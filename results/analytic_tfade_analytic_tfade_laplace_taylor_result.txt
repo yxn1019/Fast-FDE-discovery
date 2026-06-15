@@ -1,0 +1,166 @@
+case: analytic_tfade
+route: fde_nn_laplace_taylor
+example: analytic_tfade
+paper_example: analytic_limitation
+preset_example: analytic_tfade
+example_source: preset
+example_description: single-mode analytic time-fractional ADE used as the limitation case
+selected_by: minimum_valid_augmented_objective
+checkpoint: analytic_tfade
+training metadata: {'config': {'case': 'analytic_tfade', 'alpha': 0.8, 'D': 0.5, 'v': -1.0, 'lambda': 1.0, 'field_shape': [200, 200]}, 'summary': 'Analytic time-fractional advection-diffusion field'}
+model_file: analytic_tfade_alphaanalytic_tfade_none_0x0_clean
+trained_point: 0
+noise_level: 0.0
+activation: none
+hidden_layers: 0
+neurons: 0
+NN grid shape: (200, 186)
+x_range: (0.1105082842971284, 3.031084369292665)
+t_range: (0.0, 10.0)
+operator_grid_shape: None
+operator_x_range: None
+operator_t_range: None
+fit_grid_shape: None
+fit_x_range: None
+fit_t_range: None
+fit_window_config: None
+initial_condition_time: 0.0
+initial_condition_note: Caputo-Laplace term uses H(x, initial_condition_time)
+library terms: 1, H, Hx, Hxxx, H^2, H*Hx, H*Hxx, H*Hxxx, H^2*Hx, H^2*Hxx, H^2*Hxxx, alpha_correction
+candidate_search: None
+generated_structure: None
+generated_raw_structure: None
+generated_normalized_from: None
+generated_structure_has_fractional: None
+generated_structure_rank: None
+generated_complexity_score: None
+generated_structure_objective_penalty: None
+generated_structure_count: None
+eqgpt_checkpoint: None
+eqgpt_dictionary: None
+eqgpt_epoch: None
+eqgpt_sample_count: None
+eqgpt_unique_structure_count: None
+eqgpt_optimize_epochs: None
+eqgpt_finetune_epochs: None
+eqgpt_learning_rate: None
+eqgpt_reward_sparsity_alpha: None
+eqgpt_selection_mode: None
+eqgpt_random_exploration: None
+eqgpt_reward: None
+eqgpt_r2: None
+eqgpt_source_equation: None
+matrix_shape: (22320, 12)
+alpha0_count: 7
+best alpha0: 0.8
+best beta0: None
+delta alpha: 0.0
+delta alpha raw: None
+alpha: 0.8
+true_alpha: 0.8
+alpha_relative_error: 0.0
+true_beta: 2.0
+beta_relative_error: None
+s_range: (0.05, 5.0)
+s_points: 120
+laguerre_nodes: 15
+space_derivative_mode: autodiff
+spatial_fractional_mode: gj_richardson
+time_operator_mode: laplace_taylor
+laplace_out_of_bounds_fraction: 0.29444444444444445
+ridge_lambda: 2.0
+d_tol: 0.005
+maxit: 25
+STR_iters: 10
+normalize: 0
+split: 0.8
+sparsity_lamb: 0.001
+fractional_correction_sparsity_lamb: 0.0
+fractional_correction_tol_scale: 0.001
+alpha_correction_tol: 0.01
+beta_correction_tol: 0.02
+delta_alpha_prune_threshold: 0.0
+delta_alpha_bounds: (-1.0, 1.0)
+delta_beta_prune_threshold: 0.0
+loss_formula: validation_residual_norm + cond(Theta)*sum(active_term_lamb)
+validation_residual_norm: 0.06767001070506772
+physical_refit: True
+physical_refit_note: coefficients refit after replacing Taylor beta columns by D_x^beta H
+physical_refit_terms: ('H',)
+physical_stridge_library_terms: None
+active_count_for_loss: 1
+complexity_penalty: 1002.3019016414196
+l0_penalty: 1002.3019016414196
+best tolerance: 0.12500000000000003
+augmented_stridge_objective_raw: None
+selection_loss_formula: None
+objective: 1002.3695716521247
+selection_objective_mode: augmented
+refit_mode: None
+order_update_mode: None
+iteration_count: None
+iteration_converged: None
+iteration_stop_reason: None
+iteration_final_index: None
+iteration_best_objective_index: None
+iteration_best_fractional_support_index: None
+iteration_selected_index: None
+iteration_selected: True
+iter_selection_mode: None
+iter_start_alpha: None
+iter_start_beta: None
+iter_start_beta_values: None
+iter_order_tol: None
+iter_damping: None
+iter_max_step_alpha: None
+iter_max_step_beta: None
+iter_delta_alpha_bounds: None
+iter_delta_beta_bounds: None
+iter_stop_on_non_decreasing_objective: None
+iter_objective_min_delta: None
+physical_refit_selection_objective: 0.06702305503842408
+physical_refit_selection_residual_norm: 0.06602305503842408
+nonlinear_refit_success: None
+nonlinear_refit_cost: None
+nonlinear_refit_nfev: None
+nonlinear_refit_status: None
+nonlinear_refit_message: None
+order_radius_mode: penalty
+order_radius_penalty: 0.0
+mse: 1.045884316703741e-06
+residual_norm: 0.15278788547796418
+used alpha correction: False
+spatial_fractional_enabled: False
+spatial_correction_active: False
+spatial_beta_status: disabled
+spatial_beta: None
+spatial_delta_beta: None
+spatial_delta_beta_raw: None
+spatial_beta_correction: None
+spatial_beta_in_bounds: None
+spatial_beta_bounds: (1.5, 2.0)
+spatial_beta_model_valid: True
+spatial_log_quad_points: 40
+spatial_log_quad_method: hardcoded
+spatial_correction_method: gj_richardson
+spatial_correction_pruned_without_main: None
+physical_refit_spatial_fractional_mode: gj_richardson
+physical_refit_space_derivative_mode: autodiff
+physical_refit_time_operator_mode: laplace_taylor
+spatial_boundary_mode: none
+spatial_boundary_value: None
+spatial_operator_note: fourier_taylor follows the periodic Fourier multiplier; gj_richardson and gl_pycaputo are left-sided RL diagnostics for noisy surrogates
+end_to_end_seconds: None
+candidate equation: D_t^0.8 H = -0.9963*H
+augmented regression equation: D_t^0.8 H = -0.9993*H
+active terms:
+  H: -0.9962743164
+alpha0/beta0 scan:
+  alpha0,beta0,delta_alpha,beta_correction,alpha,beta,alpha_rel_error,beta_rel_error,mse,objective,status,active
+  1,n/a,-0.197723,n/a,0.802277,n/a,0.002846476652237917,None,1.190e-05,1.989e+03,disabled,H + H^2 + alpha_correction
+  0.9,n/a,-0.102647,n/a,0.797353,n/a,0.0033092757477755363,None,2.636e-06,1.990e+03,disabled,H + H^2 + alpha_correction
+  0.8,n/a,0,n/a,0.8,n/a,0.0,None,1.126e-06,1.002e+03,disabled,H
+  0.7,n/a,0.0867911,n/a,0.786791,n/a,0.016511069860585953,None,2.638e-06,1.016e+03,disabled,H + alpha_correction
+  0.6,n/a,0.156934,n/a,0.756934,n/a,0.05383300835379842,None,1.442e-05,1.032e+03,disabled,H + alpha_correction
+  0.5,n/a,0.208436,n/a,0.708436,n/a,0.11445439647886357,None,5.316e-05,1.048e+03,disabled,H + alpha_correction
+  0.4,n/a,0.245084,n/a,0.645084,n/a,0.19364447656663064,None,0.000143846,1.061e+03,disabled,H + alpha_correction

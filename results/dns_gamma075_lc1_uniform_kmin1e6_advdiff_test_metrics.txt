@@ -1,0 +1,65 @@
+DNS advection-diffusion diagnostic at t=100
+full_npz: D:\OneDrive - HHU\ML codes\DL-PDE\Linear_fractional\data\dns_gamma075_lc1_uniform_kmin1e6\dns_gamma075_lc1_uniform_kmin1e6.npz
+pure_equation: D_t^0.83349955 H = -0.6202*Hx
+pure_alpha: 0.8334995469019958
+pure_velocity: 0.6202483315
+selected_advdiff_for_plot: adv-diff x6-30
+selected_advdiff_source: forced allowed terms Hx + D_x^beta H; beta0=2; x=[6,30], t=[5.063,80]
+selected_advdiff_equation: D_t^0.88563717 H = -0.5587*Hx + 0.08552 D_x^1.985847 H
+selected_advdiff_alpha: 0.88563717
+selected_advdiff_theta: -0.5587
+selected_advdiff_velocity: 0.5587
+selected_advdiff_diffusivity_coefficient: 0.08552
+selected_advdiff_beta_reported: 1.9858467
+target_time: 100.0
+x0: 0.55
+dns_mass: 0.9886696945406708
+
+[pure advection vs DNS]
+relative_l2_mass_normalized: 0.2881456355087336
+log_profile_mse: 0.16707329202957658
+mean_x: 31.16727236216296
+std_x: 12.848273525067384
+skewness: -0.35372201857482133
+peak_x: 37.33362597465518
+peak_value: 0.03089788741281281
+norm_mse_all: 2.7308045719549555e-05
+log_mse_2pct: 0.16707329202957658
+
+[adv-diff candidates vs DNS]
+adv-diff x6-30: D_t^0.88563717 H = -0.5587*Hx + 0.08552 D_x^1.985847 H
+adv-diff x6-30 relative_l2_mass_normalized: 0.3373581589388092
+adv-diff x6-30 log_profile_mse: 0.08673964726023918
+adv-diff x6-30 mean_x: 35.01258515866027
+adv-diff x6-30 std_x: 12.30618484480339
+adv-diff x6-30 skewness: -0.6270712794894051
+adv-diff x6-30 peak_x: 41.00149098269148
+adv-diff x6-30 peak_value: 0.03646604528939129
+adv-diff x6-30 norm_mse_all: 3.7262361605772645e-05
+adv-diff x6-30 log_mse_2pct: 0.08673964726023918
+
+adv-diff x4-26: D_t^0.90886084 H = -0.4889*Hx + 0.1839 D_x^1.99104 H
+adv-diff x4-26 relative_l2_mass_normalized: 0.3683509861546435
+adv-diff x4-26 log_profile_mse: 0.1375714952779738
+adv-diff x4-26 mean_x: 33.84846002492476
+adv-diff x4-26 std_x: 11.343117679934636
+adv-diff x4-26 skewness: -0.5894009646073769
+adv-diff x4-26 peak_x: 37.857606690088936
+adv-diff x4-26 peak_value: 0.03945841632229192
+adv-diff x4-26 norm_mse_all: 4.436479559931478e-05
+adv-diff x4-26 log_mse_2pct: 0.1375714952779738
+
+adv-diff x4-30: D_t^0.9085577 H = -0.4907*Hx + 0.1765 D_x^1.99121 H
+adv-diff x4-30 relative_l2_mass_normalized: 0.37224978038761075
+adv-diff x4-30 log_profile_mse: 0.1406195848828151
+adv-diff x4-30 mean_x: 33.92825157592276
+adv-diff x4-30 std_x: 11.337977019166889
+adv-diff x4-30 skewness: -0.6023872563930366
+adv-diff x4-30 peak_x: 37.857606690088936
+adv-diff x4-30 peak_value: 0.039630194696864844
+adv-diff x4-30 norm_mse_all: 4.530842687149687e-05
+adv-diff x4-30 log_mse_2pct: 0.1406195848828151
+
+
+figure: D:\OneDrive - HHU\ML codes\DL-PDE\Linear_fractional\figures\dns_gamma075_lc1_uniform_kmin1e6_advdiff_test_t100.png
+output_npz: D:\OneDrive - HHU\ML codes\DL-PDE\Linear_fractional\data\dns_gamma075_lc1_uniform_kmin1e6\forecast_t100_advdiff_test.npz

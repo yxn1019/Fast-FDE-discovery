@@ -1,0 +1,38 @@
+[
+  {
+    "experiment": "made2",
+    "variant": "raw",
+    "model_dir": "D:\\OneDrive - HHU\\ML codes\\DL-PDE\\Linear_fractional\\data\\models\\hydrology_experiments\\made2_raw_tanh_5x50_mse",
+    "checkpoint": "D:\\OneDrive - HHU\\ML codes\\DL-PDE\\Linear_fractional\\data\\models\\hydrology_experiments\\made2_raw_tanh_5x50_mse\\best.pkl",
+    "train_returncode": null,
+    "discovery_returncode": 0,
+    "report": "D:\\OneDrive - HHU\\ML codes\\DL-PDE\\Linear_fractional\\results\\tsfade_fft_hydrology_experiments_made2_raw_tanh_5x50_mse_gj_hybrid_taylor_result.txt"
+  },
+  {
+    "experiment": "made2",
+    "variant": "massnorm",
+    "model_dir": "D:\\OneDrive - HHU\\ML codes\\DL-PDE\\Linear_fractional\\data\\models\\hydrology_experiments\\made2_massnorm_tanh_5x50_mse",
+    "checkpoint": "D:\\OneDrive - HHU\\ML codes\\DL-PDE\\Linear_fractional\\data\\models\\hydrology_experiments\\made2_massnorm_tanh_5x50_mse\\best.pkl",
+    "train_returncode": null,
+    "discovery_returncode": 0,
+    "report": "D:\\OneDrive - HHU\\ML codes\\DL-PDE\\Linear_fractional\\results\\tsfade_fft_hydrology_experiments_made2_massnorm_tanh_5x50_mse_gj_hybrid_taylor_result.txt"
+  },
+  {
+    "experiment": "north_loup",
+    "variant": "raw",
+    "model_dir": "D:\\OneDrive - HHU\\ML codes\\DL-PDE\\Linear_fractional\\data\\models\\hydrology_experiments\\north_loup_raw_tanh_5x50_mse",
+    "checkpoint": "D:\\OneDrive - HHU\\ML codes\\DL-PDE\\Linear_fractional\\data\\models\\hydrology_experiments\\north_loup_raw_tanh_5x50_mse\\best.pkl",
+    "train_returncode": null,
+    "discovery_returncode": 0,
+    "report": "D:\\OneDrive - HHU\\ML codes\\DL-PDE\\Linear_fractional\\results\\tsfade_fft_hydrology_experiments_north_loup_raw_tanh_5x50_mse_gj_hybrid_taylor_result.txt"
+  },
+  {
+    "experiment": "north_loup",
+    "variant": "massnorm",
+    "model_dir": "D:\\OneDrive - HHU\\ML codes\\DL-PDE\\Linear_fractional\\data\\models\\hydrology_experiments\\north_loup_massnorm_tanh_5x50_mse",
+    "checkpoint": "D:\\OneDrive - HHU\\ML codes\\DL-PDE\\Linear_fractional\\data\\models\\hydrology_experiments\\north_loup_massnorm_tanh_5x50_mse\\best.pkl",
+    "train_returncode": null,
+    "discovery_returncode": 0,
+    "report": "D:\\OneDrive - HHU\\ML codes\\DL-PDE\\Linear_fractional\\results\\tsfade_fft_hydrology_experiments_north_loup_massnorm_tanh_5x50_mse_gj_hybrid_taylor_result.txt"
+  }
+]

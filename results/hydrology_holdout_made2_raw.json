@@ -1,0 +1,22 @@
+{
+  "diagnostic": "surrogate_holdout_profile",
+  "note": "This compares the trained differentiable surrogate against the held-out final snapshot. A discovered-equation forecast is reported separately only when the selected equation has a supported closed-form profile predictor.",
+  "experiment": "made2",
+  "variant": "raw",
+  "holdout_time": 503.0,
+  "time_unit": "d",
+  "full_npz": "data\\hydrology_experiments\\made2\\raw\\made2_raw_full.npz",
+  "checkpoint": "data\\models\\hydrology_experiments\\made2_raw_tanh_5x50_hybrid_log_mse\\best.pkl",
+  "report": "results\\tsfade_fft_hydrology_experiments_made2_raw_tanh_5x50_hybrid_log_mse_gj_hybrid_taylor_result.txt",
+  "candidate_equation": "D_t^0.999 H = -0.01229*Hx",
+  "alpha": "0.999",
+  "observed_mass": 1138.8564542023662,
+  "predicted_mass": 1088.6466446721345,
+  "mass_error": -50.20980953023172,
+  "mass_normalized_relative_l2": 0.605989032795628,
+  "positive_support_relative_l2": 0.6059890307249306,
+  "log_profile_mse_2pct": 0.13520658781100575,
+  "peak_location_error": 3.360730593607304,
+  "observed_peak_x": 20.164383561643834,
+  "predicted_peak_x": 23.52511415525114
+}

@@ -1,0 +1,31 @@
+Uniform DNS t=100 prediction comparison
+full_npz: D:\OneDrive - HHU\ML codes\DL-PDE\Linear_fractional\data\dns_gamma075_lc1_uniform_kmin1e6\dns_gamma075_lc1_uniform_kmin1e6.npz
+report: D:\OneDrive - HHU\ML codes\DL-PDE\Linear_fractional\results\tsfade_fft_dns_gamma075_lc1_uniform_kmin1e6_gj_hybrid_taylor_result.txt
+equation: D_t^0.83349955 H = -0.6202*Hx
+alpha: 0.8334995469019958
+velocity: 0.6202483315
+theta: -0.6202483315
+target_time: 100.0
+x0: 0.55
+dns_mass: 0.9886696945406708
+prediction_mass: 1.0000049101141848
+log_epsilon: 3.2407709851929193e-05
+
+[prediction vs DNS]
+mass: 1.0000049101141848
+raw_mse: 2.7287123237931326e-05
+raw_rel_l2: 0.29245015998536894
+norm_mse_all: 2.7308045719549555e-05
+norm_mse_positive: 2.730917311614249e-05
+relative_l2_mass_normalized: 0.2881456355087336
+log_mse_2pct: 0.16707329202957658
+log_mse_positive: 0.16707329202957658
+mean_x: 31.16727236216296
+std_x: 12.848273525067384
+skewness: -0.35372201857482133
+peak_x: 37.33362597465518
+peak_value: 0.03089788741281281
+
+output_npz: D:\OneDrive - HHU\ML codes\DL-PDE\Linear_fractional\data\dns_gamma075_lc1_uniform_kmin1e6\forecast_t100_comparison.npz
+linear_figure: D:\OneDrive - HHU\ML codes\DL-PDE\Linear_fractional\figures\dns_gamma075_lc1_uniform_kmin1e6_forecast_t100_linear.png
+loglog_figure: D:\OneDrive - HHU\ML codes\DL-PDE\Linear_fractional\figures\dns_gamma075_lc1_uniform_kmin1e6_forecast_t100_loglog.png

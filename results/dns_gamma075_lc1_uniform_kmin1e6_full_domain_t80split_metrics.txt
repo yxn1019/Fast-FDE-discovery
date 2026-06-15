@@ -1,0 +1,23 @@
+Uniform DNS full-domain prediction heatmap comparison
+full_npz: D:\OneDrive - HHU\ML codes\DL-PDE\Linear_fractional\data\dns_gamma075_lc1_uniform_kmin1e6\dns_gamma075_lc1_uniform_kmin1e6.npz
+report: D:\OneDrive - HHU\ML codes\DL-PDE\Linear_fractional\results\tsfade_fft_dns_gamma075_lc1_uniform_kmin1e6_gj_hybrid_taylor_result.txt
+equation: D_t^0.83349955 H = -0.6202*Hx
+alpha: 0.8334995469019958
+velocity: 0.6202483315
+theta: -0.6202483315
+x0: 0.55
+x_range: (0.13099517885843923, 62.74669067319239)
+t_range: (0.0, 100.0)
+split_time: 80.0
+fit_last_snapshot_at_or_before_split: 79.74683544303798
+first_oos_snapshot_after_split: 81.0126582278481
+t0_prediction_convention: discrete Dirac bin at nearest x0 with value 1/dx; shared color limit excludes t=0 prediction row through positive-time quantile
+shared_vmax_quantile: 0.995
+shared_vmax: 0.16501047404426883
+oos_snapshot_count: 16.0
+mean_relative_l2_mass_normalized: 0.2720999308461778
+mean_log_mse_2pct: 0.35643900246547655
+mean_peak_location_error: 3.913480968395872
+mean_mass_error: 0.002914470294755084
+output_npz: D:\OneDrive - HHU\ML codes\DL-PDE\Linear_fractional\data\dns_gamma075_lc1_uniform_kmin1e6\forecast_full_domain_t80split.npz
+figure: D:\OneDrive - HHU\ML codes\DL-PDE\Linear_fractional\figures\dns_gamma075_lc1_uniform_kmin1e6_full_domain_t80split_heatmaps.png
