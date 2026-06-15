@@ -1,0 +1,11 @@
+alpha_true: 0.8
+D_true: 0.2
+v_true: 0.2
+lambda: 0.25
+grid: Nx=200, Nt=200, t_max=5.0
+boundary max |c(0,t)|: 0.000000000000e+00
+boundary max |c(2pi,t)|: 5.667835032557e-15
+initial max error: 0.000000000000e+00
+L1 residual max abs: 5.163556094079e-01
+L1 residual mean abs: 2.623501625128e-03
+mat: D:\OneDrive - HHU\ML codes\DL-PDE\Linear_fractional\data\analytic_tfade_sine\analytic_tfade_sine.mat

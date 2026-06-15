@@ -1,0 +1,78 @@
+{
+  "case": "tsfade_fft",
+  "data_file": "C:\\Users\\54543\\AppData\\Local\\Temp\\tsfade_retrained_alpha078_beta183\\raw_data\\tsfade_alpha078_beta183_noise0.mat",
+  "output_dir": "C:\\Users\\54543\\AppData\\Local\\Temp\\tsfade_retrained_alpha078_beta183\\model_save\\draft-2000-0",
+  "train_points": 2000,
+  "val_points": 2000,
+  "max_steps": 30000,
+  "noise_level": 0.0,
+  "noise_type": "none",
+  "activation": "tanh",
+  "hidden_layers": 8,
+  "neurons": 20,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "seed": 525,
+  "eval_every": 100,
+  "print_every": 1000,
+  "periodic_boundary_weight": 0.0,
+  "periodic_derivative_weight": 0.0,
+  "periodic_boundary_points": 0,
+  "early_time_weight": 0.0,
+  "early_time_cutoff": 1.0,
+  "spectral_weight": 0.0,
+  "spectral_high_k_gamma": 0.0,
+  "spectral_high_k_power": 2.0,
+  "spectral_time_batch": 8,
+  "integer_derivative_weight": 0.0,
+  "peak_weight": 0.0,
+  "peak_quantile": 0.9,
+  "peak_time_cutoff": 1.0,
+  "peak_use_absolute": true,
+  "gaussian_scale": 0.5,
+  "denoise_mode": "none",
+  "denoise_fft_cutoff": 0.0,
+  "allow_large_train_set": false,
+  "input_normalization": "none",
+  "output_normalization": "none",
+  "time_range": [
+    0.0,
+    14.899999618530273
+  ],
+  "x_range": [
+    0.0,
+    29.75
+  ],
+  "field_shape": [
+    150,
+    120
+  ],
+  "best_step": 29900,
+  "best_train_loss": 0.003796991193667054,
+  "best_val_loss": 0.0016809869557619095,
+  "best_periodic_boundary_loss": 0.9271981716156006,
+  "best_periodic_derivative_loss": 1.4145177602767944,
+  "best_early_time_loss": 0.035457588732242584,
+  "best_peak_loss": 0.0018818198004737496,
+  "best_spectral_loss": 0.0,
+  "best_integer_derivative_loss": 0.0,
+  "peak_threshold": 9.689071655273438,
+  "peak_mask_fraction": 0.010222222222222223,
+  "checkpoint": "C:\\Users\\54543\\AppData\\Local\\Temp\\tsfade_retrained_alpha078_beta183\\model_save\\draft-2000-0\\best.pkl",
+  "input_x_range": [
+    0.0,
+    29.75
+  ],
+  "input_t_range": [
+    0.0,
+    14.899999618530273
+  ],
+  "input_x_scale": 29.75,
+  "input_t_scale": 14.899999618530273,
+  "target_c_range": [
+    0.035506486892700195,
+    10.0
+  ],
+  "target_c_shift": 0.035506486892700195,
+  "target_c_scale": 9.9644935131073
+}

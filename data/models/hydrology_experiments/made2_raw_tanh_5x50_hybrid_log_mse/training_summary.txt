@@ -1,0 +1,75 @@
+Time-FADE NN reconstruction training
+case: tsfade_fft
+data_file: D:\OneDrive - HHU\ML codes\DL-PDE\Linear_fractional\data\hydrology_experiments\made2\raw\made2_raw_train.mat
+output_dir: D:\OneDrive - HHU\ML codes\DL-PDE\Linear_fractional\data\models\hydrology_experiments\made2_raw_tanh_5x50_hybrid_log_mse
+field_shape: (6, 220)
+time_range: [9, 370]
+x_range: [0, 184]
+noise_type: gaussian_relative
+noise_level: 0.0
+activation: tanh
+hidden_layers: 5
+neurons: 50
+learning_rate: 0.001
+weight_decay: 0.0
+train_points: 990
+val_points: 330
+max_steps: 2000
+completed_steps: 2000
+stop_reason: max_steps
+patience_steps: 0
+min_delta_rel: 0.0
+last_meaningful_improvement_step: 2000
+plateau_reference_score: 0.6224328279
+periodic_boundary_weight: 0.0
+periodic_derivative_weight: 0.0
+periodic_boundary_points: 0
+early_time_weight: 0.0
+early_time_cutoff: 1.0
+peak_weight: 0.0
+peak_quantile: 0.9
+peak_time_cutoff: 1.0
+peak_use_absolute: True
+peak_threshold: 14.34556484
+peak_mask_fraction: 0.1
+spectral_weight: 0.0
+spectral_high_k_gamma: 0.0
+spectral_high_k_power: 2.0
+spectral_time_batch: 8
+integer_derivative_weight: 0.0
+selection_metric: val
+selection_derivative_weight: 1.0
+selection_spectral_weight: 1.0
+gaussian_scale: 0.5
+denoise_mode: none
+denoise_fft_cutoff: 0.0
+allow_large_train_set: True
+input_normalization: unit_box
+input_x_range: [0, 184]
+input_t_range: [9, 370]
+input_x_scale: 184
+input_t_scale: 361
+output_normalization: unit_interval
+output_activation: softplus
+data_loss: hybrid_log_mse
+log_loss_epsilon: 4.35647479e-07
+physical_log_loss_epsilon: 0.001000000047
+physical_loss_weight: 1.0
+log_loss_weight: 1.0
+target_c_range: [0, 2295.433838]
+target_c_shift: 0
+target_c_scale: 2295.433838
+best_step: 2000
+best_train_loss: 0.8300778866
+best_val_loss: 0.6224328279
+best_periodic_boundary_loss: 1.102923024e-13
+best_periodic_derivative_loss: 6.87809365e-10
+best_early_time_loss: 0.8300778866
+best_peak_loss: 0.7414761782
+best_spectral_loss: 0
+best_integer_derivative_loss: 0
+best_spectral_val_loss: 1.247391765e-06
+best_integer_derivative_val_loss: 0.0002424461127
+best_composite_derivative_val_loss: 0.6226765215
+best_selection_score: 0.6224328279
+checkpoint: best.pkl

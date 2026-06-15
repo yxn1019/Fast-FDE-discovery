@@ -1,0 +1,30 @@
+{
+  "full_domain_metrics": {
+    "rmse": 0.13295894248648935,
+    "mae": 0.09060353267049744,
+    "max_abs_error": 3.356420052397323,
+    "relative_l2": 0.02403940602007841,
+    "bias": 0.0009081905942801198,
+    "p95_abs_error": 0.2652184862644198,
+    "p99_abs_error": 0.40986139617750866
+  },
+  "fit_window_metrics": {
+    "rmse": 0.08990783857318496,
+    "mae": 0.06825791687642814,
+    "max_abs_error": 0.346089061889689,
+    "relative_l2": 0.014390251989328386,
+    "bias": -0.002710568322706261,
+    "p95_abs_error": 0.17824929945390622,
+    "p99_abs_error": 0.25782940730007614
+  },
+  "early_window_metrics": {
+    "rmse": 0.2878530701766575,
+    "mae": 0.20578308216266541,
+    "max_abs_error": 3.356420052397323,
+    "relative_l2": 0.047897775230575895,
+    "bias": 0.07043362212853672,
+    "p95_abs_error": 0.447762213445742,
+    "p99_abs_error": 1.0406292968716757
+  },
+  "output_dir": "C:\\Users\\54543\\AppData\\Local\\Temp\\tsfade_retrained_alpha078_beta183\\model_save\\draft-2000-25\\fidelity"
+}

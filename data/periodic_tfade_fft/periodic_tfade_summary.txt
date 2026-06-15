@@ -1,0 +1,9 @@
+alpha_true: 0.85
+D_true: 0.5
+v_true: -1.0
+sigma: 0.4
+grid: Nx=256, Nt=201, t_max=5.0
+periodic endpoint jump c0: 9.371507635875e-15
+L1 residual max abs: 7.411149130131e-01
+L1 residual mean abs: 1.771631204887e-03
+mat: D:\OneDrive - HHU\ML codes\DL-PDE\Linear_fractional\data\periodic_tfade_fft\periodic_tfade_fft.mat

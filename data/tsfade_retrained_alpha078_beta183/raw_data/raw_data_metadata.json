@@ -1,0 +1,24 @@
+﻿{
+  "mat_path": "C:\\Users\\54543\\AppData\\Local\\Temp\\tsfade_retrained_alpha078_beta183\\raw_data\\tsfade_alpha078_beta183_paper_grid.mat",
+  "dat_path": "C:\\Users\\54543\\AppData\\Local\\Temp\\tsfade_retrained_alpha078_beta183\\raw_data\\tsfade_alpha078_beta183_paper_grid.dat",
+  "equation": "D_t^0.78 c = -c_x + 0.5 D_x^1.83 c",
+  "alpha": 0.78,
+  "beta": 1.83,
+  "velocity": 1.0,
+  "diffusivity": 0.5,
+  "initial_condition": "10*exp(-((x-6)/10)^2)",
+  "boundary_condition": "periodic c(0,t)=c(30,t), implemented by FFT on [0,30)",
+  "x_min": 0.0,
+  "x_max_exclusive": 30.0,
+  "x_step": 0.25,
+  "t_min": 0.0,
+  "t_max_exclusive": 15.0,
+  "t_step": 0.1,
+  "shape": [
+    150,
+    120
+  ],
+  "initial_periodic_gap": 6.941256775137885,
+  "max_imaginary_leakage": 2.2260852465773288e-05,
+  "residual_relative_l2": 2.030419030328026e-16
+}
