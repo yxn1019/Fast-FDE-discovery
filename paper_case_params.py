@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 import sys
 from dataclasses import dataclass
 from pathlib import Path
@@ -144,6 +145,168 @@ MODEL_PRESETS: dict[str, dict] = {
         / "best.pkl",
         "description": "paper tsfade benchmark with normalized tanh surrogate, alpha=0.78, beta=1.83, 25 percent noise",
     },
+    "fisher_tfr_alpha07_clean": {
+        "alpha_tag": "fisher_tfr_alpha07",
+        "activation": "tanh",
+        "hidden_layers": 8,
+        "neurons": 20,
+        "noise_level": 0.0,
+        "trained_point": 2000,
+        "enable_spatial_fractional": True,
+        "true_alpha": 0.7,
+        "true_beta": 1.8,
+        "laplace_s_min": 0.1,
+        "laplace_s_max": 1.0,
+        "alpha_correction_tol": 0.0,
+        "beta_correction_tol": 0.0,
+        "beta_reference_orders": SPACE_TIME_BETA_REFERENCE_ORDERS,
+        "d_tol": 0.005,
+        "x_min": 0.0,
+        "x_max": 40.0,
+        "x_step": 0.15625,
+        "t_min": 1.0,
+        "t_max": 4.0,
+        "t_step": 0.05,
+        "checkpoint_file": ROOT
+        / "data"
+        / "models"
+        / "fisher_tfr_alpha07_tanh"
+        / "fisher-2000-0"
+        / "best.pkl",
+        "description": "time-fractional Fisher benchmark, alpha=0.7, beta=1.8, D=0.5, r=1, clean data (revision R1-5)",
+    },
+    "fisher_tfr_alpha07_noise5": {
+        "alpha_tag": "fisher_tfr_alpha07",
+        "activation": "tanh",
+        "hidden_layers": 8,
+        "neurons": 20,
+        "noise_level": 5.0,
+        "trained_point": 2000,
+        "enable_spatial_fractional": True,
+        "true_alpha": 0.7,
+        "true_beta": 1.8,
+        "laplace_s_min": 0.1,
+        "laplace_s_max": 1.0,
+        "alpha_correction_tol": 0.0,
+        "beta_correction_tol": 0.0,
+        "beta_reference_orders": SPACE_TIME_BETA_REFERENCE_ORDERS,
+        "d_tol": 0.005,
+        "x_min": 0.0,
+        "x_max": 40.0,
+        "x_step": 0.15625,
+        "t_min": 1.0,
+        "t_max": 4.0,
+        "t_step": 0.05,
+        "checkpoint_file": ROOT
+        / "data"
+        / "models"
+        / "fisher_tfr_alpha07_tanh"
+        / "fisher-2000-5"
+        / "best.pkl",
+        "description": "time-fractional Fisher benchmark, alpha=0.7, beta=1.8, D=0.5, r=1, 5 percent noise (revision R1-5)",
+    },
+    "fisher_tfr_alpha07_noise25": {
+        "alpha_tag": "fisher_tfr_alpha07",
+        "activation": "tanh",
+        "hidden_layers": 8,
+        "neurons": 20,
+        "noise_level": 25.0,
+        "trained_point": 2000,
+        "enable_spatial_fractional": True,
+        "true_alpha": 0.7,
+        "true_beta": 1.8,
+        "laplace_s_min": 0.1,
+        "laplace_s_max": 1.0,
+        "alpha_correction_tol": 0.0,
+        "beta_correction_tol": 0.0,
+        "beta_reference_orders": SPACE_TIME_BETA_REFERENCE_ORDERS,
+        "d_tol": 0.005,
+        "x_min": 0.0,
+        "x_max": 40.0,
+        "x_step": 0.15625,
+        "t_min": 1.0,
+        "t_max": 4.0,
+        "t_step": 0.05,
+        "checkpoint_file": ROOT
+        / "data"
+        / "models"
+        / "fisher_tfr_alpha07_tanh"
+        / "fisher-2000-25"
+        / "best.pkl",
+        "description": "time-fractional Fisher benchmark, alpha=0.7, beta=1.8, D=0.5, r=1, 25 percent noise (revision R1-5)",
+    },
+    "tsfade_periodic_ic_clean": {
+        "alpha_tag": "tsfade_periodic_ic",
+        "activation": "tanh",
+        "hidden_layers": 8,
+        "neurons": 20,
+        "noise_level": 0.0,
+        "trained_point": 2000,
+        "enable_spatial_fractional": True,
+        "true_alpha": 0.78,
+        "true_beta": 1.83,
+        "laplace_s_min": 0.1,
+        "laplace_s_max": 1.0,
+        "alpha_correction_tol": 0.0,
+        "beta_correction_tol": 0.0,
+        "beta_reference_orders": SPACE_TIME_BETA_REFERENCE_ORDERS,
+        "d_tol": 0.005,
+        "checkpoint_file": ROOT
+        / "data"
+        / "models"
+        / "tsfade_periodic_ic_tanh"
+        / "draft-2000-0"
+        / "best.pkl",
+        "description": "R1-7 robustness twin: periodic initial condition, clean data",
+    },
+    "tsfade_periodic_ic_noise5": {
+        "alpha_tag": "tsfade_periodic_ic",
+        "activation": "tanh",
+        "hidden_layers": 8,
+        "neurons": 20,
+        "noise_level": 5.0,
+        "trained_point": 2000,
+        "enable_spatial_fractional": True,
+        "true_alpha": 0.78,
+        "true_beta": 1.83,
+        "laplace_s_min": 0.1,
+        "laplace_s_max": 1.0,
+        "alpha_correction_tol": 0.0,
+        "beta_correction_tol": 0.0,
+        "beta_reference_orders": SPACE_TIME_BETA_REFERENCE_ORDERS,
+        "d_tol": 0.005,
+        "checkpoint_file": ROOT
+        / "data"
+        / "models"
+        / "tsfade_periodic_ic_tanh"
+        / "draft-2000-5"
+        / "best.pkl",
+        "description": "R1-7 robustness twin: periodic initial condition, 5 percent noise",
+    },
+    "tsfade_periodic_ic_noise25": {
+        "alpha_tag": "tsfade_periodic_ic",
+        "activation": "tanh",
+        "hidden_layers": 8,
+        "neurons": 20,
+        "noise_level": 25.0,
+        "trained_point": 2000,
+        "enable_spatial_fractional": True,
+        "true_alpha": 0.78,
+        "true_beta": 1.83,
+        "laplace_s_min": 0.1,
+        "laplace_s_max": 1.0,
+        "alpha_correction_tol": 0.0,
+        "beta_correction_tol": 0.0,
+        "beta_reference_orders": SPACE_TIME_BETA_REFERENCE_ORDERS,
+        "d_tol": 0.005,
+        "checkpoint_file": ROOT
+        / "data"
+        / "models"
+        / "tsfade_periodic_ic_tanh"
+        / "draft-2000-25"
+        / "best.pkl",
+        "description": "R1-7 robustness twin: periodic initial condition, 25 percent noise",
+    },
     "dns_gamma075_lc1_uniform_kmin1e6": {
         "alpha_tag": "dns_gamma075_lc1_uniform_kmin1e6",
         "activation": "tanh",
@@ -241,7 +404,7 @@ PAPER_EXAMPLES: dict[str, dict] = {
         "selection_objective": "physical-stridge",
         "order_update_mode": "iterative",
         "iter_start_beta_values": (2.0, 1.8, 1.7),
-        "sparsity_lamb": 2.0e-4,
+        "sparsity_lamb": 5.0e-5,
         "description": "space-time fractional ADE, 5 percent noise, interior window [4,26]x[3,14]",
     },
     "tsfade_noise25": {
@@ -258,6 +421,87 @@ PAPER_EXAMPLES: dict[str, dict] = {
         "sparsity_lamb": 1.0e-4,
         "d_tol": 0.006,
         "description": "paper space-time fractional ADE, 25 percent noise, strict physical STRidge objective",
+    },
+    "fisher_clean": {
+        "case": "tsfade_fft",
+        "example": "fisher_tfr_alpha07_clean",
+        "refit_mode": "none",
+        "selection_objective": "physical-stridge",
+        "order_update_mode": "iterative",
+        "iter_start_beta_values": (2.0, 1.9, 1.8),
+        "fit_x_min": 2.0,
+        "fit_x_max": 38.0,
+        "fit_t_min": 1.0,
+        "fit_t_max": 4.0,
+        "sparsity_lamb": 1.0e-4,
+        "d_tol": 0.01,
+        "description": "time-fractional Fisher benchmark, clean data (revision R1-5)",
+    },
+    "fisher_noise5": {
+        "case": "tsfade_fft",
+        "example": "fisher_tfr_alpha07_noise5",
+        "refit_mode": "none",
+        "selection_objective": "physical-stridge",
+        "order_update_mode": "iterative",
+        "iter_start_beta_values": (2.0, 1.9, 1.8),
+        "fit_x_min": 2.0,
+        "fit_x_max": 38.0,
+        "fit_t_min": 1.0,
+        "fit_t_max": 4.0,
+        "sparsity_lamb": 1.0e-4,
+        "d_tol": 0.01,
+        "description": "time-fractional Fisher benchmark, 5 percent noise (revision R1-5)",
+    },
+    "fisher_noise25": {
+        "case": "tsfade_fft",
+        "example": "fisher_tfr_alpha07_noise25",
+        "refit_mode": "none",
+        "selection_objective": "physical-stridge",
+        "order_update_mode": "iterative",
+        "iter_start_beta_values": (2.0, 1.9, 1.8),
+        "fit_x_min": 2.0,
+        "fit_x_max": 38.0,
+        "fit_t_min": 1.0,
+        "fit_t_max": 4.0,
+        "sparsity_lamb": 1.0e-4,
+        "d_tol": 0.01,
+        "description": "time-fractional Fisher benchmark, 25 percent noise (revision R1-5)",
+    },
+    "tsfade_pic_clean": {
+        "case": "tsfade_fft",
+        "example": "tsfade_periodic_ic_clean",
+        "refit_mode": "none",
+        "selection_objective": "physical-stridge",
+        "order_update_mode": "iterative",
+        "iter_start_beta_values": (2.0, 1.8, 1.7),
+        "sparsity_lamb": 3.0e-6,
+        "d_tol": 0.005,
+        "description": "R1-7 twin, clean; submitted hyperparameters",
+    },
+    "tsfade_pic_noise5": {
+        "case": "tsfade_fft",
+        "example": "tsfade_periodic_ic_noise5",
+        "refit_mode": "none",
+        "selection_objective": "physical-stridge",
+        "order_update_mode": "iterative",
+        "iter_start_beta_values": (2.0, 1.8, 1.7),
+        "sparsity_lamb": 2.0e-4,
+        "description": "R1-7 twin, 5 percent noise; submitted hyperparameters",
+    },
+    "tsfade_pic_noise25": {
+        "case": "tsfade_fft",
+        "example": "tsfade_periodic_ic_noise25",
+        "refit_mode": "none",
+        "selection_objective": "physical-stridge",
+        "order_update_mode": "iterative",
+        "iter_start_beta_values": (2.0, 1.8, 1.7),
+        "fit_x_min": 5.0,
+        "fit_x_max": 28.0,
+        "fit_t_min": 3.0,
+        "fit_t_max": 14.0,
+        "sparsity_lamb": 1.0e-4,
+        "d_tol": 0.006,
+        "description": "R1-7 twin, 25 percent noise; submitted hyperparameters",
     },
     "candidate_select_tsfade_clean_10": {
         "case": "tsfade_fft",
@@ -865,7 +1109,7 @@ def make_config(
         d_tol=d_tol,
         maxit=PAPER_MAXIT,
         str_iters=PAPER_STR_ITERS,
-        normalize=PAPER_NORMALIZE,
+        normalize=int(os.environ.get("GJ_STRIDGE_NORMALIZE", PAPER_NORMALIZE)),
         split=PAPER_SPLIT,
         sparsity_lamb=sparsity_lamb,
         fractional_correction_sparsity_lamb=fractional_correction_sparsity_lamb,

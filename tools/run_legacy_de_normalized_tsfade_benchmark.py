@@ -379,6 +379,8 @@ def run_case(noise_level: float, args: argparse.Namespace) -> tuple[dict[str, An
     beta_cache: dict[float, np.ndarray] = {}
     trace: list[dict[str, Any]] = []
     eval_counter = 0
+    operator_seconds = 0.0
+    regression_seconds = 0.0
     if args.stridge_mode == "legacy":
         effective_lamb = float(args.lamb)
         effective_ridge_lam = float(args.ridge_lam)
@@ -397,6 +399,8 @@ def run_case(noise_level: float, args: argparse.Namespace) -> tuple[dict[str, An
         effective_split = float(config.split)
 
     def evaluate(alpha: float, beta: float) -> LegacyFitResult:
+        nonlocal operator_seconds, regression_seconds
+        operator_started = time.perf_counter()
         matrix, target, term_names = fit_values_for_orders(
             discoverer,
             torch,
@@ -408,21 +412,30 @@ def run_case(noise_level: float, args: argparse.Namespace) -> tuple[dict[str, An
             alpha,
             beta,
         )
+        operator_elapsed = time.perf_counter() - operator_started
+        operator_seconds += operator_elapsed
+        regression_started = time.perf_counter()
         if args.stridge_mode == "same_stridge_core":
-            return mainline_stridge_fit(discoverer, matrix, target, term_names)
-        return legacy_fstridge_fit(
-            matrix,
-            target,
-            term_names,
-            seed=int(args.seed),
-            ridge_lam=effective_ridge_lam,
-            d_tol=effective_d_tol,
-            maxit=effective_maxit,
-            str_iters=effective_str_iters,
-            normalize=effective_normalize,
-            split=effective_split,
-            lamb=effective_lamb,
-        )
+            fit = mainline_stridge_fit(discoverer, matrix, target, term_names)
+        else:
+            fit = legacy_fstridge_fit(
+                matrix,
+                target,
+                term_names,
+                seed=int(args.seed),
+                ridge_lam=effective_ridge_lam,
+                d_tol=effective_d_tol,
+                maxit=effective_maxit,
+                str_iters=effective_str_iters,
+                normalize=effective_normalize,
+                split=effective_split,
+                lamb=effective_lamb,
+            )
+        regression_elapsed = time.perf_counter() - regression_started
+        regression_seconds += regression_elapsed
+        fit._timing_operator_seconds = operator_elapsed
+        fit._timing_regression_seconds = regression_elapsed
+        return fit
 
     def objective(params: np.ndarray) -> float:
         nonlocal eval_counter
@@ -464,6 +477,8 @@ def run_case(noise_level: float, args: argparse.Namespace) -> tuple[dict[str, An
                     "stridge_mode": args.stridge_mode,
                     "lamb": effective_lamb,
                     "d_tol": effective_d_tol,
+                    "operator_seconds": getattr(fit, "_timing_operator_seconds", None),
+                    "regression_seconds": getattr(fit, "_timing_regression_seconds", None),
                 }
             )
         trace.append(row)
@@ -489,6 +504,11 @@ def run_case(noise_level: float, args: argparse.Namespace) -> tuple[dict[str, An
         disp=not args.quiet,
     )
     runtime = time.perf_counter() - started
+    runtime_operator_seconds = float(operator_seconds)
+    runtime_regression_seconds = float(regression_seconds)
+    runtime_search_overhead_seconds = max(
+        0.0, runtime - runtime_operator_seconds - runtime_regression_seconds
+    )
     alpha_opt = float(result.x[0])
     beta_opt = float(result.x[1])
     final_fit = evaluate(alpha_opt, beta_opt)
@@ -525,6 +545,9 @@ def run_case(noise_level: float, args: argparse.Namespace) -> tuple[dict[str, An
         "support_correct": bool(support_correct),
         "equation": equation,
         "runtime_seconds": runtime,
+        "timing_fractional_operator_seconds": runtime_operator_seconds,
+        "timing_sparse_regression_seconds": runtime_regression_seconds,
+        "timing_de_overhead_seconds": runtime_search_overhead_seconds,
         "alpha_error": relative_error(alpha_opt, TRUE_ALPHA),
         "beta_error": relative_error(beta_opt, TRUE_BETA) if final_fit.coef_dbeta is not None else None,
         "coef_hx_error": relative_error(final_fit.coef_hx, TRUE_HX),
@@ -613,6 +636,9 @@ def write_outputs(records: list[dict[str, Any]], traces: dict[str, list[dict[str
         "support_correct",
         "equation",
         "runtime_seconds",
+        "timing_fractional_operator_seconds",
+        "timing_sparse_regression_seconds",
+        "timing_de_overhead_seconds",
         "alpha_error",
         "beta_error",
         "coef_hx_error",

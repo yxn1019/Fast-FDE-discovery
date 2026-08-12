@@ -25,9 +25,9 @@ PYTHON = Path(sys.executable)
 OUT_DIR = ROOT / "results" / "candidate_select"
 
 CASES = (
-    ("candidate_select_tsfade_clean", "clean"),
-    ("candidate_select_tsfade_noise5", "5%"),
-    ("candidate_select_tsfade_noise25", "25%"),
+    ("candidate_select_tsfade_clean_{n}", "clean"),
+    ("candidate_select_tsfade_noise5_{n}", "5%"),
+    ("candidate_select_tsfade_noise25_{n}", "25%"),
 )
 
 def parse_args() -> argparse.Namespace:
@@ -379,12 +379,11 @@ def _writable_output_paths(stem: str) -> tuple[Path, Path]:
 
 def main() -> int:
     args = parse_args()
-    cases = CASES
-    output_stem = args.output_stem or (
-        "generated_iterative_top10_tsfade_normalized_tanh"
-        if args.generated_top_structures in (None, 10)
-        else "generated_iterative_tsfade_normalized_tanh"
-    )
+    # The paper reports EqGPT-N for N sequences per sampling round; the paper
+    # examples are named with that N as a suffix.
+    pool_size = int(args.generated_candidates) if args.generated_candidates is not None else 80
+    cases = tuple((name.format(n=pool_size), label) for name, label in CASES)
+    output_stem = args.output_stem or f"generated_iterative_candidates{pool_size}_tsfade_normalized_tanh"
     csv_path, json_path = _writable_output_paths(output_stem)
     records = []
     structure_records: list[dict[str, Any]] = []
