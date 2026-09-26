@@ -34,7 +34,6 @@ TSFADE_GJ_T_STEP = 0.1
 TSFADE_GJ_QUADRATURE_POINTS = 5
 
 SPACE_TIME_BETA_REFERENCE_ORDERS = (2.0, 1.9, 1.8, 1.7, 1.6, 1.5)
-TIME_FRACTIONAL_BETA_REFERENCE_ORDERS = (2.0,)
 
 
 MODEL_PRESETS: dict[str, dict] = {
@@ -54,24 +53,6 @@ MODEL_PRESETS: dict[str, dict] = {
         "beta_correction_tol": 0.02,
         "beta_reference_orders": (),
         "description": "single-mode analytic time-fractional ADE used as the limitation case",
-    },
-    "periodic_tfade_fft": {
-        "alpha_tag": "periodic_tfade_fft",
-        "activation": "none",
-        "hidden_layers": 0,
-        "neurons": 0,
-        "noise_level": 0.0,
-        "trained_point": 0,
-        "enable_spatial_fractional": False,
-        "true_alpha": 0.85,
-        "true_beta": 2.0,
-        "laplace_s_min": 7.0,
-        "laplace_s_max": 18.0,
-        "alpha_correction_tol": 0.01,
-        "beta_correction_tol": 0.02,
-        "beta_reference_orders": TIME_FRACTIONAL_BETA_REFERENCE_ORDERS,
-        "d_tol": 0.005,
-        "description": "periodic time-fractional ADE; D_x^beta at beta=2 replaces Hxx by prior design",
     },
     "tsfade_retrained_alpha078_beta183_clean": {
         "alpha_tag": "retrained_alpha078_beta183_normalized_tanh",
@@ -380,11 +361,6 @@ PAPER_EXAMPLES: dict[str, dict] = {
         "selection_objective": "augmented",
         "d_tol": 0.005,
         "description": "single-mode limitation example in the discussion section",
-    },
-    "tfade_periodic": {
-        "case": "periodic_tfade_fft",
-        "example": "periodic_tfade_fft",
-        "description": "periodic time-fractional ADE benchmark",
     },
     "tsfade_clean": {
         "case": "tsfade_fft",
@@ -695,27 +671,39 @@ DEFAULT_MODEL_CHECKPOINT = (
 
 PAPER_TASK_SCRIPTS = {
     "mainline": ROOT / "tools" / "run_iterative_paper_case_diagnostics.py",
+    "local-optimizers": ROOT / "tools" / "baseline_nonlinear_order_search.py",
     "candidate-select": ROOT / "tools" / "run_candidate_select_generated_iterative.py",
     "derivative-robustness": ROOT / "tools" / "compare_tsfade_derivative_robustness_self_consistent.py",
     "iter-radius-ablation": ROOT / "tools" / "run_iter_radius_ablation_tsfade.py",
+    "radius-sensitivity": ROOT / "tools" / "run_revision_diagnostics.py",
+    "matrix-conditioning": ROOT / "tools" / "run_matrix_conditioning_diagnostics.py",
+    "iteration-trajectories": ROOT / "tools" / "plot_order_iteration_trajectories.py",
+    "linearization-verification": ROOT / "tools" / "verify_linearization_analysis.py",
+    "timing-breakdown": ROOT / "tools" / "measure_timing_breakdown.py",
     "legacy-de": ROOT / "tools" / "run_legacy_de_normalized_tsfade_benchmark.py",
     "surrogate-heatmaps": ROOT / "tools" / "plot_paper_surrogate_heatmaps.py",
     "generate-analytic-tfade": ROOT / "tools" / "generate_analytic_tfade_sine.py",
-    "generate-periodic-tfade": ROOT / "tools" / "generate_periodic_tfade_fft.py",
+    "generate-fisher": ROOT / "tools" / "generate_fisher_tfr_benchmark.py",
 }
 
 PAPER_REPRODUCTION_GROUPS = {
     "demo-data": (
         ("--paper-task", "generate-analytic-tfade"),
-        ("--paper-task", "generate-periodic-tfade"),
+        ("--paper-task", "generate-fisher"),
     ),
     "paper-examples": (
         ("--paper-example", "analytic_limitation"),
-        ("--paper-example", "tfade_periodic"),
         ("--paper-example", "tsfade_clean"),
         ("--paper-example", "tsfade_noise5"),
         ("--paper-example", "tsfade_noise25"),
+        ("--paper-example", "fisher_clean"),
+        ("--paper-example", "fisher_noise5"),
+        ("--paper-example", "fisher_noise25"),
+        ("--paper-example", "tsfade_pic_clean"),
+        ("--paper-example", "tsfade_pic_noise5"),
+        ("--paper-example", "tsfade_pic_noise25"),
         ("--paper-example", "dns_gamma_uniform_kmin1e6_oos"),
+        ("--paper-example", "made2_raw_field"),
     ),
     "tsfade": (
         ("--paper-example", "tsfade_clean"),
@@ -725,8 +713,14 @@ PAPER_REPRODUCTION_GROUPS = {
     "eqgpt": (("--paper-task", "candidate-select"),),
     "diagnostics": (
         ("--paper-task", "mainline"),
+        ("--paper-task", "local-optimizers"),
         ("--paper-task", "derivative-robustness"),
         ("--paper-task", "iter-radius-ablation"),
+        ("--paper-task", "radius-sensitivity"),
+        ("--paper-task", "matrix-conditioning"),
+        ("--paper-task", "iteration-trajectories"),
+        ("--paper-task", "linearization-verification"),
+        ("--paper-task", "timing-breakdown"),
         ("--paper-task", "surrogate-heatmaps"),
     ),
     "legacy": (
@@ -899,11 +893,6 @@ CASES: dict[str, PaperCase] = {
         description="single-mode analytic time-fractional ADE limitation case",
         enabled=True,
     ),
-    "periodic_tfade_fft": PaperCase(
-        name="periodic_tfade_fft",
-        description="periodic time-fractional ADE benchmark",
-        enabled=True,
-    ),
     "tsfade_fft": PaperCase(
         name="tsfade_fft",
         description="space-time fractional ADE benchmark",
@@ -986,7 +975,7 @@ SPATIAL_BOUNDARY_VALUE = None
 def preset_for_case(case_name: str, example_name: str | None = None) -> dict:
     """Return the paper preset that owns the numerical defaults for a run."""
 
-    if case_name in {"analytic_tfade", "periodic_tfade_fft"}:
+    if case_name == "analytic_tfade":
         return MODEL_PRESETS[case_name]
     if example_name is None:
         example_name = ACTIVE_MODEL_PRESET

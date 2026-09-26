@@ -42,7 +42,7 @@ def parse_args() -> argparse.Namespace:
         default=ROOT
         / "data"
         / "models"
-        / "tsfade_retrained_alpha078_beta183_tanh"
+        / "tsfade_retrained_alpha078_beta183_normalized_tanh"
         / "draft-2000-5"
         / "best.pkl",
     )
@@ -52,7 +52,7 @@ def parse_args() -> argparse.Namespace:
         default=ROOT / "data" / "tsfade_retrained_alpha078_beta183" / "fidelity_plots",
     )
     parser.add_argument("--early-t-max", type=float, default=1.0)
-    parser.add_argument("--case", choices=("tsfade_fft", "periodic_tfade_fft"), default="tsfade_fft")
+    parser.add_argument("--case", choices=("tsfade_fft",), default="tsfade_fft")
     return parser.parse_args()
 
 

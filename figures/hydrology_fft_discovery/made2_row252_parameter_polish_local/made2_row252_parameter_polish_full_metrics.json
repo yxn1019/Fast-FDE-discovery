@@ -1,0 +1,267 @@
+{
+  "input_npz": "D:\\OneDrive - HHU\\ML codes\\DL-PDE\\Linear_fractional\\figures\\hydrology_fft_discovery\\made2_row252\\made2_row252_prediction.npz",
+  "output_npz": "figures\\hydrology_fft_discovery\\made2_row252_parameter_polish_local\\made2_row252_parameter_polish_full_prediction.npz",
+  "split_time": 370.0,
+  "train_times_used": [
+    49.0,
+    126.0,
+    202.0,
+    279.0,
+    370.0
+  ],
+  "visible_name": "parameter polish",
+  "polish_mode": "full_fixed_support",
+  "objective": "own_mass_normalized_profile_l2_train",
+  "bounds": {
+    "lower": [
+      0.9,
+      1.7,
+      0.0,
+      -0.025,
+      -0.045,
+      0.005
+    ],
+    "upper": [
+      0.999,
+      2.0,
+      0.08,
+      0.005,
+      -0.005,
+      0.055
+    ]
+  },
+  "fit": {
+    "parameters": {
+      "alpha": 0.9827010973661433,
+      "beta": 1.7000000000000002,
+      "constant": 0.0010895472001928536,
+      "h": -0.014533221148866756,
+      "hx": -0.028853205168522147,
+      "fractional": 0.0322427255971093
+    },
+    "objective": 0.28878988544893514,
+    "success": true,
+    "message": "`ftol` termination condition is satisfied.",
+    "nfev": 16,
+    "cost": 0.04169979896880453,
+    "optimality": 6.265242917905479e-08,
+    "active_mask": [
+      0,
+      -1,
+      0,
+      0,
+      0,
+      0
+    ],
+    "method": "scipy_least_squares_profile_normalized_full_support",
+    "bounds_mode": "local",
+    "bounds": {
+      "lower": [
+        0.9,
+        1.7,
+        0.0,
+        -0.025,
+        -0.045,
+        0.005
+      ],
+      "upper": [
+        0.999,
+        2.0,
+        0.08,
+        0.005,
+        -0.005,
+        0.055
+      ]
+    }
+  },
+  "base_equation": "D_t^0.999 H = 0.038207 - 0.0089014 H -0.019984 Hx +0.025025 D_x^1.934 H",
+  "refit_equation": "D_t^0.983 H = 0.0010895 - 0.014533 H -0.028853 Hx +0.032243 D_x^1.700 H",
+  "base_coefficients": {
+    "alpha": 0.999,
+    "beta": 1.933515,
+    "constant": 0.03820708517,
+    "h": -0.008901399652,
+    "hx": -0.01998350272,
+    "fractional": 0.02502468186
+  },
+  "refit_coefficients": {
+    "alpha": 0.9827010973661433,
+    "beta": 1.7000000000000002,
+    "constant": 0.0010895472001928536,
+    "h": -0.014533221148866756,
+    "hx": -0.028853205168522147,
+    "fractional": 0.0322427255971093
+  },
+  "base_slice_metrics": [
+    {
+      "time": 9.0,
+      "split": "train",
+      "relative_l2_raw": 0.21203230301137718,
+      "relative_l2_own_mass_normalized": 0.2467974488257232,
+      "raw_mass": 16342.646027675264,
+      "prediction_mass": 14330.960983278434,
+      "mass_ratio_prediction_to_raw": 0.8769057935299972,
+      "peak_location_error": 0.0
+    },
+    {
+      "time": 49.0,
+      "split": "train",
+      "relative_l2_raw": 0.5809259098655127,
+      "relative_l2_own_mass_normalized": 0.25866640509892597,
+      "raw_mass": 6970.731485999041,
+      "prediction_mass": 10286.12873029881,
+      "mass_ratio_prediction_to_raw": 1.4756168346118137,
+      "peak_location_error": 0.8401826484018287
+    },
+    {
+      "time": 126.0,
+      "split": "train",
+      "relative_l2_raw": 0.7765398972114055,
+      "relative_l2_own_mass_normalized": 0.28005211145062653,
+      "raw_mass": 3185.513955088509,
+      "prediction_mass": 5593.689005202798,
+      "mass_ratio_prediction_to_raw": 1.7559769268213357,
+      "peak_location_error": 2.520547945205479
+    },
+    {
+      "time": 202.0,
+      "split": "train",
+      "relative_l2_raw": 0.48280948622188513,
+      "relative_l2_own_mass_normalized": 0.36674603934644523,
+      "raw_mass": 2359.3648506077857,
+      "prediction_mass": 3244.69312676311,
+      "mass_ratio_prediction_to_raw": 1.3752400888430878,
+      "peak_location_error": 0.8401826484018251
+    },
+    {
+      "time": 279.0,
+      "split": "train",
+      "relative_l2_raw": 0.38449567831246967,
+      "relative_l2_own_mass_normalized": 0.38152105121867314,
+      "raw_mass": 2049.88491482663,
+      "prediction_mass": 2035.1500400900559,
+      "mass_ratio_prediction_to_raw": 0.9928118526898764,
+      "peak_location_error": 0.8401826484018251
+    },
+    {
+      "time": 370.0,
+      "split": "train",
+      "relative_l2_raw": 0.6517466577965771,
+      "relative_l2_own_mass_normalized": 0.5907801063868672,
+      "raw_mass": 1666.0944684222595,
+      "prediction_mass": 1349.7962971130814,
+      "mass_ratio_prediction_to_raw": 0.8101559201449706,
+      "peak_location_error": 2.520547945205479
+    },
+    {
+      "time": 503.0,
+      "split": "holdout",
+      "relative_l2_raw": 0.8312769521224003,
+      "relative_l2_own_mass_normalized": 0.812662226636263,
+      "raw_mass": 1138.5203811430122,
+      "prediction_mass": 965.6515407345122,
+      "mass_ratio_prediction_to_raw": 0.8481635961273271,
+      "peak_location_error": 5.041095890410958
+    }
+  ],
+  "refit_slice_metrics": [
+    {
+      "time": 9.0,
+      "split": "train",
+      "relative_l2_raw": 0.21203230301137718,
+      "relative_l2_own_mass_normalized": 0.2467974488257232,
+      "raw_mass": 16342.646027675264,
+      "prediction_mass": 14330.960983278434,
+      "mass_ratio_prediction_to_raw": 0.8769057935299972,
+      "peak_location_error": 0.0
+    },
+    {
+      "time": 49.0,
+      "split": "train",
+      "relative_l2_raw": 0.348211046878494,
+      "relative_l2_own_mass_normalized": 0.2636308178144566,
+      "raw_mass": 6970.731485999041,
+      "prediction_mass": 8303.276406393055,
+      "mass_ratio_prediction_to_raw": 1.191162853291721,
+      "peak_location_error": 0.8401826484018287
+    },
+    {
+      "time": 126.0,
+      "split": "train",
+      "relative_l2_raw": 0.2789692116615178,
+      "relative_l2_own_mass_normalized": 0.2804445325484141,
+      "raw_mass": 3185.513955088509,
+      "prediction_mass": 3056.234512035127,
+      "mass_ratio_prediction_to_raw": 0.9594164568493343,
+      "peak_location_error": 2.520547945205479
+    },
+    {
+      "time": 202.0,
+      "split": "train",
+      "relative_l2_raw": 0.537797147336712,
+      "relative_l2_own_mass_normalized": 0.3476737693956333,
+      "raw_mass": 2359.3648506077857,
+      "prediction_mass": 1205.4975360823641,
+      "mass_ratio_prediction_to_raw": 0.5109415509736959,
+      "peak_location_error": 0.8401826484018251
+    },
+    {
+      "time": 279.0,
+      "split": "train",
+      "relative_l2_raw": 0.7718117735932462,
+      "relative_l2_own_mass_normalized": 0.2731777755140363,
+      "raw_mass": 2049.88491482663,
+      "prediction_mass": 509.9509959014216,
+      "mass_ratio_prediction_to_raw": 0.24877054912351065,
+      "peak_location_error": 0.8401826484018251
+    },
+    {
+      "time": 370.0,
+      "split": "train",
+      "relative_l2_raw": 0.8841443395941209,
+      "relative_l2_own_mass_normalized": 0.2888102474665016,
+      "raw_mass": 1666.0944684222595,
+      "prediction_mass": 216.91705846525585,
+      "mass_ratio_prediction_to_raw": 0.13019493346656968,
+      "peak_location_error": 1.6803652968036538
+    },
+    {
+      "time": 503.0,
+      "split": "holdout",
+      "relative_l2_raw": 0.9254131661497692,
+      "relative_l2_own_mass_normalized": 0.2931370589868483,
+      "raw_mass": 1138.5203811430122,
+      "prediction_mass": 93.48407472883812,
+      "mass_ratio_prediction_to_raw": 0.08211014600808922,
+      "peak_location_error": 3.360730593607304
+    }
+  ],
+  "base_train_summary": {
+    "mean_relative_l2_raw": 0.57530352588157,
+    "mean_relative_l2_own_mass_normalized": 0.3755531427003076,
+    "mean_abs_mass_ratio_error": 0.360773215488278,
+    "mean_peak_location_error": 1.5123287671232872
+  },
+  "refit_train_summary": {
+    "mean_relative_l2_raw": 0.5641867038128181,
+    "mean_relative_l2_own_mass_normalized": 0.2907474285478084,
+    "mean_abs_mass_ratio_error": 0.4683678725757221,
+    "mean_peak_location_error": 1.3442922374429223
+  },
+  "base_holdout_summary": {
+    "mean_relative_l2_raw": 0.8312769521224003,
+    "mean_relative_l2_own_mass_normalized": 0.812662226636263,
+    "mean_abs_mass_ratio_error": 0.15183640387267294,
+    "mean_peak_location_error": 5.041095890410958
+  },
+  "refit_holdout_summary": {
+    "mean_relative_l2_raw": 0.9254131661497692,
+    "mean_relative_l2_own_mass_normalized": 0.2931370589868483,
+    "mean_abs_mass_ratio_error": 0.9178898539919108,
+    "mean_peak_location_error": 3.360730593607304
+  },
+  "comparison_figures": {
+    "training": "figures\\hydrology_fft_discovery\\made2_row252_parameter_polish_local\\made2_row252_parameter_polish_full_training_comparison.png",
+    "holdout": "figures\\hydrology_fft_discovery\\made2_row252_parameter_polish_local\\made2_row252_parameter_polish_full_holdout_comparison.png"
+  }
+}

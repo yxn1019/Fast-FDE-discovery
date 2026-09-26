@@ -55,12 +55,12 @@ alpha0_count: 6
 best alpha0: 0.99
 best beta0: 1.7
 delta alpha: -0.25
-delta alpha raw: -0.2942866859671006
+delta alpha raw: -0.2942856255349891
 alpha: 0.74
 true_alpha: 0.78
 alpha_relative_error: 0.05128205128205133
 true_beta: 1.83
-beta_relative_error: 0.006060115461228274
+beta_relative_error: 0.006060779808636204
 s_range: None
 s_points: 0
 laguerre_nodes: 0
@@ -83,18 +83,18 @@ delta_alpha_prune_threshold: 0.0
 delta_alpha_bounds: (-1.0, 1.0)
 delta_beta_prune_threshold: 0.0
 loss_formula: validation_residual_norm + cond(Theta)*sum(active_term_lamb)
-validation_residual_norm: 1.5084881243870951
+validation_residual_norm: 1.508493074699336
 physical_refit: False
 physical_refit_note: None
-physical_refit_terms: ('Hx', 'D_x^1.84109 H')
-physical_stridge_library_terms: ('1', 'H', 'Hx', 'D_x^1.84109 H', 'Hxxx', 'H^2', 'H*Hx', 'H*Hxx', 'H*Hxxx', 'H^2*Hx', 'H^2*Hxx', 'H^2*Hxxx')
+physical_refit_terms: ('Hx', 'D_x^1.841091 H')
+physical_stridge_library_terms: ('1', 'H', 'Hx', 'D_x^1.841091 H', 'Hxxx', 'H^2', 'H*Hx', 'H*Hxx', 'H*Hxxx', 'H^2*Hx', 'H^2*Hxx', 'H^2*Hxxx')
 active_count_for_loss: 4
-complexity_penalty: 14.33649714652451
-l0_penalty: 7.168248573262255
-best tolerance: 0.029358281879635264
-augmented_stridge_objective_raw: 15.844985270911604
+complexity_penalty: 14.33649337259087
+l0_penalty: 7.168246686295435
+best tolerance: 0.03590523995052566
+augmented_stridge_objective_raw: 15.844986447290205
 selection_loss_formula: physical validation_residual_norm + cond(physical_Theta)*sum(active_physical_lamb)
-objective: 12.091693801883375
+objective: 12.091708935378005
 selection_objective_mode: physical-stridge
 refit_mode: none
 order_update_mode: iterative
@@ -118,8 +118,8 @@ iter_delta_alpha_bounds: (-0.25, 0.25)
 iter_delta_beta_bounds: (-0.15, 0.15)
 iter_stop_on_non_decreasing_objective: True
 iter_objective_min_delta: 0.0
-physical_refit_selection_objective: 12.091693801883375
-physical_refit_selection_residual_norm: 1.0747947204979735
+physical_refit_selection_objective: 12.091708935378005
+physical_refit_selection_residual_norm: 1.074795477799391
 nonlinear_refit_success: None
 nonlinear_refit_cost: None
 nonlinear_refit_nfev: None
@@ -127,16 +127,16 @@ nonlinear_refit_status: None
 nonlinear_refit_message: None
 order_radius_mode: penalty
 order_radius_penalty: 0.0
-mse: 0.0006054102056141826
-residual_norm: 2.475227521020144
+mse: 0.0006054111772962061
+residual_norm: 2.4752295073866595
 used alpha correction: False
 spatial_fractional_enabled: True
 spatial_correction_active: True
 spatial_beta_status: estimated
-spatial_beta: 1.8410900112940478
-spatial_delta_beta: 0.14109001129404786
-spatial_delta_beta_raw: 0.14109001129404797
-spatial_beta_correction: 0.14109001129404786
+spatial_beta: 1.8410912270498043
+spatial_delta_beta: 0.14109122704980437
+spatial_delta_beta_raw: 0.14109122704980426
+spatial_beta_correction: 0.14109122704980437
 spatial_beta_in_bounds: True
 spatial_beta_bounds: (1.5, 2.0)
 spatial_beta_model_valid: True
@@ -150,21 +150,27 @@ physical_refit_time_operator_mode: None
 spatial_boundary_mode: none
 spatial_boundary_value: None
 spatial_operator_note: time and spatial fractional operators both use Jacobi-Gauss quadrature with autodiff derivatives
-end_to_end_seconds: 6.904898800006777
-candidate equation: D_t^0.74 H = -1.065*Hx + 0.3452 D_x^1.84109 H
-augmented regression equation: D_t^0.74 H = -1.019*Hx + 0.5123 D_x^1.7 H + -0.2943*alpha_correction + 0.07228*spatial_correction_beta0=1.7
+end_to_end_seconds: 4.4678476
+timing_surrogate_load_seconds: 0.008104700000000076
+timing_operator_field_seconds: 0.09038170000000001
+timing_order_search_seconds: 4.3693612
+timing_fractional_operator_seconds: 3.810365100000003
+timing_sparse_regression_seconds: 0.3170125000000006
+timing_order_update_overhead_seconds: 0.24198359999999663
+candidate equation: D_t^0.74 H = -1.065*Hx + 0.3452 D_x^1.841091 H
+augmented regression equation: D_t^0.74 H = -1.019*Hx + 0.5123 D_x^1.7 H + -0.2943*alpha_correction + 0.07229*spatial_correction_beta0=1.7
 active terms:
-  Hx: -1.064927791
-  D_x^1.84109 H: 0.3452453457
+  Hx: -1.0649276
+  D_x^1.841091 H: 0.3452459956
 iterative order update trace:
   iter,alpha0,beta0,delta_alpha_raw,delta_beta_raw,delta_alpha,delta_beta,delta_beta_used,alpha_next,beta_next,objective,regularized_objective,raw_mse,mse,condition,validation_residual_norm,complexity_penalty,active_lamb_sum,physical_refit_condition_penalty,active_count_for_loss,tolerance,status,support
-  0,0.99,1.7,-0.294287,0.14109,-0.25,0.14109,0.14109,0.79,1.84109,12.0917,12.0917,0.00060541,0.00060541,7.168e+04,1.50849,14.3365,0.0002,11.0169,4,0.0293583,estimated,Hx+D_x^1.84109 H
-  1,0.79,1.84109,-0.0604095,0,-0.0604095,0,0,0.72959,1.84109,12.1598,12.1598,0.000691388,0.000691388,6.894e+04,3.21191,6.89351,0.0001,11.0169,2,0.03,estimated,Hx+D_x^1.84109 H
+  0,0.99,1.7,-0.294286,0.141091,-0.25,0.141091,0.141091,0.79,1.84109,12.0917,12.0917,0.000605411,0.000605411,7.168e+04,1.50849,14.3365,0.0002,11.0169,4,0.0359052,estimated,Hx+D_x^1.841091 H
+  1,0.79,1.84109,-0.0604094,0,-0.0604094,0,0,0.729591,1.84109,12.1598,12.1598,0.000691388,0.000691388,6.894e+04,3.21191,6.8935,0.0001,11.0169,2,0.03,estimated,Hx+D_x^1.841091 H
 alpha0/beta0 scan:
   alpha0,beta0,delta_alpha,beta_correction,alpha,beta,alpha_rel_error,beta_rel_error,mse,objective,status,active
-  0.99,2,-0.25,-0.0191874,0.74,1.98081,0.05128205128205133,0.08241125962159941,0.00128399,20.7443,estimated,1 + Hx + H*Hxxx
-  0.79,2,-0.0462464,0,0.743754,2,0.04646968870168185,0.09289617486338794,0.000504948,26.643,estimated,Hx + H*Hx + H*Hxx + H*Hxxx
-  0.99,1.8,-0.25,0.119182,0.74,1.91918,0.05128205128205133,0.048733274356908426,0.000666754,13.3209,estimated,Hx + D_x^1.919182 H
-  0.79,1.91918,-0.0504521,0,0.739548,1.91918,0.05186162983305898,0.048733274356908426,0.000670127,13.3236,estimated,Hx + D_x^1.919182 H
-  0.99,1.7,-0.25,0.14109,0.74,1.84109,0.05128205128205133,0.006060115461228274,0.00060541,12.0917,estimated,Hx + D_x^1.84109 H
-  0.79,1.84109,-0.0604095,0,0.72959,1.84109,0.0646276044668925,0.006060115461228274,0.000691388,12.1598,estimated,Hx + D_x^1.84109 H
+  0.99,2,-0.25,-0.0191869,0.74,1.98081,0.05128205128205133,0.08241155381946681,0.00128399,20.7443,estimated,1 + Hx + H*Hxxx
+  0.79,2,-0.0487764,0,0.741224,2,0.04971332474911629,0.09289617486338794,0.00130059,20.8384,estimated,1 + Hx + H*Hxxx
+  0.99,1.8,-0.25,0.119183,0.74,1.91918,0.05128205128205133,0.04873406986669058,0.000666755,13.321,estimated,Hx + D_x^1.919183 H
+  0.79,1.91918,-0.0504519,0,0.739548,1.91918,0.051861398819286766,0.04873406986669058,0.000670127,13.3236,estimated,Hx + D_x^1.919183 H
+  0.99,1.7,-0.25,0.141091,0.74,1.84109,0.05128205128205133,0.006060779808636204,0.000605411,12.0917,estimated,Hx + D_x^1.841091 H
+  0.79,1.84109,-0.0604094,0,0.729591,1.84109,0.064627427590087,0.006060779808636204,0.000691388,12.1598,estimated,Hx + D_x^1.841091 H

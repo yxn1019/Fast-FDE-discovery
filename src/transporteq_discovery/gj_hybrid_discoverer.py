@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import json
+import os
 import time
 from dataclasses import dataclass
 from typing import Any
@@ -42,10 +44,14 @@ class GJHybridDiscoverer:
         self._fde = FractionalPDEDiscoverer(config)
 
     def discover(self) -> FractionalDiscoveryResult:
+        self._timing_fractional_operator_seconds = 0.0
+        self._timing_sparse_regression_seconds = 0.0
         started = time.perf_counter()
         torch, net, training_metadata = self._load_network()
+        t_load = time.perf_counter()
         operator_field = self._build_base_field(torch, net, training_metadata)
         fit_field = self._fit_window_field(operator_field)
+        t_field = time.perf_counter()
         if self.config.order_update_mode == "iterative":
             if self.config.candidate_search == "generated":
                 alpha_scan = self._iterate_generated_order_updates(torch, net, operator_field, fit_field)
@@ -76,6 +82,26 @@ class GJHybridDiscoverer:
         if generated_summaries:
             final_metadata["generated_candidate_summaries"] = tuple(generated_summaries)
         final_metadata["end_to_end_seconds"] = elapsed
+        # Stage breakdown for the revision timing question (R1-6 / R2-5). The
+        # surrogate is trained once beforehand and is not part of these numbers;
+        # the differential-evolution baseline starts its own timer only after
+        # the operator field is built, so it is not charged for the first two
+        # stages reported here.
+        final_metadata["timing_surrogate_load_seconds"] = t_load - started
+        final_metadata["timing_operator_field_seconds"] = t_field - t_load
+        final_metadata["timing_order_search_seconds"] = elapsed - (t_field - started)
+        final_metadata["timing_fractional_operator_seconds"] = float(
+            self._timing_fractional_operator_seconds
+        )
+        final_metadata["timing_sparse_regression_seconds"] = float(
+            self._timing_sparse_regression_seconds
+        )
+        final_metadata["timing_order_update_overhead_seconds"] = max(
+            0.0,
+            float(final_metadata["timing_order_search_seconds"])
+            - float(self._timing_fractional_operator_seconds)
+            - float(self._timing_sparse_regression_seconds),
+        )
         final_model = SparseModel(
             target_name=selected_model.target_name,
             term_names=selected_model.term_names,
@@ -400,6 +426,23 @@ class GJHybridDiscoverer:
                     "iter_selection_mode": self.config.iter_selection_mode,
                 }
             )
+        # Opt-in dump of every multi-start branch. The report keeps only the
+        # trace of the selected model; this exposes the remaining branches for
+        # the order-trajectory figure without altering any result.
+        dump_path = os.environ.get("GJ_TRACE_DUMP_PATH")
+        if dump_path:
+            with open(dump_path, "a", encoding="utf-8") as handle:
+                handle.write(json.dumps({
+                    "iter_start_alpha": float(self.config.iter_start_alpha),
+                    "iter_start_beta": float(beta_start),
+                    "trace": [
+                        {k: (float(v) if isinstance(v, (int, float)) else v)
+                         for k, v in row.items()
+                         if k in ("iter", "alpha0", "beta0", "delta_alpha", "delta_beta",
+                                  "alpha_next", "beta_next", "objective", "support")}
+                        for row in trace
+                    ],
+                }) + "\n")
         return results
 
     def _iterate_generated_order_updates(
@@ -694,10 +737,17 @@ class GJHybridDiscoverer:
         term_names = list(base_order) + extra_names
         matrix = np.column_stack([base_terms[name].reshape(-1) for name in base_order] + extra_columns)
         target = target0.reshape(-1, 1)
+        self._dump_matrix_diagnostics(matrix, term_names, alpha0, beta0)
+        regression_started = time.perf_counter()
         coefficients, objective, tolerance, l0_penalty, details = self._fde._fit_fde_stridge(
             matrix,
             target,
             term_names=tuple(term_names),
+        )
+        self._timing_sparse_regression_seconds = float(
+            getattr(self, "_timing_sparse_regression_seconds", 0.0)
+            + time.perf_counter()
+            - regression_started
         )
         coefficients, objective, details, grouped_spatial_correction = self._couple_spatial_correction_group(
             matrix=matrix,
@@ -1831,7 +1881,13 @@ class GJHybridDiscoverer:
     ) -> np.ndarray:
         key = round(float(alpha), 10)
         if key not in cache:
+            operator_started = time.perf_counter()
             cache[key] = self._compute_halpha(torch, net, field, float(alpha))
+            self._timing_fractional_operator_seconds = float(
+                getattr(self, "_timing_fractional_operator_seconds", 0.0)
+                + time.perf_counter()
+                - operator_started
+            )
         return cache[key]
 
     def _get_or_compute_hbeta(
@@ -1844,7 +1900,13 @@ class GJHybridDiscoverer:
     ) -> np.ndarray:
         key = round(float(beta), 10)
         if key not in cache:
+            operator_started = time.perf_counter()
             cache[key] = self._compute_hbeta(torch, net, field, float(beta))
+            self._timing_fractional_operator_seconds = float(
+                getattr(self, "_timing_fractional_operator_seconds", 0.0)
+                + time.perf_counter()
+                - operator_started
+            )
         return cache[key]
 
     def _prepare_iter_alpha_cache(
@@ -1900,6 +1962,58 @@ class GJHybridDiscoverer:
         if step <= 0.0:
             raise ValueError(f"beta step is not positive for beta0={beta0}")
         return step
+
+    @staticmethod
+    def _dump_matrix_diagnostics(
+        matrix: np.ndarray,
+        term_names: list[str],
+        alpha0: float,
+        beta0: float,
+    ) -> None:
+        """Opt-in per-iteration conditioning diagnostics for the augmented matrix.
+
+        Enabled by setting GJ_MATRIX_DIAG_PATH; appends one JSON line per
+        augmented regression solve. Reports pairwise correlations among the
+        fractional reference/linearization columns, singular values, and the
+        condition number of the column-normalized augmented matrix.
+        """
+        diag_path = os.environ.get("GJ_MATRIX_DIAG_PATH")
+        if not diag_path:
+            return
+        norms = np.linalg.norm(matrix, axis=0)
+        safe = np.where(norms > 0.0, norms, 1.0)
+        normalized = matrix / safe
+        singular_values = np.linalg.svd(normalized, compute_uv=False)
+        tiny = float(np.finfo(float).eps)
+        condition = float(singular_values[0] / max(singular_values[-1], tiny))
+        corr = np.corrcoef(normalized, rowvar=False)
+        centered_norms = np.linalg.norm(normalized - normalized.mean(axis=0), axis=0)
+        correlation_tol = float(np.sqrt(np.finfo(float).eps))
+        watch = [
+            name
+            for name in term_names
+            if name.startswith("D_x^") or name == "alpha_correction" or name.startswith("spatial_correction")
+        ]
+        pair_corr = {}
+        record_all_pairs = os.environ.get("GJ_MATRIX_DIAG_ALL_PAIRS", "0") == "1"
+        for i, name_i in enumerate(term_names):
+            for j in range(i + 1, len(term_names)):
+                name_j = term_names[j]
+                if centered_norms[i] <= correlation_tol or centered_norms[j] <= correlation_tol:
+                    continue
+                if record_all_pairs or name_i in watch or name_j in watch:
+                    pair_corr[f"{name_i}|{name_j}"] = float(corr[i, j])
+        record = {
+            "alpha0": float(alpha0),
+            "beta0": float(beta0),
+            "term_names": list(term_names),
+            "column_norms": [float(v) for v in norms],
+            "singular_values": [float(v) for v in singular_values],
+            "condition_normalized": condition,
+            "pairwise_correlations": pair_corr,
+        }
+        with open(diag_path, "a", encoding="utf-8") as handle:
+            handle.write(json.dumps(record) + "\n")
 
     @staticmethod
     def _build_physical_terms(field: GJBaseField, hbeta: np.ndarray, beta: float) -> tuple[dict[str, np.ndarray], list[str]]:

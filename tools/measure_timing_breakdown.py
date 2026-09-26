@@ -58,7 +58,7 @@ def main() -> None:
     for label, example, mat in CASES:
         row: dict[str, object] = {"noise": label}
 
-        with tempfile.TemporaryDirectory() as tmp:
+        with tempfile.TemporaryDirectory(dir=r"D:\\") as tmp:
             started = time.perf_counter()
             proc = subprocess.run(
                 [PY, str(ROOT / "src" / "train_nn_reconstruction.py"),

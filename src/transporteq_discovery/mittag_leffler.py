@@ -9,9 +9,7 @@ from pathlib import Path
 
 import numpy as np
 
-DEFAULT_PYMITTAGLEFFLER_TARBALL = Path(
-    r"D:\OneDrive - HHU\ML codes\DL-PDE\Linear_fractional\src\transporteq_discovery\pymittagleffler-0.2.0.tar.gz"
-)
+DEFAULT_PYMITTAGLEFFLER_TARBALL = Path(__file__).with_name("pymittagleffler-0.2.0.tar.gz")
 FALLBACK_MEMBER = "pymittagleffler-0.2.0/src/pymittagleffler/fallback.py"
 
 

@@ -83,18 +83,18 @@ delta_alpha_prune_threshold: 0.0
 delta_alpha_bounds: (-1.0, 1.0)
 delta_beta_prune_threshold: 0.0
 loss_formula: validation_residual_norm + cond(Theta)*sum(active_term_lamb)
-validation_residual_norm: 0.06767001070506772
+validation_residual_norm: 0.06767001070506583
 physical_refit: True
 physical_refit_note: coefficients refit after replacing Taylor beta columns by D_x^beta H
 physical_refit_terms: ('H',)
 physical_stridge_library_terms: None
 active_count_for_loss: 1
-complexity_penalty: 1002.3019016414196
-l0_penalty: 1002.3019016414196
+complexity_penalty: 1002.3019016414574
+l0_penalty: 1002.3019016414574
 best tolerance: 0.12500000000000003
 augmented_stridge_objective_raw: None
 selection_loss_formula: None
-objective: 1002.3695716521247
+objective: 1002.3695716521626
 selection_objective_mode: augmented
 refit_mode: None
 order_update_mode: None
@@ -118,8 +118,8 @@ iter_delta_alpha_bounds: None
 iter_delta_beta_bounds: None
 iter_stop_on_non_decreasing_objective: None
 iter_objective_min_delta: None
-physical_refit_selection_objective: 0.06702305503842408
-physical_refit_selection_residual_norm: 0.06602305503842408
+physical_refit_selection_objective: 0.06702305503842532
+physical_refit_selection_residual_norm: 0.06602305503842532
 nonlinear_refit_success: None
 nonlinear_refit_cost: None
 nonlinear_refit_nfev: None
@@ -127,8 +127,8 @@ nonlinear_refit_status: None
 nonlinear_refit_message: None
 order_radius_mode: penalty
 order_radius_penalty: 0.0
-mse: 1.045884316703741e-06
-residual_norm: 0.15278788547796418
+mse: 1.0458843167037407e-06
+residual_norm: 0.15278788547796415
 used alpha correction: False
 spatial_fractional_enabled: False
 spatial_correction_active: False
@@ -151,16 +151,22 @@ spatial_boundary_mode: none
 spatial_boundary_value: None
 spatial_operator_note: fourier_taylor follows the periodic Fourier multiplier; gj_richardson and gl_pycaputo are left-sided RL diagnostics for noisy surrogates
 end_to_end_seconds: None
+timing_surrogate_load_seconds: None
+timing_operator_field_seconds: None
+timing_order_search_seconds: None
+timing_fractional_operator_seconds: None
+timing_sparse_regression_seconds: None
+timing_order_update_overhead_seconds: None
 candidate equation: D_t^0.8 H = -0.9963*H
 augmented regression equation: D_t^0.8 H = -0.9993*H
 active terms:
   H: -0.9962743164
 alpha0/beta0 scan:
   alpha0,beta0,delta_alpha,beta_correction,alpha,beta,alpha_rel_error,beta_rel_error,mse,objective,status,active
-  1,n/a,-0.197723,n/a,0.802277,n/a,0.002846476652237917,None,1.190e-05,1.989e+03,disabled,H + H^2 + alpha_correction
-  0.9,n/a,-0.102647,n/a,0.797353,n/a,0.0033092757477755363,None,2.636e-06,1.990e+03,disabled,H + H^2 + alpha_correction
+  1,n/a,-0.197723,n/a,0.802277,n/a,0.002846476652237223,None,1.190e-05,1.989e+03,disabled,H + H^2 + alpha_correction
+  0.9,n/a,-0.102647,n/a,0.797353,n/a,0.003309275747780671,None,2.636e-06,1.990e+03,disabled,H + H^2 + alpha_correction
   0.8,n/a,0,n/a,0.8,n/a,0.0,None,1.126e-06,1.002e+03,disabled,H
-  0.7,n/a,0.0867911,n/a,0.786791,n/a,0.016511069860585953,None,2.638e-06,1.016e+03,disabled,H + alpha_correction
-  0.6,n/a,0.156934,n/a,0.756934,n/a,0.05383300835379842,None,1.442e-05,1.032e+03,disabled,H + alpha_correction
-  0.5,n/a,0.208436,n/a,0.708436,n/a,0.11445439647886357,None,5.316e-05,1.048e+03,disabled,H + alpha_correction
-  0.4,n/a,0.245084,n/a,0.645084,n/a,0.19364447656663064,None,0.000143846,1.061e+03,disabled,H + alpha_correction
+  0.7,n/a,0.0867911,n/a,0.786791,n/a,0.016511069860589422,None,2.638e-06,1.016e+03,disabled,H + alpha_correction
+  0.6,n/a,0.156934,n/a,0.756934,n/a,0.05383300835380245,None,1.442e-05,1.032e+03,disabled,H + alpha_correction
+  0.5,n/a,0.208436,n/a,0.708436,n/a,0.11445439647886538,None,5.316e-05,1.048e+03,disabled,H + alpha_correction
+  0.4,n/a,0.245084,n/a,0.645084,n/a,0.19364447656663092,None,0.000143846,1.061e+03,disabled,H + alpha_correction

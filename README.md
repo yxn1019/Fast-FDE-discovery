@@ -1,42 +1,55 @@
-﻿# Laplace-Taylor Fractional Discovery
+# Fast Fractional Equation Discovery
 
-This repository contains the manuscript-facing implementation for the
-Laplace-Taylor fractional PDE discovery paper. The public reproduction path is
-centered on `main.py`; support scripts under `tools/` are only for paper tables,
-figures, and the DNS / MADE post-processing chains.
+This repository contains the manuscript-facing implementation and archived
+artifacts for the Laplace--Taylor fractional PDE discovery study. It has been
+trimmed to the numerical examples, baselines, diagnostics, and figures reported
+in the manuscript or its revision response.
 
-Interpreter used throughout:
+## Setup
+
+Python 3.10 or later is recommended.
 
 ```powershell
-$py = 'D:\Miniconda\envs\sr\python.exe'
+python -m pip install -r requirements.txt
+git lfs pull
+$py = 'python'
 ```
 
-## Paper Artifact -> Command Map
+The EqGPT checkpoint is stored with Git LFS. All other data and trained neural
+surrogates needed by the paper examples are included directly in the repository.
 
-Each compiled manuscript result and the single command that reproduces it.
+## Paper artifact map
 
-| Manuscript item | Section / label | Command |
-|---|---|---|
-| Space-time benchmark, our method (clean/5%/25%) | Sec. 3.1, Tab. `tab:tsfade` | `& $py main.py --paper-example tsfade_clean` / `tsfade_noise5` / `tsfade_noise25` |
-| Space-time benchmark, batch mainline | Sec. 3.1, Tab. `tab:tsfade` | `& $py main.py --paper-task mainline` |
-| DE baseline | Sec. 3.1, Tab. `tab:tsfade` | `& $py main.py --paper-task legacy-de --legacy-maxiter 100 --legacy-stridge-mode same_stridge_core --legacy-quiet` |
-| Surrogate heatmaps | Fig. `fig:tsfa_retr_surr_heat` | `& $py main.py --paper-task surrogate-heatmaps` |
-| MODFLOW/MODPATH plume, discovery | Sec. 3.2, Eq. `eq:dns_gamm_disc` | `& $py main.py --paper-example dns_gamma_uniform_kmin1e6_oos` |
-| MODFLOW/MODPATH prediction figures | Sec. 3.2, Figs. forecast / full-domain | `& $py tools\plot_dns_forecast_profiles.py` ; `& $py tools\plot_dns_full_domain_prediction_heatmaps.py` |
-| MADE field, discovery | Sec. 3.3, Eq. `eq:made2_disc` | `& $py main.py --paper-example made2_raw_field` (see MADE note below) |
-| MADE field, parameter polish + errors + figures | Sec. 3.3, Eq. `eq:made2_polish` | `& $py tools\refit_made2_reaction_term.py --mode full --full-bounds local` |
-| Derivative robustness | Sec. 4.1, Tab. `tab:deri_appr_comp` | `& $py main.py --paper-task derivative-robustness` |
-| EqGPT candidate generation | Sec. 4.2, Tab. `tab:eqgpt_cand_sele` | `& $py main.py --paper-task candidate-select` |
-| Iterative-radius ablation | Sec. 4.3, Tab. `tab:iter_radi_abla` | `& $py main.py --paper-task iter-radius-ablation` |
-| Parsimony-bias analytic example | Sec. 4.4, Eq. `eq:pars_disc_comp` | `& $py main.py --paper-example analytic_limitation` |
+| Manuscript item | Command |
+|---|---|
+| Space--time benchmark, clean/5%/25% | `& $py main.py --paper-example tsfade_clean` / `tsfade_noise5` / `tsfade_noise25` |
+| Differential-evolution baseline | `& $py main.py --paper-task legacy-de --legacy-maxiter 100 --legacy-stridge-mode same_stridge_core --legacy-quiet` |
+| Generic local-optimizer baseline | `& $py main.py --paper-task local-optimizers` |
+| Fisher--KPP benchmark, clean/5%/25% | `& $py main.py --paper-example fisher_clean` / `fisher_noise5` / `fisher_noise25` |
+| MODFLOW--MODPATH plume | `& $py main.py --paper-example dns_gamma_uniform_kmin1e6_oos` |
+| MADE field tracer | `& $py main.py --paper-example made2_raw_field` |
+| Derivative robustness | `& $py main.py --paper-task derivative-robustness` |
+| EqGPT-10 and EqGPT-80 | `& $py main.py --paper-task candidate-select` |
+| Bounded/unbounded update ablation | `& $py main.py --paper-task iter-radius-ablation` |
+| Radius-sensitivity scan | `& $py main.py --paper-task radius-sensitivity` |
+| Matrix conditioning | `& $py main.py --paper-task matrix-conditioning` |
+| Order-iteration trajectories | `& $py main.py --paper-task iteration-trajectories` |
+| Linearization and operator verification | `& $py main.py --paper-task linearization-verification` |
+| Parsimony-bias analytic example | `& $py main.py --paper-example analytic_limitation` |
 
-List all paper-facing examples and their resolved parameters:
+List every paper-facing example together with its resolved parameters:
 
 ```powershell
 & $py main.py --list-paper-examples
 ```
 
-## Space-time Benchmark (Sec. 3.1)
+Preview a reproduction group without starting the calculations:
+
+```powershell
+& $py main.py --paper-reproduce diagnostics --paper-reproduce-dry-run
+```
+
+## Space--time benchmark
 
 ```powershell
 & $py main.py --paper-example tsfade_clean
@@ -44,160 +57,100 @@ List all paper-facing examples and their resolved parameters:
 & $py main.py --paper-example tsfade_noise25
 ```
 
-Shared settings (G--J hybrid Taylor route): `8x20` tanh surrogate, `2000`
-training points, Gauss--Jacobi `Nq=5`, ridge parameter `2.0`, `10` inner STRidge
-iterations, bounded iterative order update with radii
-`(delta_alpha, delta_beta) = (0.25, 0.15)`, multi-start `beta0 in {2.0, 1.8, 1.7}`.
-Per-case sparsity weight `lambda`: `3e-6` (clean), `2e-4` (5%), `1e-4` (25%);
-threshold step `d_tol`: `0.005` (clean and 5%), `0.006` (25%); fit window
-`x in [4, 26]` (clean, 5%) and `x in [5, 28]` (25%), `t in [3, 14]`.
+The shared settings are an 8-by-20 tanh surrogate, 2000 training points,
+five-point Gauss--Jacobi quadrature, ridge parameter 2.0, ten inner STRidge
+iterations, update radii `(delta_alpha, delta_beta) = (0.25, 0.15)`, and spatial
+reference orders `beta0 in {2.0, 1.8, 1.7}`. The sparsity weights are `3e-6`,
+`5e-5`, and `1e-4` for clean, 5%, and 25% noise, respectively.
 
-## MODFLOW/MODPATH Plume (Sec. 3.2)
+The periodized-initial-condition runs used to address the periodic-compatibility
+question in the revision response are retained as:
+
+```powershell
+& $py main.py --paper-example tsfade_pic_clean
+& $py main.py --paper-example tsfade_pic_noise5
+& $py main.py --paper-example tsfade_pic_noise25
+```
+
+## Fisher--KPP benchmark
+
+```powershell
+& $py main.py --paper-example fisher_clean
+& $py main.py --paper-example fisher_noise5
+& $py main.py --paper-example fisher_noise25
+& $py tools\plot_fisher_benchmark_figure.py
+```
+
+The benchmark data, 8-by-20 tanh checkpoints, discovered equations, prediction
+arrays, and manuscript figure outputs are stored under `data/fisher_tfr_alpha07/`,
+`data/models/fisher_tfr_alpha07_tanh/`, and `results/fisher_tfr/`.
+
+## MODFLOW--MODPATH plume
 
 ```powershell
 & $py main.py --paper-example dns_gamma_uniform_kmin1e6_oos
 & $py tools\plot_dns_forecast_profiles.py
 & $py tools\plot_dns_full_domain_prediction_heatmaps.py
-& $py tools\update_paper_dns_uniform.py
 ```
 
-Uniform inlet injection, `K_min=1e-6`, sparse discovery on the first 80% of the
-observation interval, prediction on later snapshots. Paper equation:
+The paper case uses uniform inlet injection, `K_min=1e-6`, discovery over the
+first 80% of the observation interval, and out-of-sample prediction on later
+snapshots. Its archived equation is
 
 ```text
-D_t^0.83349955 H = -0.6202*Hx
+D_t^0.83349955 H = -0.6202 Hx.
 ```
 
-Active artifacts:
+## MADE field tracer
 
-- `data/dns_gamma075_lc1_uniform_kmin1e6/`
-- `data/models/dns_gamma075_lc1_uniform_kmin1e6_tanh_5x50_clean_4000_gj_rawcoords/`
-- `results/tsfade_fft_dns_gamma075_lc1_uniform_kmin1e6_gj_hybrid_taylor_result.txt`
-- `figures/dns_gamma075_lc1_uniform_kmin1e6_forecast_t100_{linear,loglog}.png`
-- `figures/dns_gamma075_lc1_uniform_kmin1e6_full_domain_t80split_heatmaps.png`
-
-## MADE Field Tracer (Sec. 3.3)
-
-The MADE result has two stages: a direct discovery and a fixed-support
-parameter polish. The manuscript reports the `raw` variant with the
-`hybrid_log_mse` `5x50` tanh surrogate.
-
-**Discovery (Eq. `eq:made2_disc`).** Re-run discovery through the dedicated
-paper example:
+The direct discovery uses the raw MADE data and the 5-by-50 tanh surrogate:
 
 ```powershell
 & $py main.py --paper-example made2_raw_field
 ```
 
-Settings: fit window `x in [9.2, 174.8]`, `t in [49, 370]` d, Laplace
-`s in [0.0162, 0.667]`, `lamb=1e-6`, `d_tol=1e-3`, bounded iterative update with
-`beta0 in {2.0, 1.8, 1.7}`.
-
-> MADE note: the discovered support `{1, H, Hx, D_x^beta H}` and temporal order
-> `alpha=0.999` are stable, but the spatial order sits near the `delta_beta=0.15`
-> first-order bound from `beta0=2.0`, so the order selection is sensitive to
-> numerical/library drift (a bare re-run can land on `beta~1.98` rather than the
-> archived `beta=1.93`). The **exact** manuscript equations are reproduced from
-> the frozen discovery bundle in the polish step below, which is the authoritative
-> MADE artifact.
-
-**Polish (Eq. `eq:made2_polish`) + figures + errors.** Operates on the frozen
-discovery bundle `figures/hydrology_fft_discovery/made2_row252/made2_row252_prediction.npz`:
+The manuscript's fixed-support parameter optimization starts from the frozen
+discovery bundle:
 
 ```powershell
-& $py tools\refit_made2_reaction_term.py --mode full --full-bounds local
-& $py tools\plot_made2_fft_normalized_paper_figures.py
+& $py tools\refit_made2_reaction_term.py --mode full --full-bounds local `
+    --output-dir figures\hydrology_fft_discovery\made2_row252_parameter_polish_local
+& $py tools\plot_made2_fft_normalized_paper_figures.py `
+    --input-npz figures\hydrology_fft_discovery\made2_row252_parameter_polish_local\made2_row252_parameter_polish_full_prediction.npz
 ```
 
-This reproduces, bit-for-bit, the manuscript values:
+The authoritative direct-discovery bundle is
+`figures/hydrology_fft_discovery/made2_row252/`.
 
-```text
-direct   : D_t^0.999 H = 0.0382 - 0.00890 H - 0.01998 Hx + 0.02502 D_x^1.93 H
-polished : D_t^0.983 H = 0.00109 - 0.01453 H - 0.02885 Hx + 0.03224 D_x^1.70 H
-```
+## EqGPT candidate generation
 
-Active artifacts:
-
-- `data/hydrology_experiments/made2/raw/`
-- `data/models/hydrology_experiments/made2_raw_tanh_5x50_hybrid_log_mse/`
-- `figures/hydrology_fft_discovery/made2_row252/` (frozen discovery bundle)
-- `results/tsfade_fft_hydrology_experiments_made2_raw_tanh_5x50_hybrid_log_mse_gj_hybrid_taylor_result.txt`
-
-## EqGPT Candidate Selection (Sec. 4.2)
-
-EqGPT assets are local to this repository:
-
-- `data/eqgpt/PDEGPT_KdV_equation.pt`
-- `data/eqgpt/dict_datas_0725.json`
+The manuscript compares ten and eighty sampled sequences per optimization round:
 
 ```powershell
-& $py main.py --paper-example candidate_select_tsfade_clean
-& $py main.py --paper-example candidate_select_tsfade_noise5
-& $py main.py --paper-example candidate_select_tsfade_noise25
-& $py main.py --paper-task candidate-select   # full table batch
+& $py main.py --paper-example candidate_select_tsfade_clean_10
+& $py main.py --paper-example candidate_select_tsfade_clean_80
+& $py main.py --paper-task candidate-select
 ```
 
-The `EqGPT-10` and `EqGPT-80` rows of Tab. `tab:eqgpt_cand_sele` correspond to
-`generated_candidates = 10` and `80` per optimization round.
+The checkpoint `data/eqgpt/PDEGPT_KdV_equation.pt` and its dictionary are stored
+locally so the candidate-generation layer does not depend on an external model
+download.
 
-## Diagnostics and Tables
+## Archived evidence
 
-Revision diagnostics and their complete machine-readable results are provided
-with the corresponding reproduction scripts:
+- `results/baseline_nonlinear/`: local-optimizer table and objective landscapes.
+- `results/candidate_select/`: EqGPT-10 and EqGPT-80 outputs used by the paper.
+- `results/derivative_robustness/`: derivative-approximation comparison.
+- `results/iterative_order_update/`: mainline, radius ablation, and trajectories.
+- `results/legacy_de_normalized_tsfade_alpha078_beta183/`: DE baseline outputs.
+- `results/matrix_conditioning/`: saved augmented-matrix diagnostics.
+- `results/revision_diagnostics/radius_sensitivity.csv`: complete radius scan.
+- `results/timing_breakdown/`: discovery and surrogate-training timing records.
+- `results/verification/` and `figures/verification/`: Appendix verification.
 
-- Radius sensitivity (51 runs) and normalization check:
-  `results/revision_diagnostics/`, generated by
-  `tools/run_revision_diagnostics.py`.
-- Candidate-matrix conditioning diagnostics: `results/matrix_conditioning/`,
-  generated by `tools/run_matrix_conditioning_diagnostics.py`.
-- Order-linearization verification: `results/verification/`, generated by
-  `tools/verify_linearization_analysis.py`.
-- Timing breakdown and the DE evaluation summary:
-  `results/timing_breakdown/`, generated by
-  `tools/measure_timing_breakdown.py` and
-  `tools/run_legacy_de_normalized_tsfade_benchmark.py`.
+## Scope of the public repository
 
-```powershell
-& $py main.py --paper-task derivative-robustness   # Tab. tab:deri_appr_comp
-& $py main.py --paper-task iter-radius-ablation     # Tab. tab:iter_radi_abla
-& $py main.py --paper-task mainline                 # Tab. tab:tsfade (batch)
-```
-
-Curated reproduction groups:
-
-```powershell
-& $py main.py --paper-reproduce diagnostics --paper-reproduce-dry-run
-& $py main.py --paper-reproduce diagnostics
-& $py main.py --paper-reproduce eqgpt
-```
-
-The legacy DE task is intentionally slow. It is retained for the manuscript
-benchmark table and uses the same normalized tanh surrogate, fit windows,
-fractional derivative approximation, and STRidge core as the proposed method.
-
-> **Parameter history note.** The DE rows reported in Tab. `tab:tsfade` were
-> produced with an earlier parameter set (noise5 `lambda=1e-4`, clean
-> `d_tol=0.025`). The current `--paper-task legacy-de` command inherits the
-> updated paper-example parameters (`lambda=2e-4` for noise5, `d_tol=0.005` for
-> clean) and gives different equations; those results are archived in
-> `results/legacy_de_normalized_tsfade_alpha078_beta183/`. The table values are
-> retained as published because the Score column 鈥?which depended on the
-> regularisation weight and was not comparable across methods 鈥?has been removed.
-
-## Artifact Layout
-
-- `data/tsfade_retrained_alpha078_beta183/`: space-time FADE raw/noisy data (alpha=0.78, beta=1.83).
-- `data/models/tsfade_retrained_alpha078_beta183_normalized_tanh/`: manuscript tsfade checkpoints.
-- `data/dns_gamma075_lc1_uniform_kmin1e6/`: MODFLOW/MODPATH plume data and prediction arrays.
-- `data/hydrology_experiments/made2/raw/`: MADE field tracer data (raw variant).
-- `data/models/hydrology_experiments/made2_raw_tanh_5x50_hybrid_log_mse/`: MADE surrogate checkpoint.
-- `data/analytic_tfade_sine/`: single-mode analytic time-fractional ADE data (Sec. 4.4 parsimony example).
-- `data/eqgpt/`: local EqGPT checkpoint and dictionary.
-- `figures/hydrology_fft_discovery/made2_row252/`: frozen MADE discovery bundle (authoritative for Eq. made2_disc / made2_polish).
-- `results/`: manuscript diagnostics, benchmark outputs, and per-case result reports.
-
-> Non-paper material removed during slimming: the `north_loup` hydrology site, the
-> MADE `massnorm`/`mse` variants, the 877 MB DNS work directory, and the coarse-scan
-> report set under `results/hydrology_discovery_scan/`. The periodic time-fractional
-> example is retained (its surrogate panel is still produced by
-> `--paper-task surrogate-heatmaps`). See `CODE_SLIMMING_PLAN.md`.
+Exploratory parameter sweeps, alternative hydrology sites, unused MADE
+preprocessing variants, temporary manuscript renders, and obsolete standalone
+benchmarks are intentionally excluded. The Git history preserves the previous
+public snapshot; the development archive is maintained separately.

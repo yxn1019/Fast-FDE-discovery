@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 import sys
 from dataclasses import dataclass
 from pathlib import Path
@@ -14,7 +15,7 @@ from transporteq_discovery.data import TransportDataset
 from transporteq_discovery.models import SparseModel
 
 
-DEFAULT_MODEL_ROOT = Path(r"D:\OneDrive - HHU\ML codes\DL-PDE\DL-FDE (code)\model_save")
+DEFAULT_MODEL_ROOT = Path(__file__).resolve().parents[2] / "data" / "models"
 DEFAULT_ALPHA0_GRID = tuple(round(1.0 - 0.1 * i, 10) for i in range(10))
 FDE_LIBRARY_TERMS = (
     "1",
@@ -31,7 +32,6 @@ FDE_LIBRARY_TERMS = (
 )
 
 _ANALYTIC_TFADE_PARAMS = {"alpha": 0.8, "diffusion": 0.5, "velocity": -1.0}
-_PERIODIC_TFADE_FFT_PARAMS = {"alpha": 0.85, "diffusion": 0.5, "velocity": -1.0, "sigma": 0.4}
 
 
 @dataclass(frozen=True)
@@ -178,8 +178,8 @@ class FractionalPDEDiscoverer:
 
     def discover(self, dataset: TransportDataset | None = None) -> FractionalDiscoveryResult:
         del dataset
-        if self.config.case_name not in {"tsfade_fft", "analytic_tfade", "periodic_tfade_fft"}:
-            raise NotImplementedError("The FDE-style mainline currently supports tsfade_fft, analytic_tfade, and periodic_tfade_fft.")
+        if self.config.case_name not in {"tsfade_fft", "analytic_tfade"}:
+            raise NotImplementedError("The paper workflow supports tsfade_fft and analytic_tfade.")
         if self.config.time_operator_mode == "l1_pycaputo":
             return self._discover_l1_pycaputo()
         full_field = self.reconstruct_field()
@@ -276,8 +276,6 @@ class FractionalPDEDiscoverer:
     def reconstruct_field(self) -> ReconstructedField:
         if self.config.case_name == "analytic_tfade":
             return self._reconstruct_analytic_tfade_field()
-        if self.config.case_name == "periodic_tfade_fft" and self._use_builtin_periodic_field():
-            return self._reconstruct_periodic_tfade_fft_field()
         torch = self._torch()
         checkpoint_path = self.config.checkpoint_path
         if not checkpoint_path.exists():
@@ -357,15 +355,6 @@ class FractionalPDEDiscoverer:
             training_metadata=training_metadata,
         )
 
-    def _use_builtin_periodic_field(self) -> bool:
-        checkpoint = self.config.checkpoint_file
-        if checkpoint is None:
-            return True
-        checkpoint_path = Path(checkpoint)
-        if checkpoint_path.exists():
-            return False
-        return checkpoint_path.name == "periodic_tfade_fft"
-
     def _reconstruct_analytic_tfade_field(self) -> ReconstructedField:
         from tools.generate_analytic_tfade_sine import mittag_leffler_series
 
@@ -418,67 +407,6 @@ class FractionalPDEDiscoverer:
             H=H_np,
             terms=terms,
             checkpoint_path=Path("analytic_tfade"),
-            training_metadata=training_metadata,
-        )
-
-    def _reconstruct_periodic_tfade_fft_field(self) -> ReconstructedField:
-        from tools.generate_periodic_tfade_fft import generate
-
-        alpha_true = _PERIODIC_TFADE_FFT_PARAMS["alpha"]
-        diffusion = _PERIODIC_TFADE_FFT_PARAMS["diffusion"]
-        velocity = _PERIODIC_TFADE_FFT_PARAMS["velocity"]
-        nx = max(2, int(round((self.config.x_max - self.config.x_min) / self.config.x_step)))
-        nt = max(2, int(round((self.config.t_max - self.config.t_min) / self.config.t_step))) + 1
-        payload = generate(
-            nx=nx,
-            nt=nt,
-            t_max=float(self.config.t_max - self.config.t_min),
-            alpha=alpha_true,
-            diffusivity=diffusion,
-            velocity=velocity,
-            sigma=_PERIODIC_TFADE_FFT_PARAMS["sigma"],
-        )
-        x_np = np.asarray(payload["x"]).reshape(-1) + float(self.config.x_min)
-        t_np = np.asarray(payload["t"]).reshape(-1) + float(self.config.t_min)
-        H_np = np.asarray(payload["Exact"], dtype=float)
-        Hx_np = np.asarray(payload["cx"], dtype=float)
-        Hxx_np = np.asarray(payload["cxx"], dtype=float)
-        k = np.asarray(payload["k"]).reshape(-1)
-        Hxxx_np = np.real(np.fft.ifft(((1j * k) ** 3).reshape(1, -1) * np.fft.fft(H_np, axis=1), axis=1))
-        terms = {
-            "1": np.ones_like(H_np),
-            "H": H_np,
-            "Hx": Hx_np,
-            "Hxx": Hxx_np,
-            "Hxxx": Hxxx_np,
-            "H^2": H_np**2,
-            "H*Hx": H_np * Hx_np,
-            "H*Hxx": H_np * Hxx_np,
-            "H*Hxxx": H_np * Hxxx_np,
-            "H^2*Hx": H_np**2 * Hx_np,
-            "H^2*Hxx": H_np**2 * Hxx_np,
-            "H^2*Hxxx": H_np**2 * Hxxx_np,
-        }
-        if self.config.enable_spatial_fractional:
-            terms.update(self._spatial_fractional_terms(None, None, t_np, x_np, H_np, Hxx_np, {}))
-        self._assert_finite("periodic FFT reconstruction", [H_np, *terms.values()])
-        training_metadata = {
-            "config": {
-                "case": "periodic_tfade_fft",
-                "alpha": alpha_true,
-                "D": diffusion,
-                "v": velocity,
-                "sigma": 0.4,
-                "field_shape": list(H_np.shape),
-            },
-            "summary": "Periodic FFT time-fractional advection-diffusion field",
-        }
-        return ReconstructedField(
-            time=t_np.astype(float),
-            position=x_np.astype(float),
-            H=H_np,
-            terms=terms,
-            checkpoint_path=Path("periodic_tfade_fft"),
             training_metadata=training_metadata,
         )
 
@@ -1634,7 +1562,7 @@ class FractionalPDEDiscoverer:
         target: np.ndarray,
         protected_indices: tuple[int, ...] = (),
         term_names: tuple[str, ...] | None = None,
-    ) -> tuple[np.ndarray, float, float, float, dict[str, float | int]]:
+    ) -> tuple[np.ndarray, float, float, float, dict[str, float | int | str]]:
         rng = np.random.default_rng(self.config.random_seed)
         n_rows = matrix.shape[0]
         if term_names is None:
@@ -1650,15 +1578,55 @@ class FractionalPDEDiscoverer:
         test_matrix = matrix[test, :]
         train_target = target[train, :]
         test_target = target[test, :]
-        condition = self._finite_condition(matrix)
+        # Revision diagnostics expose the paper-result behavior and two
+        # alternative data-use conventions without changing the default.
+        # In train_only mode, the reserved 20% subset cannot affect threshold,
+        # support, coefficient, or order selection.
+        selection_mode = os.environ.get("GJ_STRIDGE_SELECTION_MODE")
+        if selection_mode is None:
+            selection_mode = (
+                "train_validation"
+                if os.environ.get("GJ_STRIDGE_FIT_ON_TRAIN", "0") == "1"
+                else "legacy_full_validation"
+            )
+        valid_selection_modes = {
+            "legacy_full_validation",
+            "train_validation",
+            "train_only",
+        }
+        if selection_mode not in valid_selection_modes:
+            raise ValueError(
+                "GJ_STRIDGE_SELECTION_MODE must be one of "
+                f"{sorted(valid_selection_modes)}, got {selection_mode!r}"
+            )
+        if selection_mode == "legacy_full_validation":
+            fit_matrix = matrix
+            fit_target = target
+            score_matrix = test_matrix
+            score_target = test_target
+            selection_residual_role = "reserved_subset_after_full_fit"
+        elif selection_mode == "train_validation":
+            fit_matrix = train_matrix
+            fit_target = train_target
+            score_matrix = test_matrix
+            score_target = test_target
+            selection_residual_role = "validation_subset"
+        else:
+            fit_matrix = train_matrix
+            fit_target = train_target
+            score_matrix = train_matrix
+            score_target = train_target
+            selection_residual_role = "structure_training_subset"
+        condition_matrix = train_matrix if selection_mode == "train_only" else matrix
+        condition = self._finite_condition(condition_matrix)
         l0_penalty = self.config.sparsity_lamb * condition
 
         best_tol = float(self.config.d_tol)
         d_tol = float(self.config.d_tol)
         tol = float(d_tol)
         best_weights = self._stridge(
-            matrix,
-            target,
+            fit_matrix,
+            fit_target,
             self.config.ridge_lambda,
             self.config.str_iters,
             tol,
@@ -1667,7 +1635,7 @@ class FractionalPDEDiscoverer:
             term_names=term_names,
             correction_tol_scale=self.config.fractional_correction_tol_scale,
         )
-        best_residual_norm = self._norm2(test_target - test_matrix @ best_weights)
+        best_residual_norm = self._norm2(score_target - score_matrix @ best_weights)
         protected_set = set(protected_indices)
         candidate_indices = tuple(index for index in range(matrix.shape[1]) if index not in protected_set)
         best_active_count = self._active_count(best_weights, candidate_indices)
@@ -1677,8 +1645,8 @@ class FractionalPDEDiscoverer:
 
         for iteration in range(self.config.maxit):
             weights = self._stridge(
-                matrix,
-                target,
+                fit_matrix,
+                fit_target,
                 self.config.ridge_lambda,
                 self.config.str_iters,
                 tol,
@@ -1687,7 +1655,7 @@ class FractionalPDEDiscoverer:
                 term_names=term_names,
                 correction_tol_scale=self.config.fractional_correction_tol_scale,
             )
-            residual_norm = self._norm2(test_target - test_matrix @ weights)
+            residual_norm = self._norm2(score_target - score_matrix @ weights)
             active_count = self._active_count(weights, candidate_indices)
             complexity_penalty = self._complexity_penalty(weights, term_names, candidate_indices, condition)
             active_lamb_sum = self._active_lamb_sum(weights, term_names, candidate_indices)
@@ -1705,6 +1673,18 @@ class FractionalPDEDiscoverer:
                 tol = max(0.0, tol - 2.0 * d_tol)
                 d_tol = 2.0 * d_tol / max(1, self.config.maxit - iteration)
                 tol += d_tol
+        if selection_mode == "train_validation":
+            # This diagnostic follows the conventional validation workflow:
+            # choose the support on train/validation, then refit its coefficients
+            # on the full fitting window. Train-only structure discovery does not
+            # refit here because that would feed reserved rows into later order and
+            # support updates.
+            support = np.flatnonzero(np.abs(best_weights.reshape(-1)) > 1.0e-12)
+            if support.size > 0:
+                best_weights = best_weights.copy()
+                best_weights[support] = self._lstsq(matrix[:, support], target)
+                best_residual_norm = self._norm2(test_target - test_matrix @ best_weights)
+                best_error = float(best_residual_norm + best_complexity_penalty)
         return (
             best_weights,
             best_error,
@@ -1716,6 +1696,9 @@ class FractionalPDEDiscoverer:
                 "complexity_penalty": float(best_complexity_penalty),
                 "active_lamb_sum": float(best_active_lamb_sum),
                 "condition_number": float(condition),
+                "stridge_selection_mode": selection_mode,
+                "selection_residual_role": selection_residual_role,
+                "selection_residual_norm": float(best_residual_norm),
             },
         )
 
@@ -1936,14 +1919,17 @@ class FractionalPDEDiscoverer:
         # perturb near-degenerate STRidge selections (notably the low-lambda clean tsfade
         # case). Thread count only -- do not enable use_deterministic_algorithms or reseed,
         # which switch autograd kernels and change the derivative values themselves.
-        try:
-            torch.set_num_threads(1)
-        except Exception:
-            pass
-        try:
-            torch.set_num_interop_threads(1)
-        except Exception:
-            pass
+        # Set GJ_TORCH_MULTITHREAD=1 to bypass the pin (reproducibility diagnostic
+        # only; results are then not bitwise stable).
+        if os.environ.get("GJ_TORCH_MULTITHREAD", "0") != "1":
+            try:
+                torch.set_num_threads(1)
+            except Exception:
+                pass
+            try:
+                torch.set_num_interop_threads(1)
+            except Exception:
+                pass
         return torch
 
     def _build_network(self, torch: Any, *, activation: str, hidden_layers: int, neurons: int) -> Any:

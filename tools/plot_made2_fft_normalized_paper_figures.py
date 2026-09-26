@@ -39,7 +39,7 @@ plt.rcParams.update(
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_INPUT = ROOT / "figures" / "hydrology_fft_discovery" / "made2_row252" / "made2_row252_prediction.npz"
-DEFAULT_PAPER_FIG_DIR = Path(r"D:\OneDrive - HHU\My paper\11Laplace-Taylor discovery\figures")
+DEFAULT_PAPER_FIG_DIR = ROOT / "figures" / "paper"
 
 
 def _safe_profile(field: np.ndarray) -> np.ndarray:

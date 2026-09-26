@@ -1,2 +1,0 @@
-noise_label,method,maxiter,popsize,de_success,de_nit,de_nfev,runtime_seconds,fractional_operator_seconds,sparse_regression_seconds,de_overhead_seconds
-clean,differential_evolution,100,15,True,42,1290,1052.17814,1003.2087171000028,48.72695310000084,0.24246979999635698

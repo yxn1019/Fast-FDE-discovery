@@ -1,0 +1,21 @@
+{
+  "equation": "D_t^0.7 u = 0.5 D_x^1.8 u + 1.0 u (1 - u)",
+  "alpha": 0.7,
+  "beta": 1.8,
+  "diffusivity": 0.5,
+  "reaction_rate": 1.0,
+  "initial_condition": "sum_m 0.95*exp(-((x-20.0+40.0m)/3.0)^2), two counter-propagating fronts",
+  "boundary_condition": "periodic on [0, 40.0)",
+  "solver": "L1 Caputo (semi-implicit) + FFT spectral diffusion",
+  "solver_substeps_per_save": 8,
+  "time_refinement_relative_error": 0.003134372939296934,
+  "diffusion_to_reaction_norm_ratio": 0.072935155395754,
+  "shape": [
+    321,
+    256
+  ],
+  "x_step": 0.15625,
+  "t_step": 0.025,
+  "t_final": 8.0,
+  "noise_convention": "noiseN: Exact = clean * (1 + 0.01*N*U(-1,1)), seed 525"
+}

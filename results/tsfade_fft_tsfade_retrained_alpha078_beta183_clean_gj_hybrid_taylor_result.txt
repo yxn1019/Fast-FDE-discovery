@@ -14,19 +14,19 @@ noise_level: 0.0
 activation: tanh
 hidden_layers: 8
 neurons: 20
-NN grid shape: (110, 92)
-x_range: (5.0, 27.75)
+NN grid shape: (110, 88)
+x_range: (4.0, 25.75)
 t_range: (3.0, 13.90000057220459)
 operator_grid_shape: (150, 120)
 operator_x_range: (0.0, 29.75)
 operator_t_range: (0.0, 14.899999618530273)
-fit_grid_shape: (110, 92)
-fit_x_range: (5.0, 27.75)
+fit_grid_shape: (110, 88)
+fit_x_range: (4.0, 25.75)
 fit_t_range: (3.0, 13.90000057220459)
-fit_window_config: (5.0, 28.0, 3.0, 14.0)
+fit_window_config: (4.0, 26.0, 3.0, 14.0)
 initial_condition_time: 0.0
 initial_condition_note: G-J operators are evaluated on the full reconstruction domain and then restricted to the fit window for STRidge
-library terms: 1, H, Hx, D_x^1.7 H, Hxxx, H^2, H*Hx, H*Hxx, H*Hxxx, H^2*Hx, H^2*Hxx, H^2*Hxxx, alpha_correction, spatial_correction_beta0=1.7
+library terms: 1, H, Hx, D_x^1.85 H, Hxxx, H^2, H*Hx, H*Hxx, H*Hxxx, H^2*Hx, H^2*Hxx, H^2*Hxxx, alpha_correction, spatial_correction_beta0=1.9
 candidate_search: fixed
 generated_structure: None
 generated_raw_structure: None
@@ -50,17 +50,17 @@ eqgpt_random_exploration: None
 eqgpt_reward: None
 eqgpt_r2: None
 eqgpt_source_equation: None
-matrix_shape: (10120, 14)
+matrix_shape: (9680, 14)
 alpha0_count: 6
-best alpha0: 0.99
-best beta0: 1.7
-delta alpha: -0.25
-delta alpha raw: -0.2692423557185664
-alpha: 0.74
+best alpha0: 0.7555135487370459
+best beta0: 1.85
+delta alpha: 0.001973016410770967
+delta alpha raw: 0.0019730164107709847
+alpha: 0.7574865651478169
 true_alpha: 0.78
-alpha_relative_error: 0.05128205128205133
+alpha_relative_error: 0.02886337801561943
 true_beta: 1.83
-beta_relative_error: 0.010928961748633767
+beta_relative_error: 0.020367285396386856
 s_range: None
 s_points: 0
 laguerre_nodes: 0
@@ -83,32 +83,32 @@ delta_alpha_prune_threshold: 0.0
 delta_alpha_bounds: (-1.0, 1.0)
 delta_beta_prune_threshold: 0.0
 loss_formula: validation_residual_norm + cond(Theta)*sum(active_term_lamb)
-validation_residual_norm: 1.0409967589470548
+validation_residual_norm: 0.929073134898595
 physical_refit: False
 physical_refit_note: None
-physical_refit_terms: ('Hx', 'D_x^1.85 H', 'H*Hxx')
-physical_stridge_library_terms: ('1', 'H', 'Hx', 'D_x^1.85 H', 'Hxxx', 'H^2', 'H*Hx', 'H*Hxx', 'H*Hxxx', 'H^2*Hx', 'H^2*Hxx', 'H^2*Hxxx')
-active_count_for_loss: 6
-complexity_penalty: 1.2922835788275577
-l0_penalty: 0.32307089470688943
-best tolerance: 0.005869565217391303
-augmented_stridge_objective_raw: 2.3332803377746125
+physical_refit_terms: ('Hx', 'D_x^1.792728 H')
+physical_stridge_library_terms: ('1', 'H', 'Hx', 'D_x^1.792728 H', 'Hxxx', 'H^2', 'H*Hx', 'H*Hxx', 'H*Hxxx', 'H^2*Hx', 'H^2*Hxx', 'H^2*Hxxx')
+active_count_for_loss: 4
+complexity_penalty: 0.38734560107787763
+l0_penalty: 0.19367280053893882
+best tolerance: 0.06138888888888887
+augmented_stridge_objective_raw: 1.3164187359764727
 selection_loss_formula: physical validation_residual_norm + cond(physical_Theta)*sum(active_physical_lamb)
-objective: 1.5231435436439695
+objective: 1.256777605382837
 selection_objective_mode: physical-stridge
 refit_mode: none
 order_update_mode: iterative
-iteration_count: 2
+iteration_count: 4
 iteration_converged: False
 iteration_stop_reason: objective_not_decreased
-iteration_final_index: 1
-iteration_best_objective_index: 0
-iteration_best_fractional_support_index: 0
-iteration_selected_index: 5
+iteration_final_index: 3
+iteration_best_objective_index: 2
+iteration_best_fractional_support_index: 2
+iteration_selected_index: 2
 iteration_selected: True
 iter_selection_mode: best_objective
 iter_start_alpha: 0.99
-iter_start_beta: 1.7
+iter_start_beta: 2.0
 iter_start_beta_values: (2.0, 1.8, 1.7)
 iter_order_tol: 0.005
 iter_damping: 1.0
@@ -118,8 +118,8 @@ iter_delta_alpha_bounds: (-0.25, 0.25)
 iter_delta_beta_bounds: (-0.15, 0.15)
 iter_stop_on_non_decreasing_objective: True
 iter_objective_min_delta: 0.0
-physical_refit_selection_objective: 1.5231435436439695
-physical_refit_selection_residual_norm: 0.8783033638137367
+physical_refit_selection_objective: 1.256777605382837
+physical_refit_selection_residual_norm: 0.9285490883433998
 nonlinear_refit_success: None
 nonlinear_refit_cost: None
 nonlinear_refit_nfev: None
@@ -127,16 +127,16 @@ nonlinear_refit_status: None
 nonlinear_refit_message: None
 order_radius_mode: penalty
 order_radius_penalty: 0.0
-mse: 0.0003919542204674127
-residual_norm: 1.9916266495330435
+mse: 0.0004466061284304381
+residual_norm: 2.0792179595238784
 used alpha correction: False
 spatial_fractional_enabled: True
 spatial_correction_active: True
 spatial_beta_status: estimated
-spatial_beta: 1.8499999999999999
-spatial_delta_beta: 0.1499999999999999
-spatial_delta_beta_raw: 0.49774070623443323
-spatial_beta_correction: 0.1499999999999999
+spatial_beta: 1.7927278677246121
+spatial_delta_beta: -0.057272132275387966
+spatial_delta_beta_raw: -0.05727213227538789
+spatial_beta_correction: -0.057272132275387966
 spatial_beta_in_bounds: True
 spatial_beta_bounds: (1.5, 2.0)
 spatial_beta_model_valid: True
@@ -150,23 +150,31 @@ physical_refit_time_operator_mode: None
 spatial_boundary_mode: none
 spatial_boundary_value: None
 spatial_operator_note: time and spatial fractional operators both use Jacobi-Gauss quadrature with autodiff derivatives
-end_to_end_seconds: 7.404276900000696
-candidate equation: D_t^0.74 H = -1.073*Hx + 0.1502 D_x^1.85 H + 0.04901*H*Hxx
-augmented regression equation: D_t^0.74 H = -0.8311*Hx + 0.4928 D_x^1.7 H + 0.08309*H*Hxx + 0.05954*H*Hxxx + -0.2692*alpha_correction + 0.2453*spatial_correction_beta0=1.7
+end_to_end_seconds: 5.6111828
+timing_surrogate_load_seconds: 0.007799400000000123
+timing_operator_field_seconds: 0.086144
+timing_order_search_seconds: 5.517239399999999
+timing_fractional_operator_seconds: 4.7656132
+timing_sparse_regression_seconds: 0.37269949999999774
+timing_order_update_overhead_seconds: 0.37892670000000184
+candidate equation: D_t^0.75748657 H = -1.054*Hx + 0.4324 D_x^1.792728 H
+augmented regression equation: D_t^0.75748657 H = -1.052*Hx + 0.433 D_x^1.85 H + 0.001973*alpha_correction + -0.0248*spatial_correction_beta0=1.9
 active terms:
-  Hx: -1.072514874
-  D_x^1.85 H: 0.1501915527
-  H*Hxx: 0.04900900891
+  Hx: -1.053515612
+  D_x^1.792728 H: 0.4324128627
 iterative order update trace:
   iter,alpha0,beta0,delta_alpha_raw,delta_beta_raw,delta_alpha,delta_beta,delta_beta_used,alpha_next,beta_next,objective,regularized_objective,raw_mse,mse,condition,validation_residual_norm,complexity_penalty,active_lamb_sum,physical_refit_condition_penalty,active_count_for_loss,tolerance,status,support
-  0,0.99,1.7,-0.269242,0.497741,-0.25,0.15,0.15,0.79,1.85,1.52314,1.52314,0.000391954,0.000391954,1.077e+05,1.041,1.29228,1.200e-05,0.64484,6,0.00586957,estimated,Hx+D_x^1.85 H+H*Hxx
-  1,0.79,1.85,-0.0235419,0.184691,-0.0235419,0.15,0.15,0.766458,2,2.07842,2.07842,0.000351422,0.000351422,1.059e+05,0.842998,1.27027,1.200e-05,1.23597,6,0.0372222,estimated,Hx+D_x^2 H+Hxxx+H*Hxx
+  0,0.99,2,-0.322187,0.148631,-0.25,0,0,0.79,2,1.31132,1.31132,0.000451676,0.000451676,6.459e+04,1.20387,0.387552,6.000e-06,0.374277,4,0.06,estimated,Hx+H*Hxx
+  1,0.79,2,-0.0344865,-0.165083,-0.0344865,-0.15,-0.15,0.755514,1.85,1.27651,1.27651,0.000452225,0.000452225,6.261e+04,0.891087,0.563472,9.000e-06,0.343033,5,0.0259907,estimated,Hx+D_x^1.85 H
+  2,0.755514,1.85,0.00197302,-0.0572721,0.00197302,-0.0572721,-0.0572721,0.757487,1.79273,1.25678,1.25678,0.000446606,0.000446606,6.456e+04,0.929073,0.387346,6.000e-06,0.328229,4,0.0613889,estimated,Hx+D_x^1.792728 H
+  3,0.757487,1.79273,0.0118504,0.119883,0.0118504,0.119883,0.119883,0.769337,1.91261,1.62895,1.62895,0.000418807,0.000418807,6.592e+04,0.784911,1.1866,1.800e-05,0.72969,8,0.015,estimated,Hx+D_x^1.91261 H+Hxxx+H*Hxx
 alpha0/beta0 scan:
   alpha0,beta0,delta_alpha,beta_correction,alpha,beta,alpha_rel_error,beta_rel_error,mse,objective,status,active
-  0.99,2,-0.128869,0,0.861131,2,0.10401351047170275,0.09289617486338794,0.000794642,2.17595,estimated,Hx + D_x^2 H + Hxxx
-  0.861131,2,-0.108238,0,0.752893,2,0.034752543586810465,0.09289617486338794,0.000442252,1.55908,estimated,Hx + D_x^2 H
-  0.752893,2,0.0124472,-0.15,0.76534,1.85,0.01879455991884509,0.010928961748633888,0.000263822,2.2336,estimated,1 + Hx + D_x^1.85 H + Hxxx + H*Hxx + H*Hxxx + H^2*Hxx
-  0.99,1.8,-0.25,0.15,0.74,1.95,0.05128205128205133,0.06557377049180321,0.000396672,1.77063,estimated,Hx + Hxxx + H*Hxx
-  0.79,1.8,-0.0235602,0.15,0.76644,1.95,0.01738488753717017,0.06557377049180321,0.000352686,2.0231,estimated,Hx + D_x^1.95 H + Hxxx + H*Hxx
-  0.99,1.7,-0.25,0.15,0.74,1.85,0.05128205128205133,0.010928961748633767,0.000391954,1.52314,estimated,Hx + D_x^1.85 H + H*Hxx
-  0.79,1.85,-0.0235419,0.15,0.766458,2,0.017361361913451837,0.09289617486338782,0.000351422,2.07842,estimated,Hx + D_x^2 H + Hxxx + H*Hxx
+  0.99,2,-0.25,0,0.74,2,0.05128205128205133,0.09289617486338794,0.000451676,1.31132,estimated,Hx + H*Hxx
+  0.79,2,-0.0344865,-0.15,0.755514,1.85,0.03139288623455657,0.010928961748633888,0.000452225,1.27651,estimated,Hx + D_x^1.85 H
+  0.755514,1.85,0.00197302,-0.0572721,0.757487,1.79273,0.02886337801561943,0.020367285396386856,0.000446606,1.25678,estimated,Hx + D_x^1.792728 H
+  0.757487,1.79273,0.0118504,0.119883,0.769337,1.91261,0.013670522226475695,0.045142304005029305,0.000418807,1.62895,estimated,Hx + D_x^1.91261 H + Hxxx + H*Hxx
+  0.99,1.8,-0.02477,0.15,0.96523,1.95,0.2374743807250195,0.06557377049180321,0.00129855,2.51125,estimated,1 + Hx + D_x^1.95 H + H*Hxx + H*Hxxx
+  0.96523,1.95,0.0285617,0.05,0.993792,2,0.2740918880008561,0.09289617486338794,0.00138203,2.56316,estimated,1 + Hx + D_x^2 H + H*Hxx + H*Hxxx
+  0.99,1.7,-0.25,0.15,0.74,1.85,0.05128205128205133,0.010928961748633767,0.000451676,1.28007,estimated,Hx + H*Hxx
+  0.79,1.7,-0.0470246,0,0.742975,1.7,0.047467457113778776,0.07103825136612028,0.000420937,1.38007,estimated,Hx + D_x^1.7 H + H*Hxx

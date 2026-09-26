@@ -1,0 +1,32 @@
+[
+  {
+    "noise": "clean",
+    "surrogate_training_seconds": 483.1,
+    "surrogate_best_step": 118800,
+    "surrogate_rc": 0,
+    "proposed_total_seconds": 6.419,
+    "proposed_surrogate_load_seconds": 0.008,
+    "proposed_operator_field_seconds": 0.093,
+    "proposed_order_search_seconds": 6.319
+  },
+  {
+    "noise": "5%",
+    "surrogate_training_seconds": 444.3,
+    "surrogate_best_step": 111200,
+    "surrogate_rc": 0,
+    "proposed_total_seconds": 5.347,
+    "proposed_surrogate_load_seconds": 0.008,
+    "proposed_operator_field_seconds": 0.096,
+    "proposed_order_search_seconds": 5.243
+  },
+  {
+    "noise": "25%",
+    "surrogate_training_seconds": 147.1,
+    "surrogate_best_step": 10400,
+    "surrogate_rc": 0,
+    "proposed_total_seconds": 6.952,
+    "proposed_surrogate_load_seconds": 0.007,
+    "proposed_operator_field_seconds": 0.09,
+    "proposed_order_search_seconds": 6.856
+  }
+]

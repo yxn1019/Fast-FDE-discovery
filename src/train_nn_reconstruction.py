@@ -791,7 +791,7 @@ def train(config: TrainingConfig) -> dict[str, float | int | str]:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--case", default=TrainingConfig.case, choices=("tsfade_fft", "periodic_tfade_fft"))
+    parser.add_argument("--case", default=TrainingConfig.case, choices=("tsfade_fft",))
     parser.add_argument("--data-file", default=TrainingConfig.data_file)
     parser.add_argument("--output-dir", default=TrainingConfig.output_dir)
     parser.add_argument("--train-points", type=int, default=TrainingConfig.train_points)

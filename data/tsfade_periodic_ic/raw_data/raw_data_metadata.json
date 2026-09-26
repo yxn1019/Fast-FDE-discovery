@@ -1,0 +1,22 @@
+{
+  "equation": "D_t^0.78 c = -c_x + 0.5 D_x^1.83 c",
+  "alpha": 0.78,
+  "beta": 1.83,
+  "velocity": 1.0,
+  "diffusivity": 0.5,
+  "initial_condition": "sum_(m=-12..12) 10.0*exp(-((x-6.0+30.0m)/10.0)^2)",
+  "gaussian_width": 10.0,
+  "boundary_condition": "periodic c(x+30,t)=c(x,t), implemented by FFT on [0,30)",
+  "x_step": 0.25,
+  "t_step": 0.1,
+  "shape": [
+    150,
+    120
+  ],
+  "endpoint_mismatch_submitted_ic": 6.941256775137885,
+  "endpoint_mismatch_periodized_ic": 0.0,
+  "max_imaginary_leakage": 1.6498709807944091e-15,
+  "residual_relative_l2": 2.352074993526494e-16,
+  "noise_convention": "noiseN: Exact = clean * (1 + 0.01*N*U(-1,1)), seed 525",
+  "purpose": "periodic-IC twin of the submitted benchmark for the R1-7 robustness check"
+}

@@ -1,8 +1,8 @@
 # Verification of the order-linearization analysis
 
 - command: `python tools/verify_linearization_analysis.py e1 e2 e3`
-- python: the active project environment
-- checkpoint: `data/models/tsfade_retrained_alpha078_beta183_normalized_tanh/draft-2000-0/best.pkl`
+- python: `D:\Miniconda\envs\sr\python.exe`
+- checkpoint: `D:\OneDrive - HHU\ML codes\DL-PDE\Linear_fractional\data\models\tsfade_retrained_alpha078_beta183_normalized_tanh\draft-2000-0\best.pkl`
 - surrogate grid: x in [0,30] step 0.25, t in [0,15] step 0.1; interior fit window x in [4,26), t in [3,14)
 - paper N_q (laguerre_nodes) = 5; order FD steps h_alpha = 0.05, h_beta = 0.02
 - wall time: 32.5 s

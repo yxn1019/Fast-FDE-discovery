@@ -1,0 +1,4 @@
+noise,surrogate_training_seconds,surrogate_best_step,surrogate_rc,proposed_total_seconds,proposed_surrogate_load_seconds,proposed_operator_field_seconds,proposed_order_search_seconds
+clean,483.1,118800,0,6.419,0.008,0.093,6.319
+5%,444.3,111200,0,5.347,0.008,0.096,5.243
+25%,147.1,10400,0,6.952,0.007,0.09,6.856

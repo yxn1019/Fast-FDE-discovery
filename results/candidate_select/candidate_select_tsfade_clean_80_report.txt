@@ -1,0 +1,262 @@
+case: tsfade_fft
+route: gj_hybrid_taylor
+example: tsfade_retrained_alpha078_beta183_clean
+paper_example: candidate_select_tsfade_clean_80
+preset_example: tsfade_retrained_alpha078_beta183_clean
+example_source: preset
+example_description: paper tsfade benchmark with normalized tanh surrogate, alpha=0.78, beta=1.83, clean data
+selected_by: minimum_valid_generated_stridge_objective
+checkpoint: D:\OneDrive - HHU\ML codes\DL-PDE\Linear_fractional\data\models\tsfade_retrained_alpha078_beta183_normalized_tanh\draft-2000-0\best.pkl
+training metadata: {'config': {'case': 'tsfade_fft', 'data_file': 'D:\\OneDrive - HHU\\ML codes\\DL-PDE\\Linear_fractional\\data\\tsfade_retrained_alpha078_beta183\\raw_data\\tsfade_alpha078_beta183_noise0.mat', 'output_dir': 'D:\\tmp_revision_models\\draft-2000-0', 'train_points': 2000, 'val_points': 2000, 'max_steps': 120000, 'noise_level': 0.0, 'noise_type': 'none', 'activation': 'tanh', 'hidden_layers': 8, 'neurons': 20, 'learning_rate': 0.001, 'weight_decay': 0.0001, 'seed': 525, 'eval_every': 200, 'print_every': 5000, 'patience_steps': 30000, 'min_delta_rel': 0.0001, 'periodic_boundary_weight': 0.0, 'periodic_derivative_weight': 0.0, 'periodic_boundary_points': 0, 'early_time_weight': 0.0, 'early_time_cutoff': 1.0, 'spectral_weight': 0.0, 'spectral_high_k_gamma': 0.0, 'spectral_high_k_power': 2.0, 'spectral_time_batch': 8, 'integer_derivative_weight': 0.0, 'peak_weight': 0.0, 'peak_quantile': 0.9, 'peak_time_cutoff': 1.0, 'peak_use_absolute': True, 'gaussian_scale': 0.5, 'denoise_mode': 'none', 'denoise_fft_cutoff': 0.0, 'allow_large_train_set': False, 'input_normalization': 'unit_box', 'output_normalization': 'unit_interval', 'output_activation': 'identity', 'data_loss': 'mse', 'log_loss_epsilon': 2.51696186605841e-05, 'physical_loss_weight': 1.0, 'log_loss_weight': 1.0, 'selection_metric': 'val', 'selection_derivative_weight': 1.0, 'selection_spectral_weight': 1.0, 'time_range': [0.0, 14.899999618530273], 'x_range': [0.0, 29.75], 'field_shape': [150, 120], 'best_step': 120000, 'completed_steps': 120000, 'stop_reason': 'max_steps', 'last_meaningful_improvement_step': 120000, 'plateau_reference_score': 8.815851469989866e-05, 'best_train_loss': 0.00010018479224527255, 'best_val_loss': 8.815851469989866e-05, 'best_periodic_boundary_loss': 0.0004740017175208777, 'best_periodic_derivative_loss': 1.1313564777374268, 'best_early_time_loss': 0.00010018479224527255, 'best_peak_loss': 0.00034373736707493663, 'best_spectral_loss': 0.0, 'best_integer_derivative_loss': 0.0, 'best_spectral_val_loss': 2.3823622541385703e-06, 'best_integer_derivative_val_loss': 0.00020591318025253713, 'best_composite_derivative_val_loss': 0.00029645405720657436, 'best_selection_score': 8.815851469989866e-05, 'peak_threshold': 8.366136741638188, 'peak_mask_fraction': 0.013222222222222222, 'checkpoint': 'D:\\tmp_revision_models\\draft-2000-0\\best.pkl', 'input_x_range': [0.0, 29.75], 'input_t_range': [0.0, 14.899999618530273], 'input_x_scale': 29.75, 'input_t_scale': 14.899999618530273, 'physical_log_loss_epsilon': 0.00025125026702880863, 'target_c_range': [1.5622978025930934e-05, 10.0], 'target_c_shift': 1.5622978025930934e-05, 'target_c_scale': 9.999984377021974}, 'summary': 'Time-FADE NN reconstruction training\ncase: tsfade_fft\ndata_file: D:\\OneDrive - HHU\\ML codes\\DL-PDE\\Linear_fractional\\data\\tsfade_retrained_alpha078_beta183\\raw_data\\tsfade_alpha078_beta183_noise0.mat\noutput_dir: D:\\tmp_revision_models\\draft-2000-0\nfield_shape: (150, 120)\ntime_range: [0, 14.9]\nx_range: [0, 29.75]\nnoise_type: none\nnoise_level: 0.0\nactivation: tanh\nhidden_layers: 8\nneurons: 20\nlearning_rate: 0.001\nweight_decay: 0.0001\ntrain_points: 2000\nval_points: 2000\nmax_steps: 120000\ncompleted_steps: 120000\nstop_reason: max_steps\npatience_steps: 30000\nmin_delta_rel: 0.0001\nlast_meaningful_improvement_step: 120000\nplateau_reference_score: 8.81585147e-05\nperiodic_boundary_weight: 0.0\nperiodic_derivative_weight: 0.0\nperiodic_boundary_points: 0\nearly_time_weight: 0.0\nearly_time_cutoff: 1.0\npeak_weight: 0.0\npeak_quantile: 0.9\npeak_time_cutoff: 1.0\npeak_use_absolute: True\npeak_threshold: 8.366136742\npeak_mask_fraction: 0.01322222222\nspectral_weight: 0.0\nspectral_high_k_gamma: 0.0\nspectral_high_k_power: 2.0\nspectral_time_batch: 8\ninteger_derivative_weight: 0.0\nselection_metric: val\nselection_derivative_weight: 1.0\nselection_spectral_weight: 1.0\ngaussian_scale: 0.5\ndenoise_mode: none\ndenoise_fft_cutoff: 0.0\nallow_large_train_set: False\ninput_normalization: unit_box\ninput_x_range: [0, 29.75]\ninput_t_range: [0, 14.9]\ninput_x_scale: 29.75\ninput_t_scale: 14.89999962\noutput_normalization: unit_interval\noutput_activation: identity\ndata_loss: mse\nlog_loss_epsilon: 2.516961866e-05\nphysical_log_loss_epsilon: 0.000251250267\nphysical_loss_weight: 1.0\nlog_loss_weight: 1.0\ntarget_c_range: [1.562297803e-05, 10]\ntarget_c_shift: 1.562297803e-05\ntarget_c_scale: 9.999984377\nbest_step: 120000\nbest_train_loss: 0.0001001847922\nbest_val_loss: 8.81585147e-05\nbest_periodic_boundary_loss: 0.0004740017175\nbest_periodic_derivative_loss: 1.131356478\nbest_early_time_loss: 0.0001001847922\nbest_peak_loss: 0.0003437373671\nbest_spectral_loss: 0\nbest_integer_derivative_loss: 0\nbest_spectral_val_loss: 2.382362254e-06\nbest_integer_derivative_val_loss: 0.0002059131803\nbest_composite_derivative_val_loss: 0.0002964540572\nbest_selection_score: 8.81585147e-05\ncheckpoint: best.pkl\n'}
+model_file: tsfade_fft_alpharetrained_alpha078_beta183_normalized_tanh_tanh_8x20_clean
+trained_point: 2000
+noise_level: 0.0
+activation: tanh
+hidden_layers: 8
+neurons: 20
+NN grid shape: (110, 88)
+x_range: (4.0, 25.75)
+t_range: (3.0, 13.90000057220459)
+operator_grid_shape: (150, 120)
+operator_x_range: (0.0, 29.75)
+operator_t_range: (0.0, 14.899999618530273)
+fit_grid_shape: (110, 88)
+fit_x_range: (4.0, 25.75)
+fit_t_range: (3.0, 13.90000057220459)
+fit_window_config: (4.0, 26.0, 3.0, 14.0)
+initial_condition_time: 0.0
+initial_condition_note: G-J operators are evaluated on the full reconstruction domain and then restricted to the fit window for STRidge
+library terms: Hx, D_x^1.636674 H, alpha_correction, spatial_correction_beta0=1.6
+candidate_search: generated
+generated_structure: Hx + D_x^beta H
+generated_raw_structure: Hxx + Hx
+generated_normalized_from: ('Hxx -> D_x^beta H',)
+generated_structure_has_fractional: True
+generated_structure_rank: 1
+generated_complexity_score: 2.5
+generated_structure_objective_penalty: 0.125
+generated_structure_count: 9
+eqgpt_checkpoint: D:\OneDrive - HHU\ML codes\DL-PDE\Linear_fractional\data\eqgpt\PDEGPT_KdV_equation.pt
+eqgpt_dictionary: D:\OneDrive - HHU\ML codes\DL-PDE\Linear_fractional\data\eqgpt\dict_datas_0725.json
+eqgpt_epoch: 3
+eqgpt_sample_count: 80
+eqgpt_unique_structure_count: 9
+eqgpt_optimize_epochs: 5
+eqgpt_finetune_epochs: 5
+eqgpt_learning_rate: 1e-05
+eqgpt_reward_sparsity_alpha: 0.2
+eqgpt_selection_mode: stridge_objective
+eqgpt_random_exploration: 0.2
+eqgpt_reward: 0.9366756030696883
+eqgpt_r2: 0.9966818283638351
+eqgpt_source_equation: uxx+ux+ut+utt
+generated candidate summary:
+  epoch,rank,selected,structure,raw_structure,eqgpt_source_equation,eqgpt_reward,eqgpt_r2,complexity_score,structure_penalty,endpoint_penalty,iter_start_beta,alpha,beta,coef_hx,coef_dbeta,objective,augmented_objective,validation_residual_norm,condition,support
+  0,1,False,Hx + Hxxx,Hxxx + Hx,ut+uxxx+ux,0.926792,0.986165,3,0.15,0,2,0.693791,n/a,-1.27482,n/a,3.61007,3.61572,3.60764,40.413,Hx+Hxxx
+  0,2,False,Hx + H*Hx,H*Hx + Hx,uxxt+ut+ux*u+ux,0.927137,0.986532,3,0.15,0,2,0.688026,n/a,-1.36954,n/a,3.62351,3.62503,3.62108,19.7759,Hx+H*Hx
+  0,3,False,Hx + Hxxx + H^2*Hx,H^2*Hx + Hxxx + Hx,ux*u^2+ut+uxxx+ux,0.926792,0.986165,5.5,0.275,0,1.8,0.693791,n/a,-1.27482,n/a,3.77144,3.79899,3.60764,9.568e+02,Hx+Hxxx
+  0,4,False,Hx,Hx,ux,0.983379,0.983379,1,0.05,0,2,0.696825,n/a,-1.18868,n/a,3.9261,3.92678,3.92599,7.81804,Hx
+  0,5,False,Hxxx + H*Hx,Hxxx + H*Hx,uxxx+ut+u*ux,0.872698,0.928606,4,0.2,0,2,0.838237,n/a,-7.88608,n/a,5.4613,5.46801,5.44158,1.321e+02,Hxxx+H*Hx
+  0,6,False,H^2 + H*Hx,H^2 + H*Hx,ut+u^2+u*ux,0.683408,0.683408,3.5,0.175,0,2,0.999,n/a,n/a,n/a,7.00494,8.36553,8.36025,52.7487,H^2+H*Hx
+  0,7,False,H*Hx,H*Hx,u*ux+ut+uxt,0.683408,0.683408,2,0.1,0,2,0.999,n/a,n/a,n/a,8.61378,8.36093,8.36025,6.76035,H*Hx
+  0,8,False,Hxxx + H^2*Hx,H^2*Hx + Hxxx,ux*u^2+ut+uxxx,0.728026,0.774665,4.5,0.225,0,2,0.999,n/a,-6.25899,n/a,9.21899,6.99531,6.8312,8.205e+02,Hxxx+H^2*Hx
+  0,9,False,H + D_x^beta H,Hxx + H,utt+uxx+u,0.932591,0.932591,2.5,0.125,0.1,2,0.999,2,n/a,1.26733,11.7736,3.84593,3.84212,38.107,H+D_x^2 H
+  0,10,False,D_x^beta H,Hxx,utt+uxx,0.932591,0.932591,1.5,0.075,0.1,2,0.999,2,n/a,1.07437,11.9538,3.84317,3.84212,10.4509,D_x^2 H
+  1,1,False,Hx + D_x^beta H + H*Hxxx,H*Hxxx + Hxx + Hx,uxxx*u+uxx+ut+ux,0.936675,0.996681,5.5,0.275,0,1.7,0.782707,1.67053,-1.03234,0.441442,1.42918,1.43134,1.4268,22.7076,Hx+D_x^1.670534 H
+  1,2,False,Hx + H*Hx,H*Hx + Hx,ux*u+ut+uxxt+ux,0.927137,0.986532,3,0.15,0,2,0.688026,n/a,-1.36954,n/a,3.62351,3.62503,3.62108,19.7759,Hx+H*Hx
+  1,3,False,D_x^beta H + Hxxx + H*Hx,H*Hx + Hxx + Hxxx,ux*u+uxx+uxxx+ut,0.855608,0.945866,5.5,0.275,0,2,0.999,1.85,-3.93434,0.619316,3.62878,3.50126,3.43404,2.241e+02,D_x^1.85 H+Hxxx+H*Hx
+  1,4,False,Hx + Hxxx + H^2*Hx,H^2*Hx + Hxxx + Hx,ut+ux*u^2+uxxx+ux,0.926792,0.986165,5.5,0.275,0,2,0.693791,n/a,-1.27482,n/a,3.77144,3.79899,3.60764,9.568e+02,Hx+Hxxx
+  1,5,False,Hx,Hx,ux,0.983379,0.983379,1,0.05,0,2,0.696825,n/a,-1.18868,n/a,3.9261,3.92678,3.92599,7.81804,Hx
+  1,6,False,D_x^beta H + H*Hx + H*Hxxx,H*Hx + H*Hxxx + Hxx,ut+u*ux+uxxx*u+uxx,0.885047,0.941746,6.5,0.325,0,1.8,0.999,1.95,n/a,0.790349,4.27016,3.55657,3.54881,38.8029,D_x^1.95 H+H*Hx+H*Hxxx
+  1,7,False,H + D_x^beta H + H^2,H^2 + H + Hxx,ut+u^2+u+uxx,0.932591,0.932591,4,0.2,0.1,2,0.999,2,n/a,2.47163,11.3976,3.88455,3.84212,4.243e+02,H+D_x^2 H+H^2
+  1,8,False,D_x^beta H,Hxx,uxx+utt,0.932591,0.932591,1.5,0.075,0.1,2,0.999,2,n/a,1.07437,11.9538,3.84317,3.84212,10.4509,D_x^2 H
+  1,9,False,H + H^2,H + H^2,u+u^2+ut,0.83891,0.892653,2.5,0.125,0,2,0.999,n/a,n/a,n/a,12.7736,4.90487,4.90071,20.7996,H+H^2
+  1,10,False,H^2*Hx,H^2*Hx,ut+u^2*ux+uxxt,0.647496,0.647496,2.5,0.125,0,2,0.999,n/a,n/a,n/a,inf,8.94013,8.94013,21.2035,alpha_correction
+  1,11,False,H^2,H^2,u^2,0.647496,0.647496,1.5,0.075,0,2,0.999,n/a,n/a,n/a,inf,8.94013,8.94013,20.47,alpha_correction
+  2,1,False,Hx + Hxxx,Hx + Hxxx,ux+utt+ut+uxxx,0.926792,0.986165,3,0.15,0,2,0.693791,n/a,-1.27482,n/a,3.61007,3.61572,3.60764,40.413,Hx+Hxxx
+  2,2,False,H^2 + H*Hx,H*Hx + H^2,ux*u+ut+u^2,0.683408,0.683408,3.5,0.175,0,2,0.999,n/a,n/a,n/a,7.00494,8.36553,8.36025,52.7487,H^2+H*Hx
+  2,3,False,H*Hx,H*Hx,ut+u*ux,0.683408,0.683408,2,0.1,0,2,0.999,n/a,n/a,n/a,8.61378,8.36093,8.36025,6.76035,H*Hx
+  2,4,False,H + D_x^beta H,Hxx + H,uxx+u+uxxtt+utt+ut,0.877239,0.933437,2.5,0.125,0.1,2,0.999,2,n/a,1.26733,11.7736,3.80375,3.79613,38.107,H+D_x^2 H
+  2,5,False,D_x^beta H,Hxx,uxxtt+uxx+utt,0.932591,0.932591,1.5,0.075,0.1,2,0.999,2,n/a,1.07437,11.9538,3.84317,3.84212,10.4509,D_x^2 H
+  2,6,False,H^2,H^2,u^2+utt,0.796321,0.796321,1.5,0.075,0,2,0.999,n/a,n/a,n/a,13.6429,6.73325,6.73116,20.8542,H^2
+  3,1,True,Hx + D_x^beta H,Hxx + Hx,uxx+ux+ut+utt,0.936676,0.996682,2.5,0.125,0,1.7,0.782724,1.6707,-1.03225,0.441508,1.42903,1.43057,1.42668,19.4883,Hx+D_x^1.670701 H
+  3,2,False,Hx + H^2,H^2 + Hx,u*u+ux,0.933987,0.993821,2.5,0.125,0,1.7,0.742091,n/a,-1.06575,n/a,2.14863,2.16114,2.14151,98.1113,Hx+H^2
+  3,3,False,Hx + Hxxx,Hxxx + Hx,ut+uxxx+ux,0.926792,0.986165,3,0.15,0,1.8,0.693791,n/a,-1.27482,n/a,3.61007,3.61572,3.60764,40.413,Hx+Hxxx
+  3,4,False,H*Hx + H*Hxxx,H*Hx + H*Hxxx,ux*u+uxxt+u*uxxx,0.849034,0.903425,5,0.25,0,2,0.815221,n/a,n/a,n/a,6.93608,6.93732,6.93337,19.7117,H*Hx+H*Hxxx
+  3,5,False,H^2 + H*Hx,H^2 + H*Hx,u^2+ux*u+ut,0.673471,0.673471,3.5,0.175,0,2,0.999,n/a,n/a,n/a,7.00494,8.3261,8.32067,54.2371,H^2+H*Hx
+  3,6,False,Hxxx + H^2*Hx,H^2*Hx + Hxxx,u^2*ux+uxxx+ut,0.728026,0.774665,4.5,0.225,0,2,0.999,n/a,-6.25899,n/a,9.21899,6.99531,6.8312,8.205e+02,Hxxx+H^2*Hx
+  3,7,False,H + D_x^beta H + H^2,H + H^2 + Hxx,utt+u+u^2+uxx,0.845612,0.934816,4,0.2,0.1,2,0.999,2,n/a,2.47163,11.3976,3.87046,3.74316,4.243e+02,H+D_x^2 H+H^2
+  3,8,False,D_x^beta H,Hxx,uxx,0.932591,0.932591,1.5,0.075,0.1,2,0.999,2,n/a,1.07437,11.9538,3.84317,3.84212,10.4509,D_x^2 H
+  3,9,False,H + H^2,H + H^2,u+u^2+ut,0.83891,0.892653,2.5,0.125,0,2,0.999,n/a,n/a,n/a,12.7736,4.90487,4.90071,20.7996,H+H^2
+  4,1,False,Hx + D_x^beta H,Hxx + Hx,uxx+ux,0.936676,0.996682,2.5,0.125,0,1.7,0.782724,1.6707,-1.03225,0.441508,1.42903,1.43057,1.42668,19.4883,Hx+D_x^1.670701 H
+  4,2,False,Hx + H*Hx,H*Hx + Hx,uxxt+ut+ux*u+ux,0.927137,0.986532,3,0.15,0,2,0.688026,n/a,-1.36954,n/a,3.62351,3.62503,3.62108,19.7759,Hx+H*Hx
+  4,3,False,Hx + Hxxx + H^2*Hx,H^2*Hx + Hx + Hxxx,u^2*ux+ut+ux+uxxx,0.926792,0.986165,5.5,0.275,0,2,0.693791,n/a,-1.27482,n/a,3.77144,3.79899,3.60764,9.568e+02,Hx+Hxxx
+  4,4,False,Hx,Hx,ux,0.983379,0.983379,1,0.05,0,2,0.696825,n/a,-1.18868,n/a,3.9261,3.92678,3.92599,7.81804,Hx
+  4,5,False,D_x^beta H + H*Hx,Hxx + H*Hx,uxx+ux*u+ut^2+utt,0.87912,0.935439,3.5,0.175,0,2,0.999,1.99177,n/a,0.925534,5.14984,3.69981,3.69207,38.7255,D_x^1.991767 H+H*Hx
+  4,6,False,Hxxx + H*Hx,H*Hx + Hxxx,ux*u+ut+uxxx,0.872698,0.928606,4,0.2,0,1.8,0.838237,n/a,-7.88608,n/a,5.4613,5.46801,5.44158,1.321e+02,Hxxx+H*Hx
+  4,7,False,H + H*Hx,H + H*Hx,ut+u+u*ux,0.711429,0.757005,3,0.15,0,2,0.999,n/a,n/a,n/a,7.81286,7.40019,7.39825,9.69508,H+H*Hx
+  4,8,False,H*Hx,H*Hx,u*ux+ut^3+ut,0.683408,0.683408,2,0.1,0,1.8,0.999,n/a,n/a,n/a,8.61378,8.36093,8.36025,6.76035,H*Hx
+  4,9,False,Hxxx + H^2*Hx,Hxxx + H^2*Hx,uxxx+ut+u^2*ux,0.728026,0.774665,4.5,0.225,0,2,0.999,n/a,-6.25899,n/a,9.21899,6.99531,6.8312,8.205e+02,Hxxx+H^2*Hx
+  4,10,False,H^2*Hx,H^2*Hx + H^2*Hx,ux*u^2+ux*u^2+ut,0.657772,0.657772,2.5,0.125,0,2,0.999,n/a,n/a,n/a,10.1478,8.53935,8.53717,21.7366,H^2*Hx
+  4,11,False,D_x^beta H,Hxx,uxx+ut,0.932591,0.932591,1.5,0.075,0.1,2,0.999,2,n/a,1.07437,11.9538,3.84317,3.84212,10.4509,D_x^2 H
+matrix_shape: (9680, 4)
+alpha0_count: 6
+best alpha0: 0.7806961978068063
+best beta0: 1.6366740785873397
+delta alpha: 0.0020276405390580177
+delta alpha raw: 0.002027640539058061
+alpha: 0.7827238383458643
+true_alpha: 0.78
+alpha_relative_error: 0.003492100443415789
+true_beta: 1.83
+beta_relative_error: 0.08704839089581967
+s_range: None
+s_points: 0
+laguerre_nodes: 0
+space_derivative_mode: autodiff
+spatial_fractional_mode: gj_hybrid_taylor
+time_operator_mode: gj_caputo_taylor
+laplace_out_of_bounds_fraction: 0.0
+ridge_lambda: 2.0
+d_tol: 0.008
+maxit: 25
+STR_iters: 10
+normalize: 0
+split: 0.8
+sparsity_lamb: 0.0001
+fractional_correction_sparsity_lamb: 0.0
+fractional_correction_tol_scale: 0.001
+alpha_correction_tol: 0.0
+beta_correction_tol: 0.0
+delta_alpha_prune_threshold: 0.0
+delta_alpha_bounds: (-1.0, 1.0)
+delta_beta_prune_threshold: 0.0
+loss_formula: validation_residual_norm + cond(Theta)*sum(active_term_lamb)
+validation_residual_norm: 1.42667568052803
+physical_refit: False
+physical_refit_note: None
+physical_refit_terms: ('Hx', 'D_x^1.670701 H')
+physical_stridge_library_terms: ('Hx', 'D_x^1.670701 H')
+active_count_for_loss: 4
+complexity_penalty: 0.0038976509775143146
+l0_penalty: 0.0019488254887571573
+best tolerance: 7.00087050416656e-12
+augmented_stridge_objective_raw: 1.4305733315055444
+selection_loss_formula: physical validation_residual_norm + cond(physical_Theta)*sum(active_physical_lamb)
+objective: 1.429034023978416
+selection_objective_mode: physical-stridge
+refit_mode: none
+order_update_mode: iterative
+iteration_count: 4
+iteration_converged: False
+iteration_stop_reason: objective_not_decreased
+iteration_final_index: 3
+iteration_best_objective_index: 2
+iteration_best_fractional_support_index: 2
+iteration_selected_index: 27
+iteration_selected: True
+iter_selection_mode: best_objective
+iter_start_alpha: 0.99
+iter_start_beta: 1.7
+iter_start_beta_values: (2.0, 1.8, 1.7)
+iter_order_tol: 0.005
+iter_damping: 1.0
+iter_max_step_alpha: 0.2
+iter_max_step_beta: 0.25
+iter_delta_alpha_bounds: (-0.25, 0.25)
+iter_delta_beta_bounds: (-0.15, 0.15)
+iter_stop_on_non_decreasing_objective: True
+iter_objective_min_delta: 0.0
+physical_refit_selection_objective: 1.429034023978416
+physical_refit_selection_residual_norm: 1.4285165238724145
+nonlinear_refit_success: None
+nonlinear_refit_cost: None
+nonlinear_refit_nfev: None
+nonlinear_refit_status: None
+nonlinear_refit_message: None
+order_radius_mode: penalty
+order_radius_penalty: 0.0
+mse: 0.0010343190390921582
+residual_norm: 3.1642073728521796
+used alpha correction: False
+spatial_fractional_enabled: True
+spatial_correction_active: True
+spatial_beta_status: estimated
+spatial_beta: 1.67070144466065
+spatial_delta_beta: 0.03402736607331036
+spatial_delta_beta_raw: 0.03402736607331037
+spatial_beta_correction: 0.03402736607331036
+spatial_beta_in_bounds: True
+spatial_beta_bounds: (1.5, 2.0)
+spatial_beta_model_valid: True
+spatial_log_quad_points: 40
+spatial_log_quad_method: jacobi_gauss
+spatial_correction_method: gj_hybrid_taylor
+spatial_correction_pruned_without_main: False
+physical_refit_spatial_fractional_mode: None
+physical_refit_space_derivative_mode: None
+physical_refit_time_operator_mode: None
+spatial_boundary_mode: none
+spatial_boundary_value: None
+spatial_operator_note: time and spatial fractional operators both use Jacobi-Gauss quadrature with autodiff derivatives
+end_to_end_seconds: 111.4520672
+candidate equation: D_t^0.78272384 H = -1.032*Hx + 0.4415 D_x^1.670701 H
+augmented regression equation: D_t^0.78272384 H = -1.032*Hx + 0.4409 D_x^1.636674 H + 0.002028*alpha_correction + 0.015*spatial_correction_beta0=1.6
+active terms:
+  Hx: -1.032247618
+  D_x^1.670701 H: 0.441508235
+iterative order update trace:
+  iter,alpha0,beta0,delta_alpha_raw,delta_beta_raw,delta_alpha,delta_beta,delta_beta_used,alpha_next,beta_next,objective,regularized_objective,raw_mse,mse,condition,validation_residual_norm,complexity_penalty,active_lamb_sum,physical_refit_condition_penalty,active_count_for_loss,tolerance,status,support
+  0,0.99,1.7,-0.287781,0.0202078,-0.25,0.0202078,0.0202078,0.79,1.72021,1.79254,1.79254,0.0015717,0.0015717,23.2837,1.95202,0.00465674,0.0002,0.000526669,4,0.00724637,estimated,Hx+D_x^1.720208 H
+  1,0.79,1.72021,-0.0093038,-0.0835337,-0.0093038,-0.0835337,-0.0835337,0.780696,1.63667,1.43931,1.43931,0.00103935,0.00103935,21.4757,1.42788,0.00429515,0.0002,0.000514266,4,0.00724645,estimated,Hx+D_x^1.636674 H
+  2,0.780696,1.63667,0.00202764,0.0340274,0.00202764,0.0340274,0.0340274,0.782724,1.6707,1.42903,1.42903,0.00103432,0.00103432,19.4883,1.42668,0.00389765,0.0002,0.0005175,4,7.001e-12,estimated,Hx+D_x^1.670701 H
+  3,0.782724,1.6707,-0.000815205,-0.0100794,-0.000815205,-0.0100794,-0.0100794,0.781909,1.66062,1.43093,1.43093,0.001034,0.001034,20.3319,1.43024,0.00406638,0.0002,0.000516277,4,0.0152645,estimated,Hx+D_x^1.660622 H
+alpha0/beta0 scan:
+  alpha0,beta0,delta_alpha,beta_correction,alpha,beta,alpha_rel_error,beta_rel_error,mse,objective,status,active
+  0.692957,2,0.000833475,n/a,0.693791,n/a,0.11052441661871105,None,0.00651701,3.61007,not_applicable,Hx + Hxxx
+  0.687032,2,0.000993732,n/a,0.688026,n/a,0.1179153796211464,None,0.00652367,3.62351,not_applicable,Hx + H*Hx
+  0.692957,1.8,0.000833475,n/a,0.693791,n/a,0.11052441661871276,None,0.00651701,3.77144,not_applicable,Hx + Hxxx
+  0.696112,2,0.000713127,n/a,0.696825,n/a,0.10663402111586408,None,0.00771395,3.9261,not_applicable,Hx
+  0.848862,2,-0.0106248,n/a,0.838237,n/a,0.07466326515430224,None,0.0160654,5.4613,not_applicable,Hxxx + H*Hx
+  0.99,2,0.009,n/a,0.999,n/a,0.2807692307692307,None,0.0257796,7.00494,not_applicable,H^2 + H*Hx
+  0.99,2,0.009,n/a,0.999,n/a,0.2807692307692307,None,0.0393821,8.61378,not_applicable,H*Hx
+  0.99,2,0.009,n/a,0.999,n/a,0.2807692307692307,None,0.0453082,9.21899,not_applicable,Hxxx + H^2*Hx
+  0.99,2,0.009,0,0.999,2,0.2807692307692307,0.09289617486338794,0.0758877,11.7736,estimated,H + D_x^2 H
+  0.99,2,0.009,0,0.999,2,0.2807692307692307,0.09289617486338794,0.0776219,11.9538,estimated,D_x^2 H
+  0.780734,1.63744,0.00197241,0.0330904,0.782707,1.67053,0.00347035410792091,0.08713984366765512,0.0010343,1.42918,estimated,Hx + D_x^1.670534 H
+  0.687032,2,0.000993732,n/a,0.688026,n/a,0.11791537962114583,None,0.00652367,3.62351,not_applicable,Hx + H*Hx
+  0.99,2,0.009,-0.15,0.999,1.85,0.2807692307692307,0.010928961748633888,0.00705356,3.62878,estimated,D_x^1.85 H + Hxxx + H*Hx
+  0.692957,2,0.000833475,n/a,0.693791,n/a,0.1105244166187112,None,0.00651701,3.77144,not_applicable,Hx + Hxxx
+  0.696112,2,0.000713127,n/a,0.696825,n/a,0.10663402111586294,None,0.00771395,3.9261,not_applicable,Hx
+  0.99,1.8,0.009,0.15,0.999,1.95,0.2807692307692307,0.06557377049180321,0.0097587,4.27016,estimated,D_x^1.95 H + H*Hx + H*Hxxx
+  0.99,2,0.009,0,0.999,2,0.2807692307692307,0.09289617486338794,0.0717509,11.3976,estimated,H + D_x^2 H + H^2
+  0.99,2,0.009,0,0.999,2,0.2807692307692307,0.09289617486338794,0.0776219,11.9538,estimated,D_x^2 H
+  0.99,2,0.009,n/a,0.999,n/a,0.2807692307692307,None,0.0867864,12.7736,not_applicable,H + H^2
+  0.99,2,0.009,n/a,0.999,n/a,0.2807692307692307,None,0.0408263,inf,not_applicable,alpha_correction
+  0.99,2,0.009,n/a,0.999,n/a,0.2807692307692307,None,0.0408263,inf,not_applicable,alpha_correction
+  0.692957,2,0.000833475,n/a,0.693791,n/a,0.11052441661871219,None,0.00651701,3.61007,not_applicable,Hx + Hxxx
+  0.99,2,0.009,n/a,0.999,n/a,0.2807692307692307,None,0.0257796,7.00494,not_applicable,H^2 + H*Hx
+  0.99,2,0.009,n/a,0.999,n/a,0.2807692307692307,None,0.0393821,8.61378,not_applicable,H*Hx
+  0.99,2,0.009,0,0.999,2,0.2807692307692307,0.09289617486338794,0.0758877,11.7736,estimated,H + D_x^2 H
+  0.99,2,0.009,0,0.999,2,0.2807692307692307,0.09289617486338794,0.0776219,11.9538,estimated,D_x^2 H
+  0.999,2,0,n/a,0.999,n/a,0.2807692307692307,None,0.098064,13.6429,not_applicable,H^2
+  0.780696,1.63667,0.00202764,0.0340274,0.782724,1.6707,0.003492100443415789,0.08704839089581967,0.00103432,1.42903,estimated,Hx + D_x^1.670701 H
+  0.738493,1.7,0.0035985,n/a,0.742091,n/a,0.04860077230751687,None,0.00234764,2.14863,not_applicable,Hx + H^2
+  0.692957,1.8,0.000833475,n/a,0.693791,n/a,0.11052441661871192,None,0.00651701,3.61007,not_applicable,Hx + Hxxx
+  0.817605,2,-0.00238381,n/a,0.815221,n/a,0.04515548065166718,None,0.0252155,6.93608,not_applicable,H*Hx + H*Hxxx
+  0.999,2,0,n/a,0.999,n/a,0.2807692307692307,None,0.0257796,7.00494,not_applicable,H^2 + H*Hx
+  0.99,2,0.009,n/a,0.999,n/a,0.2807692307692307,None,0.0453082,9.21899,not_applicable,Hxxx + H^2*Hx
+  0.99,2,0.009,0,0.999,2,0.2807692307692307,0.09289617486338794,0.0717509,11.3976,estimated,H + D_x^2 H + H^2
+  0.99,2,0.009,0,0.999,2,0.2807692307692307,0.09289617486338794,0.0776219,11.9538,estimated,D_x^2 H
+  0.99,2,0.009,n/a,0.999,n/a,0.2807692307692307,None,0.0867864,12.7736,not_applicable,H + H^2
+  0.780696,1.63667,0.00202764,0.0340274,0.782724,1.6707,0.0034921004434173546,0.08704839089581323,0.00103432,1.42903,estimated,Hx + D_x^1.670701 H
+  0.687032,2,0.000993732,n/a,0.688026,n/a,0.11791537962114483,None,0.00652367,3.62351,not_applicable,Hx + H*Hx
+  0.692957,2,0.000833475,n/a,0.693791,n/a,0.11052441661871062,None,0.00651701,3.77144,not_applicable,Hx + Hxxx
+  0.696112,2,0.000713127,n/a,0.696825,n/a,0.10663402111586379,None,0.00771395,3.9261,not_applicable,Hx
+  0.999,1.95452,0,0.0372489,0.999,1.99177,0.2807692307692307,0.08839728971248137,0.0141216,5.14984,estimated,D_x^1.991767 H + H*Hx
+  0.848862,1.8,-0.0106248,n/a,0.838237,n/a,0.07466326515430138,None,0.0160654,5.4613,not_applicable,Hxxx + H*Hx
+  0.99,2,0.009,n/a,0.999,n/a,0.2807692307692307,None,0.0320952,7.81286,not_applicable,H + H*Hx
+  0.99,1.8,0.009,n/a,0.999,n/a,0.2807692307692307,None,0.0393821,8.61378,not_applicable,H*Hx
+  0.99,2,0.009,n/a,0.999,n/a,0.2807692307692307,None,0.0453082,9.21899,not_applicable,Hxxx + H^2*Hx
+  0.999,2,0,n/a,0.999,n/a,0.2807692307692307,None,0.0550999,10.1478,not_applicable,H^2*Hx
+  0.99,2,0.009,0,0.999,2,0.2807692307692307,0.09289617486338794,0.0776219,11.9538,estimated,D_x^2 H

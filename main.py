@@ -460,25 +460,6 @@ def _apply_case_overrides(
         fit_t_max = None if args.fit_t_max == PAPER_FIT_T_MAX else args.fit_t_max
         checkpoint_file = Path("analytic_tfade")
 
-    if args.case == "periodic_tfade_fft":
-        if args.nx == 200:
-            args.nx = 256
-        x_min = 0.0 if np.isclose(args.x_min, PAPER_X_MIN) else args.x_min
-        x_max = float(np.pi) if np.isclose(args.x_max, PAPER_X_MAX) else args.x_max
-        x_step = (x_max - x_min) / int(args.nx) if np.isclose(args.x_step, PAPER_X_STEP) else args.x_step
-        t_min = 0.0 if np.isclose(args.t_min, PAPER_T_MIN) else args.t_min
-        t_max = 5.0 if np.isclose(args.t_max, PAPER_T_MAX) else args.t_max
-        t_step = (t_max - t_min) / int(args.nt) if np.isclose(args.t_step, PAPER_T_STEP) else args.t_step
-        fit_x_min = None if args.fit_x_min == PAPER_FIT_X_MIN else args.fit_x_min
-        fit_x_max = None if args.fit_x_max == PAPER_FIT_X_MAX else args.fit_x_max
-        fit_t_min = None if args.fit_t_min == PAPER_FIT_T_MIN else args.fit_t_min
-        fit_t_max = None if args.fit_t_max == PAPER_FIT_T_MAX else args.fit_t_max
-        if args.delta_alpha_min == PAPER_DELTA_ALPHA_BOUNDS[0] and args.delta_alpha_max == PAPER_DELTA_ALPHA_BOUNDS[1]:
-            args.delta_alpha_min = -0.15
-            args.delta_alpha_max = 0.15
-        if checkpoint_file is None:
-            checkpoint_file = Path("periodic_tfade_fft")
-
     if args.case == "tsfade_fft":
         if "x_min" in preset and np.isclose(args.x_min, PAPER_X_MIN):
             x_min = float(preset["x_min"])
@@ -552,7 +533,7 @@ def run_paper_task(args: argparse.Namespace) -> int:
 
     existing_data = {
         "generate-analytic-tfade": ROOT / "data" / "analytic_tfade_sine" / "analytic_tfade_sine.mat",
-        "generate-periodic-tfade": ROOT / "data" / "periodic_tfade_fft" / "periodic_tfade_fft.mat",
+        "generate-fisher": ROOT / "data" / "fisher_tfr_alpha07" / "raw_data" / "fisher_tfr_alpha07_paper_grid.mat",
     }.get(args.paper_task)
     if existing_data is not None and existing_data.exists() and not args.force_data_regeneration:
         print(f"paper task: {args.paper_task}")
@@ -612,7 +593,7 @@ def main() -> None:
     paper_example = apply_paper_example_overrides(args, _explicit_cli_option)
     if not CASES[args.case].enabled:
         raise NotImplementedError(f"{args.case} is not part of the paper-only workflow.")
-    example_name = args.case if args.case in {"analytic_tfade", "periodic_tfade_fft"} else args.example
+    example_name = args.case if args.case == "analytic_tfade" else args.example
     preset_example_name = example_name
     preset = preset_for_case(args.case, example_name)
     model_alpha_tag = args.model_alpha_tag or preset["alpha_tag"]

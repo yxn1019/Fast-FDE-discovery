@@ -1,0 +1,184 @@
+case: tsfade_fft
+route: gj_hybrid_taylor
+example: fisher_tfr_alpha07_noise5
+paper_example: fisher_noise5
+preset_example: fisher_tfr_alpha07_noise5
+example_source: preset
+example_description: time-fractional Fisher benchmark, alpha=0.7, beta=1.8, D=0.5, r=1, 5 percent noise (revision R1-5)
+selected_by: minimum_valid_iterative_physical_stridge_objective
+checkpoint: D:\OneDrive - HHU\ML codes\DL-PDE\Linear_fractional\data\models\fisher_tfr_alpha07_tanh\fisher-2000-5\best.pkl
+training metadata: {'config': {'case': 'tsfade_fft', 'data_file': 'data/fisher_tfr_alpha07/raw_data/fisher_tfr_alpha07_noise5.mat', 'output_dir': 'D:/tmp_revision_models/fisher4-5', 'train_points': 2000, 'val_points': 2000, 'max_steps': 120000, 'noise_level': 0.0, 'noise_type': 'none', 'activation': 'tanh', 'hidden_layers': 8, 'neurons': 20, 'learning_rate': 0.001, 'weight_decay': 0.0001, 'seed': 525, 'eval_every': 200, 'print_every': 60000, 'patience_steps': 30000, 'min_delta_rel': 0.0001, 'periodic_boundary_weight': 0.0, 'periodic_derivative_weight': 0.0, 'periodic_boundary_points': 0, 'early_time_weight': 0.0, 'early_time_cutoff': 1.0, 'spectral_weight': 1.0, 'spectral_high_k_gamma': 20.0, 'spectral_high_k_power': 2.0, 'spectral_time_batch': 8, 'integer_derivative_weight': 1.0, 'peak_weight': 0.0, 'peak_quantile': 0.9, 'peak_time_cutoff': 1.0, 'peak_use_absolute': True, 'gaussian_scale': 0.5, 'denoise_mode': 'none', 'denoise_fft_cutoff': 0.0, 'allow_large_train_set': False, 'input_normalization': 'unit_box', 'output_normalization': 'unit_interval', 'output_activation': 'identity', 'data_loss': 'mse', 'log_loss_epsilon': 4.8083092260640115e-06, 'physical_loss_weight': 1.0, 'log_loss_weight': 1.0, 'selection_metric': 'derivative_composite', 'selection_derivative_weight': 1.0, 'selection_spectral_weight': 1.0, 'time_range': [0.0, 8.0], 'x_range': [0.0, 39.84375], 'field_shape': [321, 256], 'best_step': 65800, 'completed_steps': 95800, 'stop_reason': 'selection_score_plateau', 'last_meaningful_improvement_step': 65800, 'plateau_reference_score': 0.02965783319359616, 'best_train_loss': 0.00031612071325071156, 'best_val_loss': 0.0002979020355269313, 'best_periodic_boundary_loss': 9.776028309715912e-05, 'best_periodic_derivative_loss': 0.0036212587729096413, 'best_early_time_loss': 0.00031612071325071156, 'best_peak_loss': 0.0007050478598102927, 'best_spectral_loss': 4.430903572938405e-06, 'best_integer_derivative_loss': 0.033106084913015366, 'best_spectral_val_loss': 7.854806426621508e-06, 'best_integer_derivative_val_loss': 0.02935207635164261, 'best_composite_derivative_val_loss': 0.02965783319359616, 'best_selection_score': 0.02965783319359616, 'peak_threshold': 0.7284563481807709, 'peak_mask_fraction': 0.25306658878504673, 'checkpoint': 'D:\\tmp_revision_models\\fisher4-5\\best.pkl', 'input_x_range': [0.0, 39.84375], 'input_t_range': [0.0, 8.0], 'input_x_scale': 39.84375, 'input_t_scale': 8.0, 'physical_log_loss_epsilon': 4.942949599353597e-06, 'target_c_range': [9.709549427724008e-20, 1.028079867362976], 'target_c_shift': 9.709549427724008e-20, 'target_c_scale': 1.028079867362976}, 'summary': 'Time-FADE NN reconstruction training\ncase: tsfade_fft\ndata_file: data/fisher_tfr_alpha07/raw_data/fisher_tfr_alpha07_noise5.mat\noutput_dir: D:/tmp_revision_models/fisher4-5\nfield_shape: (321, 256)\ntime_range: [0, 8]\nx_range: [0, 39.8438]\nnoise_type: none\nnoise_level: 0.0\nactivation: tanh\nhidden_layers: 8\nneurons: 20\nlearning_rate: 0.001\nweight_decay: 0.0001\ntrain_points: 2000\nval_points: 2000\nmax_steps: 120000\ncompleted_steps: 95800\nstop_reason: selection_score_plateau\npatience_steps: 30000\nmin_delta_rel: 0.0001\nlast_meaningful_improvement_step: 65800\nplateau_reference_score: 0.02965783319\nperiodic_boundary_weight: 0.0\nperiodic_derivative_weight: 0.0\nperiodic_boundary_points: 0\nearly_time_weight: 0.0\nearly_time_cutoff: 1.0\npeak_weight: 0.0\npeak_quantile: 0.9\npeak_time_cutoff: 1.0\npeak_use_absolute: True\npeak_threshold: 0.7284563482\npeak_mask_fraction: 0.2530665888\nspectral_weight: 1.0\nspectral_high_k_gamma: 20.0\nspectral_high_k_power: 2.0\nspectral_time_batch: 8\ninteger_derivative_weight: 1.0\nselection_metric: derivative_composite\nselection_derivative_weight: 1.0\nselection_spectral_weight: 1.0\ngaussian_scale: 0.5\ndenoise_mode: none\ndenoise_fft_cutoff: 0.0\nallow_large_train_set: False\ninput_normalization: unit_box\ninput_x_range: [0, 39.8438]\ninput_t_range: [0, 8]\ninput_x_scale: 39.84375\ninput_t_scale: 8\noutput_normalization: unit_interval\noutput_activation: identity\ndata_loss: mse\nlog_loss_epsilon: 4.808309226e-06\nphysical_log_loss_epsilon: 4.942949599e-06\nphysical_loss_weight: 1.0\nlog_loss_weight: 1.0\ntarget_c_range: [9.709549428e-20, 1.028079867]\ntarget_c_shift: 9.709549428e-20\ntarget_c_scale: 1.028079867\nbest_step: 65800\nbest_train_loss: 0.0003161207133\nbest_val_loss: 0.0002979020355\nbest_periodic_boundary_loss: 9.77602831e-05\nbest_periodic_derivative_loss: 0.003621258773\nbest_early_time_loss: 0.0003161207133\nbest_peak_loss: 0.0007050478598\nbest_spectral_loss: 4.430903573e-06\nbest_integer_derivative_loss: 0.03310608491\nbest_spectral_val_loss: 7.854806427e-06\nbest_integer_derivative_val_loss: 0.02935207635\nbest_composite_derivative_val_loss: 0.02965783319\nbest_selection_score: 0.02965783319\ncheckpoint: best.pkl\n'}
+model_file: tsfade_fft_alphafisher_tfr_alpha07_tanh_8x20_noise5
+trained_point: 2000
+noise_level: 5.0
+activation: tanh
+hidden_layers: 8
+neurons: 20
+NN grid shape: (60, 231)
+x_range: (2.03125, 37.96875)
+t_range: (1.0, 3.950000047683716)
+operator_grid_shape: (60, 256)
+operator_x_range: (0.0, 39.84375)
+operator_t_range: (1.0, 3.950000047683716)
+fit_grid_shape: (60, 231)
+fit_x_range: (2.03125, 37.96875)
+fit_t_range: (1.0, 3.950000047683716)
+fit_window_config: (2.0, 38.0, 1.0, 4.0)
+initial_condition_time: 1.0
+initial_condition_note: G-J operators are evaluated on the full reconstruction domain and then restricted to the fit window for STRidge
+library terms: 1, H, Hx, D_x^1.821003 H, Hxxx, H^2, H*Hx, H*Hxx, H*Hxxx, H^2*Hx, H^2*Hxx, H^2*Hxxx, alpha_correction, spatial_correction_beta0=1.8
+candidate_search: fixed
+generated_structure: None
+generated_raw_structure: None
+generated_normalized_from: ()
+generated_structure_has_fractional: None
+generated_structure_rank: None
+generated_complexity_score: None
+generated_structure_objective_penalty: 0.0
+generated_structure_count: None
+eqgpt_checkpoint: None
+eqgpt_dictionary: None
+eqgpt_epoch: None
+eqgpt_sample_count: None
+eqgpt_unique_structure_count: None
+eqgpt_optimize_epochs: None
+eqgpt_finetune_epochs: None
+eqgpt_learning_rate: None
+eqgpt_reward_sparsity_alpha: None
+eqgpt_selection_mode: None
+eqgpt_random_exploration: None
+eqgpt_reward: None
+eqgpt_r2: None
+eqgpt_source_equation: None
+matrix_shape: (13860, 14)
+alpha0_count: 6
+best alpha0: 0.7256393297362668
+best beta0: 1.8210033356956123
+delta alpha: -0.0005992117850033285
+delta alpha raw: -0.0005992117850032762
+alpha: 0.7250401179512634
+true_alpha: 0.7
+alpha_relative_error: 0.03577159707323355
+true_beta: 1.8
+beta_relative_error: 0.00709386518715586
+s_range: None
+s_points: 0
+laguerre_nodes: 0
+space_derivative_mode: autodiff
+spatial_fractional_mode: gj_hybrid_taylor
+time_operator_mode: gj_caputo_taylor
+laplace_out_of_bounds_fraction: 0.0
+ridge_lambda: 2.0
+d_tol: 0.01
+maxit: 25
+STR_iters: 10
+normalize: 0
+split: 0.8
+sparsity_lamb: 0.0001
+fractional_correction_sparsity_lamb: 0.0
+fractional_correction_tol_scale: 0.001
+alpha_correction_tol: 0.0
+beta_correction_tol: 0.0
+delta_alpha_prune_threshold: 0.0
+delta_alpha_bounds: (-1.0, 1.0)
+delta_beta_prune_threshold: 0.0
+loss_formula: validation_residual_norm + cond(Theta)*sum(active_term_lamb)
+validation_residual_norm: 0.6650833892124896
+physical_refit: False
+physical_refit_note: None
+physical_refit_terms: ('H', 'D_x^1.812769 H', 'H^2')
+physical_stridge_library_terms: ('1', 'H', 'Hx', 'D_x^1.812769 H', 'Hxxx', 'H^2', 'H*Hx', 'H*Hxx', 'H*Hxxx', 'H^2*Hx', 'H^2*Hxx', 'H^2*Hxxx')
+active_count_for_loss: 5
+complexity_penalty: 1.0807440299375992
+l0_penalty: 0.36024800997919976
+best tolerance: 0.25000000000000006
+augmented_stridge_objective_raw: 1.7458274191500887
+selection_loss_formula: physical validation_residual_norm + cond(physical_Theta)*sum(active_physical_lamb)
+objective: 1.7366029316456408
+selection_objective_mode: physical-stridge
+refit_mode: none
+order_update_mode: iterative
+iteration_count: 5
+iteration_converged: False
+iteration_stop_reason: objective_not_decreased
+iteration_final_index: 4
+iteration_best_objective_index: 3
+iteration_best_fractional_support_index: 3
+iteration_selected_index: 3
+iteration_selected: True
+iter_selection_mode: best_objective
+iter_start_alpha: 0.99
+iter_start_beta: 2.0
+iter_start_beta_values: (2.0, 1.9, 1.8)
+iter_order_tol: 0.005
+iter_damping: 1.0
+iter_max_step_alpha: 0.2
+iter_max_step_beta: 0.25
+iter_delta_alpha_bounds: (-0.25, 0.25)
+iter_delta_beta_bounds: (-0.15, 0.15)
+iter_stop_on_non_decreasing_objective: True
+iter_objective_min_delta: 0.0
+physical_refit_selection_objective: 1.7366029316456408
+physical_refit_selection_residual_norm: 0.6650961587455049
+nonlinear_refit_success: None
+nonlinear_refit_cost: None
+nonlinear_refit_nfev: None
+nonlinear_refit_status: None
+nonlinear_refit_message: None
+order_radius_mode: penalty
+order_radius_penalty: 0.0
+mse: 0.0001655194223637752
+residual_norm: 1.5146284012793119
+used alpha correction: False
+spatial_fractional_enabled: True
+spatial_correction_active: True
+spatial_beta_status: estimated
+spatial_beta: 1.8127689573368806
+spatial_delta_beta: -0.008234378358731753
+spatial_delta_beta_raw: -0.008234378358731666
+spatial_beta_correction: -0.008234378358731753
+spatial_beta_in_bounds: True
+spatial_beta_bounds: (1.5, 2.0)
+spatial_beta_model_valid: True
+spatial_log_quad_points: 40
+spatial_log_quad_method: jacobi_gauss
+spatial_correction_method: gj_hybrid_taylor
+spatial_correction_pruned_without_main: False
+physical_refit_spatial_fractional_mode: None
+physical_refit_space_derivative_mode: None
+physical_refit_time_operator_mode: None
+spatial_boundary_mode: none
+spatial_boundary_value: None
+spatial_operator_note: time and spatial fractional operators both use Jacobi-Gauss quadrature with autodiff derivatives
+end_to_end_seconds: 8.345351700000002
+timing_surrogate_load_seconds: 0.009189899999999973
+timing_operator_field_seconds: 0.07953030000000005
+timing_order_search_seconds: 8.256631500000001
+candidate equation: D_t^0.72504012 H = 0.9051*H + 0.4417 D_x^1.812769 H + -0.8851*H^2
+augmented regression equation: D_t^0.72504012 H = 0.905*H + 0.4417 D_x^1.821003 H + -0.8851*H^2 + -0.0005992*alpha_correction + -0.003637*spatial_correction_beta0=1.8
+active terms:
+  H: 0.9050525954
+  D_x^1.812769 H: 0.4416546262
+  H^2: -0.8851456197
+iterative order update trace:
+  iter,alpha0,beta0,delta_alpha_raw,delta_beta_raw,delta_alpha,delta_beta,delta_beta_used,alpha_next,beta_next,objective,regularized_objective,raw_mse,mse,condition,validation_residual_norm,complexity_penalty,active_lamb_sum,physical_refit_condition_penalty,active_count_for_loss,tolerance,status,support
+  0,0.99,2,-0.0632448,-0.379184,-0.0632448,-0.15,-0.15,0.926755,1.85,2.2418,2.2418,7.608e-05,7.608e-05,3.600e+03,0.418585,2.5197,0.0007,1.78546,9,0.03,estimated,H+D_x^1.85 H+H^2+H*Hxx+H^2*Hxx
+  1,0.926755,1.85,-0.233391,-0.0818035,-0.233391,-0.0818035,-0.0818035,0.726755,1.7682,1.74379,1.74379,0.000169357,0.000169357,3.599e+03,0.670191,1.07979,0.0003,1.07173,5,0.25,estimated,H+D_x^1.768196 H+H^2
+  2,0.726755,1.7682,-0.00111588,0.0528069,-0.00111588,0.0528069,0.0528069,0.725639,1.821,1.73672,1.73672,0.000165543,0.000165543,3.602e+03,0.664668,1.08067,0.0003,1.07146,5,0.25,estimated,H+D_x^1.821003 H+H^2
+  3,0.725639,1.821,-0.000599212,-0.00823438,-0.000599212,-0.00823438,-0.00823438,0.72504,1.81277,1.7366,1.7366,0.000165519,0.000165519,3.602e+03,0.665083,1.08074,0.0003,1.07151,5,0.25,estimated,H+D_x^1.812769 H+H^2
+  4,0.72504,1.81277,6.321e-05,0.00191339,6.321e-05,0.00191339,0.00191339,0.725103,1.81468,1.73662,1.73662,0.000165518,0.000165518,3.602e+03,0.665118,1.08073,0.0003,1.0715,5,0.25,estimated,H+D_x^1.814682 H+H^2
+alpha0/beta0 scan:
+  alpha0,beta0,delta_alpha,beta_correction,alpha,beta,alpha_rel_error,beta_rel_error,mse,objective,status,active
+  0.99,2,-0.0632448,-0.15,0.926755,1.85,0.3239360181964865,0.0277777777777778,7.608e-05,2.2418,estimated,H + D_x^1.85 H + H^2 + H*Hxx + H^2*Hxx
+  0.926755,1.85,-0.233391,-0.0818035,0.693364,1.7682,0.009479928548493033,0.017668624745773947,0.000169357,1.74379,estimated,H + D_x^1.768196 H + H^2
+  0.726755,1.7682,-0.00111588,0.0528069,0.725639,1.821,0.03662761390895259,0.011668519830895722,0.000165543,1.73672,estimated,H + D_x^1.821003 H + H^2
+  0.725639,1.821,-0.000599212,-0.00823438,0.72504,1.81277,0.03577159707323355,0.00709386518715586,0.000165519,1.7366,estimated,H + D_x^1.812769 H + H^2
+  0.72504,1.81277,6.321e-05,0.00191339,0.725103,1.81468,0.03586190298379208,0.008156860215683896,0.000165518,1.73662,estimated,H + D_x^1.814682 H + H^2
+  0.99,1.9,-0.0762982,-0.112542,0.913702,1.78746,0.30528822519344573,0.006967801897344028,0.000104552,1.95642,estimated,H + D_x^1.787458 H + H^2 + H^2*Hxx
+  0.913702,1.78746,-0.214176,0.00880798,0.699526,1.79627,0.0006768414264214849,0.0020744768992470635,0.000167635,1.74054,estimated,H + D_x^1.796266 H + H^2
+  0.713702,1.79627,0.0112636,0.0214142,0.724965,1.81768,0.03566480125627024,0.00982230711658125,0.000165525,1.73665,estimated,H + D_x^1.81768 H + H^2
+  0.724965,1.81768,9.163e-05,-0.00411264,0.725057,1.81357,0.03579570114598593,0.007537508507623839,0.000165518,1.73661,estimated,H + D_x^1.813568 H + H^2
+  0.99,1.8,-0.25,-0.0460753,0.74,1.75392,0.0571428571428572,0.025597380343024032,0.000124841,2.00669,estimated,H + D_x^1.753925 H + H^2 + H^2*Hxx
+  0.79,1.75392,-0.0656301,0.0661142,0.72437,1.82004,0.03481407948383967,0.011132737612664768,0.000165539,1.73669,estimated,H + D_x^1.820039 H + H^2
+  0.72437,1.82004,0.000655014,-0.00704042,0.725025,1.813,0.0357498140135932,0.007221391343083342,0.000165519,1.7366,estimated,H + D_x^1.812999 H + H^2
+  0.725025,1.813,7.602e-05,0.00163419,0.725101,1.81463,0.035858414194511586,0.008129272380423084,0.000165518,1.73661,estimated,H + D_x^1.814633 H + H^2

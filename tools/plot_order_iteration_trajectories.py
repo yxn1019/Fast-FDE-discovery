@@ -68,7 +68,7 @@ mpl.rcParams.update({
 
 def run_case(example: str):
     """Return (branches, reported_alpha, reported_beta) for one paper example."""
-    with tempfile.TemporaryDirectory() as tmp:
+    with tempfile.TemporaryDirectory(dir=r"D:\\") as tmp:
         dump = Path(tmp) / "trace.jsonl"
         env = dict(os.environ, GJ_TRACE_DUMP_PATH=str(dump))
         proc = subprocess.run(

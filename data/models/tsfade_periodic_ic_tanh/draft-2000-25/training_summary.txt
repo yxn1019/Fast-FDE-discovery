@@ -1,0 +1,75 @@
+Time-FADE NN reconstruction training
+case: tsfade_fft
+data_file: data/tsfade_periodic_ic/raw_data/tsfade_periodic_ic_noise25.mat
+output_dir: D:/tmp_revision_models/pic-2000-25
+field_shape: (150, 120)
+time_range: [0, 14.9]
+x_range: [0, 29.75]
+noise_type: none
+noise_level: 0.0
+activation: tanh
+hidden_layers: 8
+neurons: 20
+learning_rate: 0.001
+weight_decay: 0.0001
+train_points: 2000
+val_points: 2000
+max_steps: 120000
+completed_steps: 43000
+stop_reason: selection_score_plateau
+patience_steps: 30000
+min_delta_rel: 0.0001
+last_meaningful_improvement_step: 13000
+plateau_reference_score: 0.007641122676
+periodic_boundary_weight: 0.0
+periodic_derivative_weight: 0.0
+periodic_boundary_points: 0
+early_time_weight: 0.0
+early_time_cutoff: 1.0
+peak_weight: 0.0
+peak_quantile: 0.9
+peak_time_cutoff: 1.0
+peak_use_absolute: True
+peak_threshold: 9.906691837
+peak_mask_fraction: 0.05227777778
+spectral_weight: 0.0
+spectral_high_k_gamma: 0.0
+spectral_high_k_power: 2.0
+spectral_time_batch: 8
+integer_derivative_weight: 0.0
+selection_metric: val
+selection_derivative_weight: 1.0
+selection_spectral_weight: 1.0
+gaussian_scale: 0.5
+denoise_mode: none
+denoise_fft_cutoff: 0.0
+allow_large_train_set: False
+input_normalization: unit_box
+input_x_range: [0, 29.75]
+input_t_range: [0, 14.9]
+input_x_scale: 29.75
+input_t_scale: 14.89999962
+output_normalization: unit_interval
+output_activation: identity
+data_loss: mse
+log_loss_epsilon: 0.0009081242681
+physical_log_loss_epsilon: 0.02589774001
+physical_loss_weight: 1.0
+log_loss_weight: 1.0
+target_c_range: [1.626737714, 12.23353577]
+target_c_shift: 1.626737714
+target_c_scale: 10.60679805
+best_step: 16200
+best_train_loss: 0.007357052993
+best_val_loss: 0.007640670054
+best_periodic_boundary_loss: 0.0005017303629
+best_periodic_derivative_loss: 0.2984517515
+best_early_time_loss: 0.007357052993
+best_peak_loss: 0.02204872109
+best_spectral_loss: 0
+best_integer_derivative_loss: 0
+best_spectral_val_loss: 6.533954001e-05
+best_integer_derivative_val_loss: 0.3873461485
+best_composite_derivative_val_loss: 0.3950521581
+best_selection_score: 0.007640670054
+checkpoint: best.pkl

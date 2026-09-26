@@ -22,7 +22,7 @@ if str(ROOT) not in sys.path:
 if str(TOOLS) not in sys.path:
     sys.path.insert(0, str(TOOLS))
 
-from plot_raw_vs_nn_surrogate import checkpoint_config, load_raw_field, noisy_observation, reconstruct_nn_on_raw_grid
+from plot_raw_vs_nn_surrogate import reconstruct_nn_on_raw_grid
 
 
 def parse_args() -> argparse.Namespace:
@@ -30,7 +30,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--figure-dir",
         type=Path,
-        default=Path(r"D:\OneDrive - HHU\My paper\11Laplace-Taylor discovery\figures"),
+        default=ROOT / "figures" / "paper",
     )
     parser.add_argument(
         "--tsfade-summary",
@@ -218,47 +218,6 @@ def tsfade_repo_records() -> list[dict[str, Any]]:
     return records
 
 
-def tfade_records() -> list[dict[str, Any]]:
-    data_file = ROOT / "data" / "periodic_tfade_fft" / "periodic_tfade_fft.mat"
-    checkpoints = [
-        (
-            "clean",
-            ROOT
-            / "data"
-            / "models"
-            / "periodic_tfade_fft_sin_5x50_clean_6000_spectral_w300_early5_dx002_periodic_w1_20000"
-            / "best.pkl",
-        ),
-        (
-            "10% noise",
-            ROOT / "data" / "models" / "periodic_tfade_fft_sin_5x50_noise10_spectral_w300_early5_dx002_periodic_w1" / "best.pkl",
-        ),
-        (
-            "20% noise",
-            ROOT / "data" / "models" / "periodic_tfade_fft_sin_5x50_noise20_spectral_w300_early5_dx002_periodic_w1" / "best.pkl",
-        ),
-    ]
-    x, t, exact = load_raw_field(data_file)
-    records = []
-    for label, checkpoint in checkpoints:
-        config = checkpoint_config(checkpoint)
-        raw = noisy_observation(exact, config)
-        nn = reconstruct_nn_on_raw_grid(checkpoint, x, t)
-        records.append(
-            {
-                "label": label,
-                "x": x,
-                "t": t,
-                "raw": raw,
-                "reference": exact,
-                "nn": nn,
-                "data_file": data_file,
-                "checkpoint": checkpoint,
-            }
-        )
-    return records
-
-
 def main() -> int:
     args = parse_args()
     args.figure_dir.mkdir(parents=True, exist_ok=True)
@@ -271,19 +230,12 @@ def main() -> int:
             output_base=args.figure_dir / "tsfade_retrained_surrogate_heatmaps",
             formats=formats,
             raw_label="raw data",
-        ),
-        "tfade": save_panel(
-            title="Periodic time-FADE full-domain surrogate diagnostics",
-            records=tfade_records(),
-            output_base=args.figure_dir / "tfade_surrogate_heatmaps",
-            formats=formats,
-            raw_label="raw data",
-        ),
+        )
     }
     summary_path = args.figure_dir / "surrogate_heatmap_metrics.json"
     summary_path.write_text(json.dumps(summary, indent=2), encoding="utf-8")
     print(f"summary={summary_path}")
-    for case in ("tsfade", "tfade"):
+    for case in ("tsfade",):
         print(f"{case}_rows={len(summary[case])}")
         for row in summary[case]:
             metrics_text = row["metrics_vs_exact"]
