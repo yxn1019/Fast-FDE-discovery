@@ -1660,6 +1660,9 @@ class FractionalPDEDiscoverer:
             complexity_penalty = self._complexity_penalty(weights, term_names, candidate_indices, condition)
             active_lamb_sum = self._active_lamb_sum(weights, term_names, candidate_indices)
             error = float(residual_norm + complexity_penalty)
+            # Preserve the historical threshold search for paper reproduction.
+            # A tolerance changes the explored thresholds and must be validated
+            # as a separate numerical change, not assumed to be equivalent.
             if error <= best_error:
                 best_error = error
                 best_weights = weights
@@ -1861,6 +1864,8 @@ class FractionalPDEDiscoverer:
         if torch is not None:
             matrix_tensor = torch.as_tensor(np.asarray(matrix), dtype=torch.float64)
             target_tensor = torch.as_tensor(np.asarray(target), dtype=torch.float64)
+            # Retain the paper's native Torch least-squares backend. An SVD
+            # replacement is a numerical variant, even with identical inputs.
             solution = torch.linalg.lstsq(matrix_tensor, target_tensor).solution
             return solution.detach().cpu().numpy()
         return np.linalg.lstsq(matrix, target, rcond=None)[0]
@@ -1917,8 +1922,8 @@ class FractionalPDEDiscoverer:
         # candidate columns are bitwise-stable run-to-run. The OMP_NUM_THREADS env var
         # does not reliably constrain torch on Windows, and multithreaded torch reductions
         # perturb near-degenerate STRidge selections (notably the low-lambda clean tsfade
-        # case). Thread count only -- do not enable use_deterministic_algorithms or reseed,
-        # which switch autograd kernels and change the derivative values themselves.
+        # case). This method sets the thread count only and leaves the caller's
+        # random seeds and deterministic-algorithm setting unchanged.
         # Set GJ_TORCH_MULTITHREAD=1 to bypass the pin (reproducibility diagnostic
         # only; results are then not bitwise stable).
         if os.environ.get("GJ_TORCH_MULTITHREAD", "0") != "1":

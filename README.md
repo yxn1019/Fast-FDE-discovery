@@ -7,16 +7,19 @@ in the manuscript or its revision response.
 
 ## Setup
 
-Python 3.10 or later is recommended.
+The paper reproduction audit used Windows, Python 3.9.21, PyTorch 2.5.1,
+NumPy 1.26.4, and SciPy 1.13.1. For that environment, install the tested versions:
 
 ```powershell
-python -m pip install -r requirements.txt
+python -m pip install -r requirements-paper.txt
 git lfs pull
 $py = 'python'
 ```
 
 The EqGPT checkpoint is stored with Git LFS. All other data and trained neural
 surrogates needed by the paper examples are included directly in the repository.
+`requirements.txt` is the unpinned dependency list for other environments;
+identical parameter estimates across library versions are not guaranteed.
 
 ## Paper artifact map
 
@@ -62,6 +65,41 @@ five-point Gauss--Jacobi quadrature, ridge parameter 2.0, ten inner STRidge
 iterations, update radii `(delta_alpha, delta_beta) = (0.25, 0.15)`, and spatial
 reference orders `beta0 in {2.0, 1.8, 1.7}`. The sparsity weights are `3e-6`,
 `5e-5`, and `1e-4` for clean, 5%, and 25% noise, respectively.
+The threshold increments are `0.005`, `0.005`, and `0.006`. The fitting windows
+are `x in [4,26), t in [3,14)` for clean and 5% noise, and
+`x in [5,28), t in [3,14)` for 25% noise. These presets load the supplied trained
+models; retraining produces a separate experiment.
+
+The `--paper-example` G--J entry point restores the original runtime convention:
+one Torch computation thread and `torch.use_deterministic_algorithms(False)`.
+When importing the discovery classes directly from another project, use those
+same settings. Preserve the native Torch least-squares solver and the three
+spatial starting orders; replacing the solver with NumPy/SVD or using a single
+start changes the numerical experiment. Remove diagnostic `GJ_*` environment
+overrides when reproducing the default results.
+
+### Reproduction checks and known sensitivity
+
+Run independent processes without overwriting the archived paper reports:
+
+```powershell
+& $py tools\check_paper_reproducibility.py --repeats 3 --output tmp\reproduction_check.json
+```
+
+The check reports structure recovery and parameter consistency separately and
+returns a nonzero exit code if either fails. Use a new output filename for each
+check. `--include-deterministic-diagnostic` also tests the non-paper
+`deterministic_algorithms=True` setting by deliberately bypassing the CLI runtime
+restoration after resolving its parameters.
+
+The 2026-11-03 audit recovered the intended structure at all three noise levels
+under the original runtime settings. The 5% case can return different fractional
+orders across runs, including the manuscript estimate. The adaptive STRidge
+threshold search compares near-tied scores directly; small floating-point
+differences can change the subsequent threshold path. Archived estimates under
+`results/` are historical outputs, not guaranteed bitwise results of every rerun.
+A score-tolerance change was tested but did not preserve structure recovery and
+has not been incorporated into this implementation.
 
 The periodized-initial-condition runs used to address the periodic-compatibility
 question in the revision response are retained as:

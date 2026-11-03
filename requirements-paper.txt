@@ -1,0 +1,7 @@
+# Environment used for the paper reproduction audit on Windows / Python 3.9.21.
+# These versions describe the tested environment, not every supported platform.
+numpy==1.26.4
+scipy==1.13.1
+torch==2.5.1
+pandas==2.2.3
+matplotlib==3.9.4

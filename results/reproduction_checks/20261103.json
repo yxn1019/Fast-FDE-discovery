@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-03",
+  "platform": "Windows",
+  "python": "3.9.21",
+  "torch": "2.5.1",
+  "numpy": "1.26.4",
+  "scipy": "1.13.1",
+  "threads": 1,
+  "deterministic_algorithms": false,
+  "process_repetitions": 3,
+  "total_discoveries": 9,
+  "all_correct_support": true,
+  "parameters_consistent_within_this_check": true,
+  "cases": [
+    {
+      "case": "tsfade_clean",
+      "sparsity_lamb": 0.000003,
+      "alpha": 0.7574865651478169,
+      "beta": 1.7927278677246121,
+      "support": ["Hx", "D_x^beta H"],
+      "checkpoint_sha256": "3802d1ac83c6afeed29e74e8e4d90df166412a056f177612e3841161bc5dbf17"
+    },
+    {
+      "case": "tsfade_noise5",
+      "sparsity_lamb": 0.00005,
+      "alpha": 0.728162190217233,
+      "beta": 1.7,
+      "support": ["Hx", "D_x^beta H"],
+      "checkpoint_sha256": "6df91414eaee91cd281db5ccba586bb4512344d9484997637da1ddfd787e5e8d"
+    },
+    {
+      "case": "tsfade_noise25",
+      "sparsity_lamb": 0.0001,
+      "alpha": 0.74,
+      "beta": 1.8410912270498043,
+      "support": ["Hx", "D_x^beta H"],
+      "checkpoint_sha256": "9e25abc048b33684efa1aa273ea0d5bf5a1f209cb95e53b0814a83dbb72cb459"
+    }
+  ],
+  "scope": "Fixed supplied models and observations; no retraining or resampling.",
+  "known_sensitivity": "Other runs returned different 5% orders, including the manuscript values alpha=0.7461027702250187 and beta=1.7567659083262153. Passing these three process repetitions does not establish parameter invariance across call histories or environments.",
+  "rejected_change": "Two score-tolerance/tie-handling variants gave repeatable but incorrect structures and were not incorporated. The historical threshold-search algorithm remains unchanged."
+}

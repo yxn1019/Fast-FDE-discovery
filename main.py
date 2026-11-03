@@ -749,6 +749,14 @@ def main() -> None:
         eqgpt_random_exploration=args.eqgpt_random_exploration,
     )
     if args.case == "tsfade_fft" and args.tsfade_route == "gj_hybrid_taylor":
+        if paper_example_name is not None:
+            # Paper presets include the runtime convention, not only model
+            # parameters. Restore it when invoked from another Python project.
+            import torch
+            if torch.are_deterministic_algorithms_enabled():
+                print("paper runtime: restoring torch deterministic_algorithms=False")
+            torch.use_deterministic_algorithms(False)
+            torch.set_num_threads(1)
         result = GJHybridDiscoverer(config).discover()
     else:
         result = FractionalPDEDiscoverer(config).discover()
